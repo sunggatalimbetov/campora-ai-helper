@@ -1,0 +1,195 @@
+[
+  {
+    "id": 1,
+    "question": "Какие документы нужны для ВНЖ?",
+    "category": "vnzh_documents",
+    "num_results": 18,
+    "top_similarity": 0.823,
+    "avg_similarity": 0.7236,
+    "response_time_ms": 15013.45,
+    "tokens_used": 1161,
+    "answer_preview": "Для подачи на ВНЖ вам понадобятся следующие документы:\n\n1. Справка с банка о текущем счете (минимум 500€ на счету)\n2. Фото 3х4\n3. Медицинская страховка\n4. Паспорт и копия паспорта\n5. Контракт или hospitality\n6. Ричевута (тот документ, который вам выдали на почту)\n7. Admission letter, выданный универ",
+    "keywords_found": [
+      "ричевута",
+      "контракт",
+      "страховка",
+      "фото",
+      "банк"
+    ],
+    "keywords_missing": []
+  },
+  {
+    "id": 2,
+    "question": "Как проверить статус стипендии?",
+    "category": "scholarship",
+    "num_results": 8,
+    "top_similarity": 0.9188,
+    "avg_similarity": 0.7973,
+    "response_time_ms": 6363.99,
+    "tokens_used": 462,
+    "answer_preview": "Чтобы проверить статус стипендии, вам нужно зайти на сайт student.ersumessina.it, перейти в раздел \"le mie richieste\" и найти номер рядом с borsa di studio, где будет указан ваш статус (a или i).\n\nReferences\n1) https://t.me/unimessina2223/152833\n2) https://t.me/unimessina2223/15557\n3) https://t.me/u",
+    "keywords_found": [
+      "ersu"
+    ],
+    "keywords_missing": [
+      "studenti",
+      "login",
+      "idoneo",
+      "assegnatario"
+    ]
+  },
+  {
+    "id": 3,
+    "question": "До какого числа нужно оплатить налог?",
+    "category": "fees",
+    "num_results": 15,
+    "top_similarity": 0.6059,
+    "avg_similarity": 0.5678,
+    "response_time_ms": 7449.89,
+    "tokens_used": 752,
+    "answer_preview": "Налог нужно оплатить до 31 декабря. Однако, рекомендуется сделать это пораньше, чтобы избежать штрафов. Если у вас есть стипендия, то срок оплаты будет до 15 февраля.\n\nReferences\n1) https://t.me/unimessina2223/159867\n2) https://t.me/unimessina2223/161829\n3) https://t.me/unimessina2223/158298\n4) http",
+    "keywords_found": [
+      "15",
+      "февраля"
+    ],
+    "keywords_missing": [
+      "200",
+      "евро",
+      "дедлайн"
+    ]
+  },
+  {
+    "id": 4,
+    "question": "Что делать если пропустил запись в квестуру?",
+    "category": "vnzh_questura",
+    "num_results": 12,
+    "top_similarity": 0.7431,
+    "avg_similarity": 0.5894,
+    "response_time_ms": 6774.19,
+    "tokens_used": 817,
+    "answer_preview": "Если вы пропустили запись в квестуру, стоит обратиться к информации, на которую указано в официальной документации. Обычно нужно брать appuntamento (запись) на сайте, и без него, скорее всего, вас не пустят. Однако есть возможность прийти без записи, если вы успеете за 1-2 дня до назначенной даты. Р",
+    "keywords_found": [
+      "запись"
+    ],
+    "keywords_missing": [
+      "квестура",
+      "аппойнтмент",
+      "очередь"
+    ]
+  },
+  {
+    "id": 5,
+    "question": "Где взять справку с места учебы?",
+    "category": "documents",
+    "num_results": 11,
+    "top_similarity": 0.9031,
+    "avg_similarity": 0.7811,
+    "response_time_ms": 6932.78,
+    "tokens_used": 579,
+    "answer_preview": "Чтобы получить справку с места учебы, можно обратиться в учебное заведение, где вы учитесь. Вопросы о том, куда писать или какие действия предпринять, часто задаются. Например, можно уточнить, где нужно ставить галочку для оформления справки или как ее получить онлайн. Рекомендуется связаться с учеб",
+    "keywords_found": [
+      "онлайн"
+    ],
+    "keywords_missing": [
+      "справка",
+      "секретариат",
+      "велком"
+    ]
+  },
+  {
+    "id": 6,
+    "question": "Можно ли пересдать экзамен летом если не сдал зимой?",
+    "category": "exams",
+    "num_results": 13,
+    "top_similarity": 0.8276,
+    "avg_similarity": 0.7133,
+    "response_time_ms": 8403.89,
+    "tokens_used": 881,
+    "answer_preview": "Да, можно пересдать экзамен летом, если не сдал его зимой. Летом будут доступны повторные сессии для экзаменов, и за это нет никаких проблем. Учебный процесс позволит вам пересдать экзамены первого семестра.\n\nReferences\n1) https://t.me/unimessina2223/47106\n2) https://t.me/unimessina2223/154314\n3) ht",
+    "keywords_found": [
+      "летом",
+      "семестр",
+      "экзамен"
+    ],
+    "keywords_missing": [
+      "пересдача"
+    ]
+  },
+  {
+    "id": 7,
+    "question": "Какая страховка нужна для ВНЖ?",
+    "category": "vnzh_insurance",
+    "num_results": 10,
+    "top_similarity": 0.6971,
+    "avg_similarity": 0.6578,
+    "response_time_ms": 7083.58,
+    "tokens_used": 645,
+    "answer_preview": "Для получения ВНЖ нужна медицинская страховка. В обсуждениях упоминается, что принята казахстанская страховка, что может свидетельствовать о том, что она подходит. Однако нет точной информации о том, какие именно виды страховок требуются, кроме мец. страховки. Возможно, имеет смысл уточнить стоимост",
+    "keywords_found": [
+      "страховка"
+    ],
+    "keywords_missing": [
+      "revolut",
+      "waitaly",
+      "тессера"
+    ]
+  },
+  {
+    "id": 8,
+    "question": "Когда выплачивают стипендию?",
+    "category": "scholarship",
+    "num_results": 10,
+    "top_similarity": 0.8446,
+    "avg_similarity": 0.798,
+    "response_time_ms": 6759.34,
+    "tokens_used": 471,
+    "answer_preview": "Согласно предоставленной информации, выплата стипендии будет происходить после выхода списков, и будет указана дата выплаты. точная дата, когда это произойдет, пока не известна.\n\nReferences\n1) https://t.me/unimessina2223/152228\n2) https://t.me/unimessina2223/107070\n3) https://t.me/unimessina2223/174",
+    "keywords_found": [
+      "выплата"
+    ],
+    "keywords_missing": [
+      "май",
+      "транш",
+      "ersu"
+    ]
+  },
+  {
+    "id": 9,
+    "question": "Как записаться на экзамен?",
+    "category": "exams",
+    "num_results": 14,
+    "top_similarity": 0.815,
+    "avg_similarity": 0.7209,
+    "response_time_ms": 7047.02,
+    "tokens_used": 709,
+    "answer_preview": "Чтобы записаться на экзамен, вам нужно зайти в свою учетную запись на сайте или в приложении, найти раздел, связанный с экзаменами, и следовать указаниям. Например, можно воспользоваться календарем экзаменов. Однако стоит также учитывать, что некоторые ограничения могут действовать, например, студен",
+    "keywords_found": [
+      "запись"
+    ],
+    "keywords_missing": [
+      "esse3",
+      "piano",
+      "prenotazione"
+    ]
+  },
+  {
+    "id": 10,
+    "question": "Что такое статус idoneo?",
+    "category": "scholarship",
+    "num_results": 7,
+    "top_similarity": 0.7098,
+    "avg_similarity": 0.5871,
+    "response_time_ms": 6324.95,
+    "tokens_used": 500,
+    "answer_preview": "Статус \"idoneo\" в контексте стипендий означает, что вы включены в список ожидания. Это не означает автоматического одобрения, как статус \"Assegnatario\", но подразумевает, что вы находитесь в списке тех, кто может получить стипендию в будущем.\n\nReferences\n1) https://t.me/unimessina2223/160680\n2) http",
+    "keywords_found": [
+      "idoneo",
+      "assegnatario",
+      "статус"
+    ],
+    "keywords_missing": [
+      "respinto",
+      "стипендия"
+    ]
+  }
+]

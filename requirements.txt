@@ -1,0 +1,5 @@
+python-dotenv
+openai
+supabase
+python-telegram-bot[ext]
+watchdog

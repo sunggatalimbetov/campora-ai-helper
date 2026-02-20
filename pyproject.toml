@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vectir-ai-helper"
+version = "0.1.0"
+description = "AI-powered Telegram bot for university knowledge search"
+dependencies = [
+    "python-dotenv",
+    "openai",
+    "supabase",
+    "python-telegram-bot[ext]",
+    "watchdog",
+]
+
+[project.optional-dependencies]
+dev = ["black", "flake8", "isort", "pre-commit"]
+
+[tool.black]
+line-length = 200
+
+[tool.isort]
+profile = "black"

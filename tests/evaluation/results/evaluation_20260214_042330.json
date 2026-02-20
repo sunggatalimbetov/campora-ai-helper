@@ -1,0 +1,2119 @@
+{
+  "overall_stats": {
+    "total_questions": 100,
+    "similarity": {
+      "avg_top_similarity": 0.7639,
+      "min_top_similarity": 0.5032,
+      "max_top_similarity": 1,
+      "avg_avg_similarity": 0.698
+    },
+    "response_time": {
+      "avg_ms": 2947.82,
+      "min_ms": 1889.19,
+      "max_ms": 4201.12,
+      "total_ms": 294782.24
+    },
+    "tokens": {
+      "avg_per_question": 576.2,
+      "total": 57623
+    },
+    "keywords": {
+      "total_expected": 488,
+      "total_found": 157,
+      "hit_rate": 0.3217
+    },
+    "quality": {
+      "passed_threshold": 100,
+      "failed_threshold": 0,
+      "pass_rate": 1.0,
+      "zero_results_count": 0
+    },
+    "category_breakdown": {
+      "vnzh_documents": {
+        "count": 14,
+        "avg_top_similarity": 0.7235,
+        "avg_response_time_ms": 3335.03,
+        "keyword_hit_rate": 0.4429,
+        "total_keywords": 70,
+        "found_keywords": 31
+      },
+      "scholarship": {
+        "count": 22,
+        "avg_top_similarity": 0.8428,
+        "avg_response_time_ms": 2799.51,
+        "keyword_hit_rate": 0.2222,
+        "total_keywords": 108,
+        "found_keywords": 24
+      },
+      "fees": {
+        "count": 9,
+        "avg_top_similarity": 0.7303,
+        "avg_response_time_ms": 2764.77,
+        "keyword_hit_rate": 0.3409,
+        "total_keywords": 44,
+        "found_keywords": 15
+      },
+      "vnzh_questura": {
+        "count": 1,
+        "avg_top_similarity": 0.7316,
+        "avg_response_time_ms": 3121.65,
+        "keyword_hit_rate": 0.25,
+        "total_keywords": 4,
+        "found_keywords": 1
+      },
+      "documents": {
+        "count": 13,
+        "avg_top_similarity": 0.7906,
+        "avg_response_time_ms": 3128.46,
+        "keyword_hit_rate": 0.4032,
+        "total_keywords": 62,
+        "found_keywords": 25
+      },
+      "exams": {
+        "count": 13,
+        "avg_top_similarity": 0.7838,
+        "avg_response_time_ms": 2524.84,
+        "keyword_hit_rate": 0.3226,
+        "total_keywords": 62,
+        "found_keywords": 20
+      },
+      "vnzh_insurance": {
+        "count": 1,
+        "avg_top_similarity": 0.6971,
+        "avg_response_time_ms": 2634.96,
+        "keyword_hit_rate": 0.25,
+        "total_keywords": 4,
+        "found_keywords": 1
+      },
+      "registration": {
+        "count": 1,
+        "avg_top_similarity": 0.8628,
+        "avg_response_time_ms": 2355.87,
+        "keyword_hit_rate": 0.0,
+        "total_keywords": 5,
+        "found_keywords": 0
+      },
+      "courses": {
+        "count": 6,
+        "avg_top_similarity": 0.6992,
+        "avg_response_time_ms": 3026.67,
+        "keyword_hit_rate": 0.3333,
+        "total_keywords": 30,
+        "found_keywords": 10
+      },
+      "campus": {
+        "count": 6,
+        "avg_top_similarity": 0.725,
+        "avg_response_time_ms": 3227.54,
+        "keyword_hit_rate": 0.2667,
+        "total_keywords": 30,
+        "found_keywords": 8
+      },
+      "enrollment": {
+        "count": 9,
+        "avg_top_similarity": 0.7099,
+        "avg_response_time_ms": 3174.6,
+        "keyword_hit_rate": 0.3111,
+        "total_keywords": 45,
+        "found_keywords": 14
+      },
+      "deadlines": {
+        "count": 3,
+        "avg_top_similarity": 0.7387,
+        "avg_response_time_ms": 2677.53,
+        "keyword_hit_rate": 0.2857,
+        "total_keywords": 14,
+        "found_keywords": 4
+      },
+      "transport_subscription": {
+        "count": 1,
+        "avg_top_similarity": 0.6433,
+        "avg_response_time_ms": 3102.57,
+        "keyword_hit_rate": 0.6,
+        "total_keywords": 5,
+        "found_keywords": 3
+      },
+      "jobs": {
+        "count": 1,
+        "avg_top_similarity": 0.5913,
+        "avg_response_time_ms": 2782.24,
+        "keyword_hit_rate": 0.2,
+        "total_keywords": 5,
+        "found_keywords": 1
+      }
+    }
+  },
+  "per_question_results": [
+    {
+      "id": 1,
+      "question": "Какие документы нужны для ВНЖ?",
+      "category": "vnzh_documents",
+      "num_results": 8,
+      "top_similarity": 0.823,
+      "avg_similarity": 0.8025,
+      "response_time_ms": 4169.58,
+      "tokens_used": 839,
+      "answer_preview": "Для получения ВНЖ нужны следующие документы:\n\n1. Справка из банка о текущем счете (минимум 500€ на счету)\n2. Фото 3х4\n3. Медицинская страховка\n4. Паспорт и его копия\n5. Контракт или hospitality\n6. Ричевута (документ, который вам выдали на почту)\n7. Admission letter, выданный университетом для квестуры (его выдают после оплаты 156 евро) \n\nЕсли у вас будут еще вопросы, напишите!\n\nReferences\n1) https://t.me/unimessina2223/101522\n2) https://t.me/unimessina2223/29135\n3) https://t.me/unimessina2223/116860\n4) https://t.me/unimessina2223/47065\n5) https://t.me/unimessina2223/156365",
+      "keywords_found": [
+        "ричевута",
+        "контракт",
+        "страховка",
+        "фото",
+        "банк"
+      ],
+      "keywords_missing": []
+    },
+    {
+      "id": 2,
+      "question": "Как проверить статус стипендии?",
+      "category": "scholarship",
+      "num_results": 6,
+      "top_similarity": 0.9188,
+      "avg_similarity": 0.7923,
+      "response_time_ms": 3370.84,
+      "tokens_used": 521,
+      "answer_preview": "Чтобы проверить статус своей стипендии, зайдите на сайт student.ersumessina.it, выберите раздел \"le mie richieste\" и найдите номер рядом с borsa di studio. Там вы сможете увидеть статус, который будет обозначен буквами a или i.\n\nReferences\n1) https://t.me/unimessina2223/152833\n2) https://t.me/unimessina2223/15557\n3) https://t.me/unimessina2223/150384\n4) https://t.me/unimessina2223/35590\n5) https://t.me/unimessina2223/11805",
+      "keywords_found": [
+        "ersu"
+      ],
+      "keywords_missing": [
+        "studenti",
+        "login",
+        "idoneo",
+        "assegnatario"
+      ]
+    },
+    {
+      "id": 3,
+      "question": "До какого числа нужно оплатить налог?",
+      "category": "fees",
+      "num_results": 6,
+      "top_similarity": 0.6059,
+      "avg_similarity": 0.5906,
+      "response_time_ms": 2297.5,
+      "tokens_used": 520,
+      "answer_preview": "Налог нужно оплатить до 15 февраля, если у вас нет стипендии.\n\nReferences\n1) https://t.me/unimessina2223/159867\n2) https://t.me/unimessina2223/161829\n3) https://t.me/unimessina2223/67911\n4) https://t.me/unimessina2223/78937",
+      "keywords_found": [
+        "15",
+        "февраля"
+      ],
+      "keywords_missing": [
+        "200",
+        "евро",
+        "дедлайн"
+      ]
+    },
+    {
+      "id": 4,
+      "question": "Что делать если пропустил запись в квестуру?",
+      "category": "vnzh_questura",
+      "num_results": 5,
+      "top_similarity": 0.7316,
+      "avg_similarity": 0.6073,
+      "response_time_ms": 3121.65,
+      "tokens_used": 620,
+      "answer_preview": "Если вы пропустили запись в квестуру, рекомендуется подойти в другой день и уточнить возможность записи. У некоторых людей были похожие ситуации, и они делились опытом, что иногда можно прийти на следующий день после пропущенной даты. Однако точные правила могут варьироваться, поэтому лучше всего обратиться напрямую в квестуру для получения конкретной информации.\n\nReferences\n1) https://t.me/unimessina2223/49096\n2) https://t.me/unimessina2223/82490\n3) https://t.me/unimessina2223/159419\n4) https://t.me/unimessina2223/123437\n5) https://t.me/unimessina2223/161912",
+      "keywords_found": [
+        "запись"
+      ],
+      "keywords_missing": [
+        "квестура",
+        "аппойнтмент",
+        "очередь"
+      ]
+    },
+    {
+      "id": 5,
+      "question": "Где взять справку с места учебы?",
+      "category": "documents",
+      "num_results": 5,
+      "top_similarity": 0.7882,
+      "avg_similarity": 0.8179,
+      "response_time_ms": 2876.27,
+      "tokens_used": 501,
+      "answer_preview": "Вы можете получить справку с места учебы в учебном заведении, где вы учитесь. Обычно это можно сделать через администрацию или секретариат. Если вам нужна справка для пособия, уточните в соответствующих органах, какие именно документы могут потребоваться. Если нужна онлайн-справка, проверьте, предоставляет ли ваше учебное заведение такую услугу.\n\nReferences\n1) https://t.me/unimessina2223/74246\n2) https://t.me/unimessina2223/17122\n3) https://t.me/unimessina2223/153143\n4) https://t.me/unimessina2223/153098\n5) https://t.me/unimessina2223/94509",
+      "keywords_found": [
+        "справка",
+        "секретариат",
+        "онлайн"
+      ],
+      "keywords_missing": [
+        "велком"
+      ]
+    },
+    {
+      "id": 6,
+      "question": "Можно ли пересдать экзамен летом если не сдал зимой?",
+      "category": "exams",
+      "num_results": 5,
+      "top_similarity": 0.6979,
+      "avg_similarity": 0.7673,
+      "response_time_ms": 1889.19,
+      "tokens_used": 505,
+      "answer_preview": "Да, можно пересдать экзамен летом, если вы не сдали его зимой.\n\nReferences\n1) https://t.me/unimessina2223/81661\n2) https://t.me/unimessina2223/47106\n3) https://t.me/c/2842855377/1883\n4) https://t.me/unimessina2223/154314\n5) https://t.me/unimessina2223/161475",
+      "keywords_found": [
+        "летом",
+        "экзамен"
+      ],
+      "keywords_missing": [
+        "пересдача",
+        "семестр"
+      ]
+    },
+    {
+      "id": 7,
+      "question": "Какая страховка нужна для ВНЖ?",
+      "category": "vnzh_insurance",
+      "num_results": 6,
+      "top_similarity": 0.6971,
+      "avg_similarity": 0.6645,
+      "response_time_ms": 2634.96,
+      "tokens_used": 525,
+      "answer_preview": "Для получения ВНЖ нужна страховка, которая может быть в том числе казахстанская. Однако уточните, какая именно страховка требуется, так как есть разные варианты. Важно также знать, принимаются ли другие виды страховок в вашей ситуации.\n\nReferences\n1) https://t.me/unimessina2223/62701\n2) https://t.me/unimessina2223/107994\n3) https://t.me/unimessina2223/48722\n4) https://t.me/unimessina2223/47026\n5) https://t.me/unimessina2223/34886",
+      "keywords_found": [
+        "страховка"
+      ],
+      "keywords_missing": [
+        "revolut",
+        "waitaly",
+        "тессера"
+      ]
+    },
+    {
+      "id": 8,
+      "question": "Когда выплачивают стипендию?",
+      "category": "scholarship",
+      "num_results": 5,
+      "top_similarity": 0.8393,
+      "avg_similarity": 0.816,
+      "response_time_ms": 2974.56,
+      "tokens_used": 468,
+      "answer_preview": "Сыпь по стипендиям обычно выплачивается в определённые сроки, однако точные даты могут варьироваться. Часто выплаты происходят несколько раз в семестр. Я не знаю точных дат, но вам стоит уточнить в учебном заведении или на официальном сайте, чтобы получить актуальную информацию.\n\nReferences\n1) https://t.me/unimessina2223/152228\n2) https://t.me/unimessina2223/107070\n3) https://t.me/unimessina2223/1745\n4) https://t.me/unimessina2223/37341\n5) https://t.me/unimessina2223/150493",
+      "keywords_found": [],
+      "keywords_missing": [
+        "май",
+        "транш",
+        "выплата",
+        "ersu"
+      ]
+    },
+    {
+      "id": 9,
+      "question": "Как записаться на экзамен?",
+      "category": "exams",
+      "num_results": 8,
+      "top_similarity": 0.7127,
+      "avg_similarity": 0.7487,
+      "response_time_ms": 2608.97,
+      "tokens_used": 533,
+      "answer_preview": "Чтобы записаться на экзамен, нужно использовать приложение и перейти в раздел с календарем экзаменов. Если экзамены будут в январе, то запись откроется только в январе.\n\nReferences\n1) https://t.me/unimessina2223/148381\n2) https://t.me/unimessina2223/98552\n3) https://t.me/unimessina2223/148562\n4) https://t.me/unimessina2223/70414\n5) https://t.me/unimessina2223/91976",
+      "keywords_found": [
+        "запись"
+      ],
+      "keywords_missing": [
+        "esse3",
+        "piano",
+        "prenotazione"
+      ]
+    },
+    {
+      "id": 10,
+      "question": "Что такое статус idoneo?",
+      "category": "scholarship",
+      "num_results": 5,
+      "top_similarity": 0.6857,
+      "avg_similarity": 0.5973,
+      "response_time_ms": 2790.51,
+      "tokens_used": 518,
+      "answer_preview": "Статус idoneo обозначает, что вы признаны подходящим кандидатом для получения стипендии. Люди с этим статусом также считаются стипендиантами, что означает, что статус A и I (idoneo) равнозначны для получения стипендии.\n\nReferences\n1) https://t.me/unimessina2223/160680\n2) https://t.me/unimessina2223/125894\n3) https://t.me/unimessina2223/153944\n4) https://t.me/unimessina2223/16131\n5) https://t.me/c/2842855377/3351",
+      "keywords_found": [
+        "idoneo",
+        "статус"
+      ],
+      "keywords_missing": [
+        "assegnatario",
+        "respinto",
+        "стипендия"
+      ]
+    },
+    {
+      "id": 11,
+      "question": "Как зарегистрироваться в INSP?",
+      "category": "registration",
+      "num_results": 6,
+      "top_similarity": 0.8628,
+      "avg_similarity": 0.6527,
+      "response_time_ms": 2355.87,
+      "tokens_used": 515,
+      "answer_preview": "Если ты имеешь в виду пособие, то лучше всего обратиться в кафедру. Они помогут с регистрацией, заполнением необходимых документов и отправкой запроса. Если у тебя есть абонемент, то ничего платить не нужно.\n\nReferences\n1) https://t.me/unimessina2223/162141\n2) https://t.me/unimessina2223/43688\n3) https://t.me/unimessina2223/59328\n4) https://t.me/unimessina2223/119884\n5) https://t.me/unimessina2223/58124",
+      "keywords_found": [],
+      "keywords_missing": [
+        "INSP",
+        "регистрация",
+        "кафедра",
+        "информация",
+        "студенты"
+      ]
+    },
+    {
+      "id": 12,
+      "question": "Что делать, если не заплатить 200 евро до 15 февраля?",
+      "category": "fees",
+      "num_results": 5,
+      "top_similarity": 0.9209,
+      "avg_similarity": 0.6672,
+      "response_time_ms": 3982.91,
+      "tokens_used": 497,
+      "answer_preview": "Если не заплатить 200 евро до 15 февраля, скорее всего, это может привести к проблемам. Существует вероятность, что вам придется оплатить эту сумму позже или столкнуться с последствиями, такими как штрафы или ограничение доступа к услугам. Лучше уточнить у соответствующей организации, какие именно последствия могут быть в вашем случае.\n\nReferences\n1) https://t.me/unimessina2223/162047\n2) https://t.me/unimessina2223/159515\n3) https://t.me/unimessina2223/109286\n4) https://t.me/unimessina2223/155290\n5) https://t.me/unimessina2223/159654",
+      "keywords_found": [
+        "200 евро",
+        "последствия",
+        "штраф"
+      ],
+      "keywords_missing": [
+        "платеж",
+        "срок"
+      ]
+    },
+    {
+      "id": 13,
+      "question": "Какие документы нужны для получения справки о учебе в университете?",
+      "category": "documents",
+      "num_results": 5,
+      "top_similarity": 0.7641,
+      "avg_similarity": 0.74,
+      "response_time_ms": 3183.98,
+      "tokens_used": 505,
+      "answer_preview": "Для получения справки о учебе в университете обычно требуются следующие документы: удостоверение личности (паспорт), студенческий билет и, возможно, заявление на получение справки. Однако точные требования могут различаться в зависимости от конкретного учебного заведения. Если у вас есть возможность, уточните в офисе университета.\n\nReferences\n1) https://t.me/unimessina2223/46251\n2) https://t.me/unimessina2223/94509\n3) https://t.me/unimessina2223/49357\n4) https://t.me/unimessina2223/160420\n5) https://t.me/unimessina2223/51191",
+      "keywords_found": [
+        "университет",
+        "документы"
+      ],
+      "keywords_missing": [
+        "справка",
+        "запрос",
+        "учеба"
+      ]
+    },
+    {
+      "id": 14,
+      "question": "Когда можно сдавать экзамены, если не сдал их зимой?",
+      "category": "exams",
+      "num_results": 5,
+      "top_similarity": 0.7478,
+      "avg_similarity": 0.7278,
+      "response_time_ms": 2113.5,
+      "tokens_used": 523,
+      "answer_preview": "Если не сдал экзамены зимой, можно сдать их летом. Обычно пересдачи проходят летом, но точные даты могут зависеть от учебного заведения.\n\nReferences\n1) https://t.me/unimessina2223/154314\n2) https://t.me/unimessina2223/47106\n3) https://t.me/c/2842855377/1883\n4) https://t.me/unimessina2223/81661\n5) https://t.me/unimessina2223/161475",
+      "keywords_found": [
+        "экзамены",
+        "летом"
+      ],
+      "keywords_missing": [
+        "первый семестр",
+        "пересдача",
+        "график"
+      ]
+    },
+    {
+      "id": 15,
+      "question": "Как мне узнать статус своей стипендии?",
+      "category": "scholarship",
+      "num_results": 6,
+      "top_similarity": 0.8859,
+      "avg_similarity": 0.7983,
+      "response_time_ms": 2686.84,
+      "tokens_used": 507,
+      "answer_preview": "Чтобы узнать статус своей стипендии, зайдите на сайт student.ersumessina.it и перейдите в раздел \"ле мои richieste\". Там рядом с вашей стипендией будет указан статус - буква \"a\" или \"i\".\n\nReferences\n1) https://t.me/unimessina2223/152833\n2) https://t.me/unimessina2223/15557\n3) https://t.me/unimessina2223/73186\n4) https://t.me/unimessina2223/150384\n5) https://t.me/unimessina2223/152228",
+      "keywords_found": [
+        "статус"
+      ],
+      "keywords_missing": [
+        "borsa di studio",
+        "Assegnatario",
+        "Idoneo",
+        "Respinto"
+      ]
+    },
+    {
+      "id": 16,
+      "question": "Можно ли забрать ВНЖ позже, чем назначено?",
+      "category": "vnzh_documents",
+      "num_results": 5,
+      "top_similarity": 0.745,
+      "avg_similarity": 0.6675,
+      "response_time_ms": 2389.09,
+      "tokens_used": 504,
+      "answer_preview": "Можно, но не во всех случаях. Некоторые источники указывают, что забирать ВНЖ можно в назначенное время, поэтому, если речь идет о более позднем сроке, лучше уточнить в конкретной ситуации.\n\nReferences\n1) https://t.me/unimessina2223/82852\n2) https://t.me/unimessina2223/22301\n3) https://t.me/unimessina2223/44608\n4) https://t.me/unimessina2223/51658\n5) https://t.me/unimessina2223/124572",
+      "keywords_found": [
+        "ВНЖ"
+      ],
+      "keywords_missing": [
+        "аппоинтмент",
+        "позже",
+        "проблемы",
+        "квестура"
+      ]
+    },
+    {
+      "id": 17,
+      "question": "Как подать документы на летнюю школу по Computer Vision?",
+      "category": "courses",
+      "num_results": 5,
+      "top_similarity": 0.5727,
+      "avg_similarity": 0.5453,
+      "response_time_ms": 3259.44,
+      "tokens_used": 505,
+      "answer_preview": "Чтобы подать документы на летнюю школу по Computer Vision, уточните, пожалуйста, сроки подачи, так как обычно документы подаются летом. Если вам нужна более конкретная информация, я не уверен, как именно проходит процесс, но рекомендую проверить на сайте или обратиться в университет за дополнительной информацией.\n\nReferences\n1) https://t.me/unimessina2223/66157\n2) https://t.me/unimessina2223/76127\n3) https://t.me/unimessina2223/83717\n4) https://t.me/unimessina2223/58618\n5) https://t.me/unimessina2223/29413",
+      "keywords_found": [
+        "Computer Vision"
+      ],
+      "keywords_missing": [
+        "летняя школа",
+        "дедлайн",
+        "заявка",
+        "грант"
+      ]
+    },
+    {
+      "id": 18,
+      "question": "Что делать, если я забыл пароль от ерсу?",
+      "category": "documents",
+      "num_results": 5,
+      "top_similarity": 0.739,
+      "avg_similarity": 0.6257,
+      "response_time_ms": 2467.34,
+      "tokens_used": 534,
+      "answer_preview": "Если вы забыли пароль от ерсу, попробуйте воспользоваться функцией восстановления пароля на сайте. Если это не сработает или не получается создать новый аккаунт, вам может потребоваться обратиться в техподдержку. Они должны помочь вам восстановить доступ.\n\nReferences\n1) https://t.me/unimessina2223/161272\n2) https://t.me/unimessina2223/7495\n3) https://t.me/unimessina2223/18068\n4) https://t.me/unimessina2223/26046\n5) https://t.me/unimessina2223/27439",
+      "keywords_found": [
+        "пароль",
+        "ерсу",
+        "забыл"
+      ],
+      "keywords_missing": [
+        "восстановление",
+        "вход"
+      ]
+    },
+    {
+      "id": 19,
+      "question": "За сколько дней до аппоинтмента в квестуре нужно делать хоспиталити?",
+      "category": "vnzh_documents",
+      "num_results": 5,
+      "top_similarity": 0.8027,
+      "avg_similarity": 0.6344,
+      "response_time_ms": 3059.36,
+      "tokens_used": 509,
+      "answer_preview": "Нужно делать хоспиталити за несколько дней до аппоинтмента в квестуре, но точное количество дней не указано. Может быть полезно уточнить у квестуры или знакомых, кто уже проходил этот процесс.\n\nReferences\n1) https://t.me/unimessina2223/160509\n2) https://t.me/unimessina2223/158460\n3) https://t.me/unimessina2223/39057\n4) https://t.me/unimessina2223/70704\n5) https://t.me/unimessina2223/140688",
+      "keywords_found": [
+        "хоспиталити"
+      ],
+      "keywords_missing": [
+        "аппойнтмент",
+        "квестура",
+        "документы",
+        "сроки"
+      ]
+    },
+    {
+      "id": 20,
+      "question": "Как узнать, когда готов мой ВНЖ?",
+      "category": "vnzh_documents",
+      "num_results": 5,
+      "top_similarity": 0.6319,
+      "avg_similarity": 0.6536,
+      "response_time_ms": 3074.33,
+      "tokens_used": 514,
+      "answer_preview": "Чтобы узнать, когда готов ваш ВНЖ, вы можете отслеживать уведомления, которые могут прийти на ваш телефон. Некоторые люди сообщали, что получили сообщения о готовности ВНЖ, но может быть задержка в уведомлениях через сайт или смс. Если вы подавали заявление недавно, возможно, стоит проверить и там.\n\nReferences\n1) https://t.me/unimessina2223/160313\n2) https://t.me/unimessina2223/108952\n3) https://t.me/c/2852524410/5997\n4) https://t.me/unimessina2223/60354\n5) https://t.me/unimessina2223/156390",
+      "keywords_found": [
+        "ВНЖ"
+      ],
+      "keywords_missing": [
+        "готовность",
+        "отслеживание",
+        "уведомление",
+        "квестура"
+      ]
+    },
+    {
+      "id": 21,
+      "question": "Какой дедлайн для оплаты взносов и кто должен платить?",
+      "category": "fees",
+      "num_results": 6,
+      "top_similarity": 0.6235,
+      "avg_similarity": 0.5986,
+      "response_time_ms": 3171.53,
+      "tokens_used": 520,
+      "answer_preview": "Дедлайн для оплаты взносов — 31 декабря. Лучше сделать это пораньше. Что касается того, кто должен платить, такая информация не указана, так что я не совсем уверен. Может быть, в ссылках, которые будут предоставлены, есть дополнительные детали.\n\nReferences\n1) https://t.me/unimessina2223/135239\n2) https://t.me/unimessina2223/53270\n3) https://t.me/unimessina2223/37321\n4) https://t.me/unimessina2223/4119\n5) https://t.me/unimessina2223/24265",
+      "keywords_found": [
+        "дедлайн"
+      ],
+      "keywords_missing": [
+        "оплата",
+        "взносы",
+        "стипендия",
+        "15 февраля"
+      ]
+    },
+    {
+      "id": 22,
+      "question": "Можно ли сдавать экзамены за первый курс на втором курсе?",
+      "category": "exams",
+      "num_results": 6,
+      "top_similarity": 0.7605,
+      "avg_similarity": 0.7317,
+      "response_time_ms": 2150.9,
+      "tokens_used": 568,
+      "answer_preview": "На втором курсе нельзя сдавать экзамены за первый курс. Экзамены за первый курс можно сдавать только с июня.\n\nReferences\n1) https://t.me/unimessina2223/160128\n2) https://t.me/unimessina2223/95119\n3) https://t.me/unimessina2223/103153\n4) https://t.me/unimessina2223/67679\n5) https://t.me/unimessina2223/161475",
+      "keywords_found": [
+        "экзамены",
+        "первый курс"
+      ],
+      "keywords_missing": [
+        "второй курс",
+        "дедлайн",
+        "дополнительные предметы"
+      ]
+    },
+    {
+      "id": 23,
+      "question": "Как понять, нужно ли оплачивать региональный налог за учебу?",
+      "category": "fees",
+      "num_results": 5,
+      "top_similarity": 0.8129,
+      "avg_similarity": 0.6467,
+      "response_time_ms": 3453.73,
+      "tokens_used": 528,
+      "answer_preview": "Чтобы понять, нужно ли оплачивать региональный налог за учебу, стоит проверить, есть ли у вас такие обязательства, так как некоторые студенты могут быть обязаны уплачивать этот налог. Обычно информация об этом доступна в учебном заведении или на официальных платформах, таких как Esse3. Если есть конкретные вопросы, лучший вариант — обратиться в деканат или по интересующий вас вопрос на учебной платформе.\n\nReferences\n1) https://t.me/unimessina2223/159555\n2) https://t.me/unimessina2223/143520\n3) https://t.me/unimessina2223/158298\n4) https://t.me/unimessina2223/73408\n5) https://t.me/unimessina2223/42186",
+      "keywords_found": [],
+      "keywords_missing": [
+        "стипендия",
+        "idoneo",
+        "оплата",
+        "дедлайн",
+        "не платить"
+      ]
+    },
+    {
+      "id": 24,
+      "question": "Где будет проходить экзамен по международной экономике?",
+      "category": "exams",
+      "num_results": 5,
+      "top_similarity": 0.9278,
+      "avg_similarity": 0.8508,
+      "response_time_ms": 2673.88,
+      "tokens_used": 469,
+      "answer_preview": "Я не совсем уверен, где именно будет проходить экзамен по международной экономике, но на такие вопросы обычно отвечают однокурсники или преподаватели, которые могут знать точную информацию. Лучше всего уточнить у них.\n\nReferences\n1) https://t.me/unimessina2223/159585\n2) https://t.me/unimessina2223/71435\n3) https://t.me/unimessina2223/40206\n4) https://t.me/unimessina2223/31691\n5) https://t.me/unimessina2223/45916",
+      "keywords_found": [
+        "экзамен"
+      ],
+      "keywords_missing": [
+        "international economics",
+        "место",
+        "дата",
+        "график"
+      ]
+    },
+    {
+      "id": 25,
+      "question": "Как получить студенческий абонемент на транспорт?",
+      "category": "documents",
+      "num_results": 9,
+      "top_similarity": 0.9195,
+      "avg_similarity": 0.6564,
+      "response_time_ms": 3209.79,
+      "tokens_used": 848,
+      "answer_preview": "Чтобы получить студенческий абонемент на транспорт, вам нужно войти в систему Esse3, затем перейти в меню \"Iniziative / Bandi\". Там вы найдете опции для активации и продления абонемента. После этого потребуется распечатать квитанцию и оплатить ее, используя QR-код или в табакерии. Весь процесс можно оформить онлайн.\n\nReferences\n1) https://t.me/unimessina2223/159260\n2) https://t.me/unimessina2223/93727\n3) https://t.me/unimessina2223/153814\n4) https://t.me/unimessina2223/48836\n5) https://t.me/unimessina2223/125233",
+      "keywords_found": [
+        "студенческий",
+        "абонемент",
+        "транспорт"
+      ],
+      "keywords_missing": [
+        "подача",
+        "заявка"
+      ]
+    },
+    {
+      "id": 26,
+      "question": "Когда будут списки стипендий для первокурсников второго дедлайна?",
+      "category": "scholarship",
+      "num_results": 5,
+      "top_similarity": 0.9056,
+      "avg_similarity": 0.8297,
+      "response_time_ms": 2529.08,
+      "tokens_used": 520,
+      "answer_preview": "Списки стипендий для первокурсников второго дедлайна пока не опубликованы. Точные сроки выхода списков не известны, но имеется запрос на информацию о них. Лучше следить за новостями университета для получения актуальной информации.\n\nReferences\n1) https://t.me/unimessina2223/159614\n2) https://t.me/unimessina2223/152832\n3) https://t.me/unimessina2223/149026\n4) https://t.me/unimessina2223/108717\n5) https://t.me/unimessina2223/159178",
+      "keywords_found": [
+        "дедлайн",
+        "списки"
+      ],
+      "keywords_missing": [
+        "стипендии",
+        "первокурсники",
+        "информация"
+      ]
+    },
+    {
+      "id": 27,
+      "question": "Какой срок для подачи документов на вторую стипендию для второкурсников?",
+      "category": "scholarship",
+      "num_results": 5,
+      "top_similarity": 0.7551,
+      "avg_similarity": 0.7459,
+      "response_time_ms": 2697.6,
+      "tokens_used": 524,
+      "answer_preview": "Информации о точном сроке подачи документов на вторую стипендию для второкурсников нет. Но помимо этого, стоит узнать, когда именно будут выдавать вторую часть стипендии, возможно это связано с подачей документов. Лучше обратиться в учебное заведение для получения точной информации.\n\nReferences\n1) https://t.me/unimessina2223/25273\n2) https://t.me/unimessina2223/22878\n3) https://t.me/unimessina2223/111652\n4) https://t.me/unimessina2223/22872\n5) https://t.me/unimessina2223/40413",
+      "keywords_found": [
+        "срок"
+      ],
+      "keywords_missing": [
+        "второкурсники",
+        "кредиты",
+        "транш",
+        "стипендия"
+      ]
+    },
+    {
+      "id": 28,
+      "question": "Какие документы нужны для получения ВНЖ, если у меня аннулировали контракт на квартиру?",
+      "category": "vnzh_documents",
+      "num_results": 8,
+      "top_similarity": 0.726,
+      "avg_similarity": 0.649,
+      "response_time_ms": 3800.26,
+      "tokens_used": 874,
+      "answer_preview": "Для получения ВНЖ, если у вас аннулировали контракт на квартиру, вам понадобятся следующие документы:\n\n- справка с банка о текущем счете (минимум 500€ на счету)\n- фото 3х4\n- медицинская страховка\n- паспорт и копия\n- контракт/hospitality\n- ричевута (то, что вам выдали на почту)\n- admission letter, выданный университетом для квестуры\n\nВажно учитывать, что если вы подавались на ВНЖ с контрактом, и он был валиден на момент подачи, проблем с получением ВНЖ быть не должно.\n\nReferences\n1) https://t.me/unimessina2223/29135\n2) https://t.me/unimessina2223/47065\n3) https://t.me/unimessina2223/101522\n4) https://t.me/unimessina2223/47391\n5) https://t.me/c/2842855377/2950",
+      "keywords_found": [
+        "внж",
+        "документы",
+        "контракт"
+      ],
+      "keywords_missing": [
+        "аннулирование",
+        "миграционный офис"
+      ]
+    },
+    {
+      "id": 29,
+      "question": "Когда нужно активировать процедуру для освобождения от университетских сборов?",
+      "category": "fees",
+      "num_results": 6,
+      "top_similarity": 0.6667,
+      "avg_similarity": 0.5961,
+      "response_time_ms": 2043.65,
+      "tokens_used": 654,
+      "answer_preview": "Процедуру для освобождения от университетских сборов нужно активировать в системе Esse3 с **14 по 23 января**.\n\nReferences\n1) https://t.me/unimessina2223/157346\n2) https://t.me/unimessina2223/158951\n3) https://t.me/unimessina2223/107133\n4) https://t.me/unimessina2223/26031\n5) https://t.me/unimessina2223/83854",
+      "keywords_found": [
+        "Esse3"
+      ],
+      "keywords_missing": [
+        "освобождение",
+        "сборы",
+        "дедлайн",
+        "январь"
+      ]
+    },
+    {
+      "id": 30,
+      "question": "Как записаться на итальянские курсы CPIA?",
+      "category": "courses",
+      "num_results": 6,
+      "top_similarity": 0.9632,
+      "avg_similarity": 0.706,
+      "response_time_ms": 3142.53,
+      "tokens_used": 611,
+      "answer_preview": "Чтобы записаться на итальянские курсы CPIA, вы можете использовать форму регистрации для курса \"Alfabetizzazione e Apprendimento della lingua italiana a.s. 2025/26\". Если нужны дополнительные детали, возможно, стоит обратиться в учебное заведение или на сайт курсов для получения актуальной информации.\n\nReferences\n1) https://t.me/unimessina2223/158863\n2) https://t.me/unimessina2223/160242\n3) https://t.me/c/2842855377/3300\n4) https://t.me/unimessina2223/118495\n5) https://t.me/unimessina2223/121875",
+      "keywords_found": [
+        "итальянские курсы",
+        "CPIA"
+      ],
+      "keywords_missing": [
+        "запись",
+        "процедура",
+        "документы"
+      ]
+    },
+    {
+      "id": 31,
+      "question": "Когда нужно оплатить вторую часть стипендии?",
+      "category": "scholarship",
+      "num_results": 6,
+      "top_similarity": 0.8464,
+      "avg_similarity": 0.7743,
+      "response_time_ms": 2885.61,
+      "tokens_used": 562,
+      "answer_preview": "Не знаю точно, когда нужно оплатить вторую часть стипендии. По обсуждениям видно, что вопросы по выплате второй части стипендии возникают у студентов разных курсов, но конкретной информации о сроках нет. Возможно, стоит обратиться в учебный отдел или к куратору для получения более точной информации.\n\nReferences\n1) https://t.me/unimessina2223/156480\n2) https://t.me/unimessina2223/108565\n3) https://t.me/unimessina2223/123231\n4) https://t.me/unimessina2223/55392\n5) https://t.me/unimessina2223/93559",
+      "keywords_found": [],
+      "keywords_missing": [
+        "дедлайн",
+        "оплата",
+        "вторая часть",
+        "стипендия",
+        "01.2026"
+      ]
+    },
+    {
+      "id": 32,
+      "question": "Как оформить заявление о потере permesso di soggiorno?",
+      "category": "vnzh_documents",
+      "num_results": 5,
+      "top_similarity": 0.6355,
+      "avg_similarity": 0.5597,
+      "response_time_ms": 2952.4,
+      "tokens_used": 569,
+      "answer_preview": "Чтобы оформить заявление о потере permesso di soggiorno в Мессине, вам нужно обратиться в соответствующее отделение полиции. Также важно уточнить часы приёма в этом отделении, чтобы убедиться, что вы придете в нужное время. Если есть возможность, рекомендуем заранее узнать все детали, прежде чем идти в полицию.\n\nReferences\n1) https://t.me/unimessina2223/158537\n2) https://t.me/unimessina2223/15385\n3) https://t.me/unimessina2223/17401\n4) https://t.me/unimessina2223/56307\n5) https://t.me/unimessina2223/58329",
+      "keywords_found": [
+        "заявление",
+        "permesso di soggiorno",
+        "часы приёма"
+      ],
+      "keywords_missing": [
+        "полиция",
+        "Мессина"
+      ]
+    },
+    {
+      "id": 33,
+      "question": "Какие меры безопасности принимаются из-за метеопредупреждения?",
+      "category": "campus",
+      "num_results": 5,
+      "top_similarity": 0.5032,
+      "avg_similarity": 0.4297,
+      "response_time_ms": 3014.39,
+      "tokens_used": 901,
+      "answer_preview": "Из-за метеопредупреждения на среду, 21 января 2026 года, городские власти принимают дополнительные меры безопасности, включая подписание соответствующего указа мэром Мессины. Также временно приостановлено железнодорожное сообщение по линии Messina - Catania - Siracusa.\n\nReferences\n1) https://t.me/unimessina2223/158546\n2) https://t.me/c/2842855377/2756\n3) https://t.me/c/2842855377/2913\n4) https://t.me/unimessina2223/11863\n5) https://t.me/unimessina2223/162081",
+      "keywords_found": [],
+      "keywords_missing": [
+        "метеопредупреждение",
+        "сигнал",
+        "сигналы безопасности",
+        "закрытие",
+        "учебные заведения"
+      ]
+    },
+    {
+      "id": 34,
+      "question": "Где можно сделать фото 3x4 для внж?",
+      "category": "documents",
+      "num_results": 5,
+      "top_similarity": 1,
+      "avg_similarity": 0.691,
+      "response_time_ms": 2880.8,
+      "tokens_used": 469,
+      "answer_preview": "Вы можете сделать фотографию 3x4 для внж в специальных фотоателье или студиях, которые занимаются профессиональной фотосъемкой для документов. Обычно такие места могут быть найдены в центрах обслуживания населения или салонах, которые предлагают услуги для получения виз и различных разрешений.\n\nReferences\n1) https://t.me/unimessina2223/158281\n2) https://t.me/unimessina2223/126816\n3) https://t.me/unimessina2223/105323\n4) https://t.me/unimessina2223/32301\n5) https://t.me/unimessina2223/29952",
+      "keywords_found": [
+        "внж",
+        "услуги"
+      ],
+      "keywords_missing": [
+        "фото 3x4",
+        "где сделать",
+        "документы"
+      ]
+    },
+    {
+      "id": 35,
+      "question": "Как быстро можно получить справку о том, что я учусь здесь?",
+      "category": "documents",
+      "num_results": 5,
+      "top_similarity": 0.775,
+      "avg_similarity": 0.7378,
+      "response_time_ms": 2500.68,
+      "tokens_used": 495,
+      "answer_preview": "Чтобы получить справку о том, что вы учитесь, вам нужно обратиться в учебный отдел вашего университета. Обычно это занимает некоторое время, поэтому лучше сделать запрос заранее. Если вам нужно это срочно, стоит уточнить, есть ли возможность получить справку быстрее.\n\nReferences\n1) https://t.me/unimessina2223/94509\n2) https://t.me/unimessina2223/50027\n3) https://t.me/unimessina2223/127031\n4) https://t.me/unimessina2223/49357\n5) https://t.me/unimessina2223/77434",
+      "keywords_found": [],
+      "keywords_missing": [
+        "справка",
+        "учеба",
+        "заявка",
+        "дни",
+        "готовность"
+      ]
+    },
+    {
+      "id": 36,
+      "question": "Что делать, если я немного опоздал на экзамен и не успел пройти по списку?",
+      "category": "exams",
+      "num_results": 5,
+      "top_similarity": 0.6296,
+      "avg_similarity": 0.6201,
+      "response_time_ms": 2739.44,
+      "tokens_used": 551,
+      "answer_preview": "Если ты опоздал на экзамен и не успел пройти по списку, можно попробовать записаться на следующий экзамен, где будет устное собеседование.\n\nReferences\n1) https://t.me/unimessina2223/80821\n2) https://t.me/unimessina2223/157281\n3) https://t.me/c/2842855377/2437\n4) https://t.me/unimessina2223/156739\n5) https://t.me/c/2842855377/2389",
+      "keywords_found": [
+        "экзамен"
+      ],
+      "keywords_missing": [
+        "опоздание",
+        "orale",
+        "сдать",
+        "имя"
+      ]
+    },
+    {
+      "id": 37,
+      "question": "Как активировать скидку на университетские сборы через Esse3?",
+      "category": "fees",
+      "num_results": 5,
+      "top_similarity": 0.5749,
+      "avg_similarity": 0.5612,
+      "response_time_ms": 2889.12,
+      "tokens_used": 558,
+      "answer_preview": "Чтобы активировать скидку на университетские сборы через Esse3, вам нужно заполнить форму и отправить её по университетской почте. После этого в Esse3 в разделе Pagamenti должна появиться оплата на 32€. Если у вас есть дополнительные вопросы или нужна помощь, возможно, стоит обратиться к университетскому офису.\n\nReferences\n1) https://t.me/unimessina2223/82545\n2) https://t.me/unimessina2223/157135\n3) https://t.me/unimessina2223/78283\n4) https://t.me/unimessina2223/139895\n5) https://t.me/c/2842855377/3643",
+      "keywords_found": [
+        "Esse3",
+        "активировать",
+        "сборы"
+      ],
+      "keywords_missing": [
+        "скидка",
+        "дедлайн"
+      ]
+    },
+    {
+      "id": 38,
+      "question": "В каком формате нужно предоставить документы для стипендии, на английском или итальянском?",
+      "category": "scholarship",
+      "num_results": 7,
+      "top_similarity": 0.8337,
+      "avg_similarity": 0.7733,
+      "response_time_ms": 3310.12,
+      "tokens_used": 569,
+      "answer_preview": "Для стипендии документы нужно предоставлять на итальянском языке. Некоторые документы, такие как справки с банка, могут приниматься в оригинале на английском, но в целом предпочтение отдается итальянскому.\n\nReferences\n1) https://t.me/unimessina2223/157262\n2) https://t.me/unimessina2223/115852\n3) https://t.me/unimessina2223/142878\n4) https://t.me/unimessina2223/52342\n5) https://t.me/unimessina2223/130492",
+      "keywords_found": [
+        "документы"
+      ],
+      "keywords_missing": [
+        "стипендия",
+        "перевод",
+        "английский",
+        "итальянский"
+      ]
+    },
+    {
+      "id": 39,
+      "question": "Как работает система кредитов в университете Мессина?",
+      "category": "courses",
+      "num_results": 7,
+      "top_similarity": 0.5903,
+      "avg_similarity": 0.5535,
+      "response_time_ms": 3827.96,
+      "tokens_used": 820,
+      "answer_preview": "В университете Мессина система кредитов работает так, что вы получаете кредиты в зависимости от результатов экзаменов. Например, если вы наберете 18 баллов за экзамен, это будет самый низкий балл, при котором кредиты все равно зачисляются, главное — сдать экзамен. Наивысший результат — 30 баллов. Кредиты не зависят от одобренного балла, только от того, что вы сдали предмет.\n\nReferences\n1) https://t.me/unimessina2223/111302\n2) https://t.me/unimessina2223/157235\n3) https://t.me/unimessina2223/121838\n4) https://t.me/unimessina2223/27123\n5) https://t.me/unimessina2223/7094",
+      "keywords_found": [
+        "кредиты"
+      ],
+      "keywords_missing": [
+        "CFU",
+        "экзамены",
+        "баллы",
+        "студенческая система"
+      ]
+    },
+    {
+      "id": 40,
+      "question": "Что будет, если я не пройду все экзамены первого курса зимой?",
+      "category": "exams",
+      "num_results": 8,
+      "top_similarity": 0.7111,
+      "avg_similarity": 0.6784,
+      "response_time_ms": 3850.6,
+      "tokens_used": 813,
+      "answer_preview": "Если ты не пройдёшь все экзамены первого курса зимой, то сможешь сдать их летом. Тебе нужно будет набрать 15 CFU до 10 августа и 5 CFU до 30 ноября, чтобы получить вторую часть стипендии до 31 декабря 2026 года. Помни, что нужно будет сдать все экзамены первого и второго семестра либо минимальное количество для успешного прохождения.\n\nReferences\n1) https://t.me/unimessina2223/157192\n2) https://t.me/unimessina2223/161475\n3) https://t.me/unimessina2223/95119\n4) https://t.me/unimessina2223/47106\n5) https://t.me/unimessina2223/18343",
+      "keywords_found": [
+        "экзамены",
+        "летом",
+        "CFU"
+      ],
+      "keywords_missing": [
+        "остаток стипендии",
+        "первый курс"
+      ]
+    },
+    {
+      "id": 41,
+      "question": "Как я могу изменить свой учебный план и добавить русский язык?",
+      "category": "enrollment",
+      "num_results": 6,
+      "top_similarity": 0.6525,
+      "avg_similarity": 0.6325,
+      "response_time_ms": 2804.67,
+      "tokens_used": 531,
+      "answer_preview": "Чтобы изменить свой учебный план и добавить русский язык, вам нужно узнать, возможно ли это в вашей ситуации. Если ваш учебный план уже выполнен, вы можете его изменить и добавить русский язык, но имейте в виду, что за него могут начисляться 6 кредитов. Лучше всего уточнить детали в учебной части вашего университета.\n\nReferences\n1) https://t.me/unimessina2223/157322\n2) https://t.me/unimessina2223/157120\n3) https://t.me/unimessina2223/157174\n4) https://t.me/unimessina2223/159293\n5) https://t.me/unimessina2223/79496",
+      "keywords_found": [
+        "учебный план",
+        "русский язык",
+        "изменить",
+        "добавить"
+      ],
+      "keywords_missing": [
+        "стадиплан"
+      ]
+    },
+    {
+      "id": 42,
+      "question": "Когда будет выплата второй части стипендии?",
+      "category": "scholarship",
+      "num_results": 6,
+      "top_similarity": 0.8587,
+      "avg_similarity": 0.8595,
+      "response_time_ms": 2490.87,
+      "tokens_used": 529,
+      "answer_preview": "К сожалению, точная дата выплаты второй части стипендии не указана. Возможно, вам стоит обратиться в учебный отдел или на сайт университета для получения актуальной информации.\n\nReferences\n1) https://t.me/unimessina2223/55392\n2) https://t.me/unimessina2223/156480\n3) https://t.me/unimessina2223/108565\n4) https://t.me/unimessina2223/93559\n5) https://t.me/unimessina2223/123231",
+      "keywords_found": [],
+      "keywords_missing": [
+        "выплата",
+        "вторая часть",
+        "стипендия",
+        "дедлайн",
+        "финансовая помощь"
+      ]
+    },
+    {
+      "id": 43,
+      "question": "Сколько CFU нужно для первого курса магистратуры по менеджменту?",
+      "category": "courses",
+      "num_results": 5,
+      "top_similarity": 0.7649,
+      "avg_similarity": 0.6367,
+      "response_time_ms": 2253.83,
+      "tokens_used": 703,
+      "answer_preview": "Для первого курса магистратуры по менеджменту необходимо иметь не менее 26 CFU.\n\nReferences\n1) https://t.me/unimessina2223/156445\n2) https://t.me/unimessina2223/152868\n3) https://t.me/unimessina2223/156427\n4) https://t.me/unimessina2223/55632\n5) https://t.me/c/2842855377/3607",
+      "keywords_found": [
+        "CFU",
+        "менеджмент"
+      ],
+      "keywords_missing": [
+        "магистратура",
+        "предметы",
+        "кредиты"
+      ]
+    },
+    {
+      "id": 44,
+      "question": "Как можно получить справку о фулл энролменте и где её искать?",
+      "category": "enrollment",
+      "num_results": 6,
+      "top_similarity": 0.7445,
+      "avg_similarity": 0.7144,
+      "response_time_ms": 3379.15,
+      "tokens_used": 578,
+      "answer_preview": "Чтобы получить справку о фулл энролменте, необходимо выяснить, куда нужно подавать документы. Это может быть связано с вашей учебной организацией, и, возможно, стоит обратиться непосредственно к ним для получения более точной информации. Пока не удается найти конкретный ответ на этот вопрос, но многие студенты также интересуются этим.\n\nReferences\n1) https://t.me/unimessina2223/156389\n2) https://t.me/unimessina2223/129835\n3) https://t.me/unimessina2223/29790\n4) https://t.me/unimessina2223/149915\n5) https://t.me/unimessina2223/16045",
+      "keywords_found": [
+        "фулл энролмент",
+        "документы"
+      ],
+      "keywords_missing": [
+        "esse3",
+        "справка",
+        "регистрация"
+      ]
+    },
+    {
+      "id": 45,
+      "question": "Когда начинается второй семестр и как это узнать?",
+      "category": "deadlines",
+      "num_results": 5,
+      "top_similarity": 0.7617,
+      "avg_similarity": 0.6692,
+      "response_time_ms": 2582.88,
+      "tokens_used": 457,
+      "answer_preview": "Второй семестр начинается с конца января, но точная дата может различаться в зависимости от учебного заведения. Чтобы узнать конкретную дату, рекомендую проверить расписание на сайте вашего университета или обратиться в учебный офис.\n\nReferences\n1) https://t.me/unimessina2223/156318\n2) https://t.me/unimessina2223/79327\n3) https://t.me/unimessina2223/1200\n4) https://t.me/unimessina2223/120956\n5) https://t.me/unimessina2223/120584",
+      "keywords_found": [
+        "второй семестр",
+        "расписание"
+      ],
+      "keywords_missing": [
+        "даты",
+        "начало",
+        "учебный год"
+      ]
+    },
+    {
+      "id": 46,
+      "question": "Что нужно для подачи на ВНЖ и какие документы обязательны?",
+      "category": "vnzh_documents",
+      "num_results": 7,
+      "top_similarity": 0.8248,
+      "avg_similarity": 0.7796,
+      "response_time_ms": 3649.62,
+      "tokens_used": 789,
+      "answer_preview": "Для подачи на ВНЖ вам понадобятся следующие документы:\n\n- справка с банка о текущем счете (минимум 500€ на счету)\n- фото 3х4\n- медицинская страховка\n- паспорт и его копия\n- контракт/hospitality\n- ричевута (документ, который выдали на почту)\n- admission letter, выданный университетом для квестуры (такой документ выдается после оплаты 156 евро)\n\nЕсли у вас возникнут дополнительные вопросы, дайте знать!\n\nReferences\n1) https://t.me/unimessina2223/101522\n2) https://t.me/unimessina2223/29135\n3) https://t.me/unimessina2223/47065\n4) https://t.me/unimessina2223/30044\n5) https://t.me/unimessina2223/119510",
+      "keywords_found": [
+        "документы",
+        "ВНЖ",
+        "контракт"
+      ],
+      "keywords_missing": [
+        "хоспиталити",
+        "банковский счет"
+      ]
+    },
+    {
+      "id": 47,
+      "question": "Какой дедлайн для подачи учебного плана?",
+      "category": "deadlines",
+      "num_results": 7,
+      "top_similarity": 0.6653,
+      "avg_similarity": 0.618,
+      "response_time_ms": 2767.56,
+      "tokens_used": 544,
+      "answer_preview": "Дедлайн для подачи учебного плана, насколько я помню, до конца августа, но чем раньше, тем лучше.\n\nReferences\n1) https://t.me/unimessina2223/72576\n2) https://t.me/unimessina2223/50845\n3) https://t.me/unimessina2223/1218\n4) https://t.me/unimessina2223/39549\n5) https://t.me/unimessina2223/12108",
+      "keywords_found": [
+        "дедлайн"
+      ],
+      "keywords_missing": [
+        "срок",
+        "учебный план",
+        "31 января"
+      ]
+    },
+    {
+      "id": 48,
+      "question": "Что делать, если не пришел эмэйл про фулл энроллмент?",
+      "category": "enrollment",
+      "num_results": 6,
+      "top_similarity": 0.9531,
+      "avg_similarity": 0.7335,
+      "response_time_ms": 2981.76,
+      "tokens_used": 578,
+      "answer_preview": "Если не пришел эмэйл про фулл энроллмент, возможно, стоит проверить, не возникла ли какая-то ошибка или задержка в системе. Кроме того, можно попробовать уточнить информацию у тех, кто также ожидает ответ, потому что многие задаются этим вопросом и не могут разобраться, что делать.\n\nReferences\n1) https://t.me/unimessina2223/155504\n2) https://t.me/unimessina2223/29790\n3) https://t.me/unimessina2223/131446\n4) https://t.me/unimessina2223/16045\n5) https://t.me/unimessina2223/156349",
+      "keywords_found": [
+        "фулл энроллмент",
+        "эмэйл"
+      ],
+      "keywords_missing": [
+        "проблема",
+        "табачи",
+        "оплата"
+      ]
+    },
+    {
+      "id": 49,
+      "question": "Можно ли оплатить налог за учебу картой?",
+      "category": "fees",
+      "num_results": 6,
+      "top_similarity": 0.73,
+      "avg_similarity": 0.674,
+      "response_time_ms": 2148.7,
+      "tokens_used": 471,
+      "answer_preview": "Нет, налог за учебу оплачивается налом.\n\nReferences\n1) https://t.me/unimessina2223/119650\n2) https://t.me/unimessina2223/123908\n3) https://t.me/unimessina2223/143520\n4) https://t.me/unimessina2223/159176\n5) https://t.me/unimessina2223/82251",
+      "keywords_found": [
+        "налог"
+      ],
+      "keywords_missing": [
+        "оплата",
+        "карта",
+        "наличные",
+        "156 евро"
+      ]
+    },
+    {
+      "id": 50,
+      "question": "Сколько экзаменов нужно сдать для получения стипендии ERSU?",
+      "category": "scholarship",
+      "num_results": 5,
+      "top_similarity": 0.7592,
+      "avg_similarity": 0.6988,
+      "response_time_ms": 3330.05,
+      "tokens_used": 508,
+      "answer_preview": "К сожалению, точной информации о количестве экзаменов, необходимых для получения стипендии ERSU, нет. Я не уверен, сколько именно экзаменов нужно сдать, но ты можешь попробовать найти более подробную информацию на официальном сайте или спросить у студентов, которые уже получали стипендию.\n\nReferences\n1) https://t.me/unimessina2223/15847\n2) https://t.me/unimessina2223/59427\n3) https://t.me/unimessina2223/52673\n4) https://t.me/unimessina2223/11523\n5) https://t.me/unimessina2223/144925",
+      "keywords_found": [
+        "ERSU"
+      ],
+      "keywords_missing": [
+        "стипендия",
+        "экзамены",
+        "кредиты",
+        "16"
+      ]
+    },
+    {
+      "id": 51,
+      "question": "Когда открывается велком поинт?",
+      "category": "campus",
+      "num_results": 5,
+      "top_similarity": 0.7093,
+      "avg_similarity": 0.6394,
+      "response_time_ms": 2371.87,
+      "tokens_used": 462,
+      "answer_preview": "Я не уверен в точной дате открытия велком поинта, но кто-то спрашивал, с какого числа он откроется. Попробуйте уточнить эту информацию у администрации или на официальном сайте.\n\nReferences\n1) https://t.me/unimessina2223/153749\n2) https://t.me/unimessina2223/153375\n3) https://t.me/unimessina2223/129960\n4) https://t.me/unimessina2223/154193\n5) https://t.me/unimessina2223/42178",
+      "keywords_found": [
+        "велком поинт"
+      ],
+      "keywords_missing": [
+        "открытие",
+        "дата",
+        "расписание",
+        "университет"
+      ]
+    },
+    {
+      "id": 52,
+      "question": "Сколько кредитов нужно набрать для получения стипендии на втором курсе?",
+      "category": "scholarship",
+      "num_results": 5,
+      "top_similarity": 0.9021,
+      "avg_similarity": 0.8803,
+      "response_time_ms": 2988.85,
+      "tokens_used": 521,
+      "answer_preview": "Для получения стипендии на втором курсе нужно набрать определенное количество кредитов, однако точная цифра не указана. Я не уверен, сколько именно кредитов требуется, но знаю, что для второго курса могут быть установлены специфические требования. Возможно, стоит уточнить детали у учебной части или на официальном сайте университета.\n\nReferences\n1) https://t.me/unimessina2223/115469\n2) https://t.me/unimessina2223/100562\n3) https://t.me/unimessina2223/49664\n4) https://t.me/unimessina2223/60424\n5) https://t.me/unimessina2223/77478",
+      "keywords_found": [],
+      "keywords_missing": [
+        "кредиты",
+        "стипендия",
+        "второй курс",
+        "условия",
+        "обязанности"
+      ]
+    },
+    {
+      "id": 53,
+      "question": "Можно ли сдавать зимние экзамены летом?",
+      "category": "exams",
+      "num_results": 6,
+      "top_similarity": 0.8506,
+      "avg_similarity": 0.7983,
+      "response_time_ms": 2676.23,
+      "tokens_used": 560,
+      "answer_preview": "Да, можно сдавать зимние экзамены летом. Однако учти, что кредиты уже не будут влиять на стипендию, так как дедлайн для этого в августе.\n\nReferences\n1) https://t.me/unimessina2223/154314\n2) https://t.me/c/2842855377/1883\n3) https://t.me/unimessina2223/47106\n4) https://t.me/unimessina2223/161475\n5) https://t.me/c/2842855377/3657",
+      "keywords_found": [
+        "зимние экзамены"
+      ],
+      "keywords_missing": [
+        "летние экзамены",
+        "запись",
+        "сдача",
+        "условия"
+      ]
+    },
+    {
+      "id": 54,
+      "question": "Что делать, если не могу войти в личный кабинет Vodafone?",
+      "category": "documents",
+      "num_results": 5,
+      "top_similarity": 0.5752,
+      "avg_similarity": 0.5397,
+      "response_time_ms": 3377.97,
+      "tokens_used": 556,
+      "answer_preview": "Если не можете войти в личный кабинет Vodafone, попробуйте проверить, правильно ли вы вводите email и пароль. Иногда ошибка может быть в том, что аккаунт не существует. Если проблемы продолжаются, стоит обратиться в поддержку Vodafone для получения помощи.\n\nReferences\n1) https://t.me/unimessina2223/128095\n2) https://t.me/unimessina2223/154041\n3) https://t.me/unimessina2223/18312\n4) https://t.me/c/2852524410/16336\n5) https://t.me/unimessina2223/43385",
+      "keywords_found": [
+        "Vodafone",
+        "личный кабинет",
+        "проблемы",
+        "аккаунт"
+      ],
+      "keywords_missing": [
+        "вход"
+      ]
+    },
+    {
+      "id": 55,
+      "question": "Когда закроются мензы и спортзалы в университете?",
+      "category": "campus",
+      "num_results": 5,
+      "top_similarity": 0.8529,
+      "avg_similarity": 0.643,
+      "response_time_ms": 3640.73,
+      "tokens_used": 932,
+      "answer_preview": "Спортзалы будут закрыты 13 февраля 2026 года из-за предупреждения о неблагоприятных погодных условиях. Что касается менз, они будут закрыты в связи с пасхальными праздниками в 2025 году: Центральная Менса закроется 19 апреля 2025 года, а также в другие национальные праздники. Также будет закрыта Mensa Papardo с 18 по 22 апреля 2025 года и 2 мая 2025 года.\n\nReferences\n1) https://t.me/unimessina2223/153454\n2) https://t.me/unimessina2223/106122\n3) https://t.me/unimessina2223/153731\n4) https://t.me/unimessina2223/162081\n5) https://t.me/unimessina2223/95387",
+      "keywords_found": [
+        "спортзалы"
+      ],
+      "keywords_missing": [
+        "мензы",
+        "закрытие",
+        "кампус",
+        "график"
+      ]
+    },
+    {
+      "id": 56,
+      "question": "Как получить справку о том, что я студент университета?",
+      "category": "documents",
+      "num_results": 5,
+      "top_similarity": 0.8769,
+      "avg_similarity": 0.8328,
+      "response_time_ms": 3528.84,
+      "tokens_used": 493,
+      "answer_preview": "Чтобы получить справку о том, что вы студент университета, вам следует обратиться в учебный отдел вашего университета или в деканат. Обычно необходима подача заявления и, возможно, предоставление каких-либо документов, таких как паспорт или студенческий билет. Если вам нужно больше информации, можете уточнить в вашем университете.\n\nReferences\n1) https://t.me/unimessina2223/46251\n2) https://t.me/unimessina2223/49357\n3) https://t.me/unimessina2223/94509\n4) https://t.me/unimessina2223/160420\n5) https://t.me/unimessina2223/153430",
+      "keywords_found": [
+        "студент",
+        "получить"
+      ],
+      "keywords_missing": [
+        "справка",
+        "учеба",
+        "документы"
+      ]
+    },
+    {
+      "id": 57,
+      "question": "Как проверить статус на получение стипендии?",
+      "category": "scholarship",
+      "num_results": 6,
+      "top_similarity": 0.9126,
+      "avg_similarity": 0.7939,
+      "response_time_ms": 2970.54,
+      "tokens_used": 516,
+      "answer_preview": "Чтобы проверить статус на получение стипендии, зайдите на сайт student.ersumessina.it, в разделе \"le mie richieste\" найдите номер рядом с \"borsa di studio\" — там будет указан статус.\n\nReferences\n1) https://t.me/unimessina2223/152833\n2) https://t.me/unimessina2223/150384\n3) https://t.me/unimessina2223/15557\n4) https://t.me/unimessina2223/11805\n5) https://t.me/unimessina2223/11841",
+      "keywords_found": [
+        "статус",
+        "проверить",
+        "ersumessina",
+        "номер"
+      ],
+      "keywords_missing": [
+        "стипендия"
+      ]
+    },
+    {
+      "id": 58,
+      "question": "Можно ли учиться в университете по туристической визе?",
+      "category": "vnzh_documents",
+      "num_results": 8,
+      "top_similarity": 0.6951,
+      "avg_similarity": 0.5644,
+      "response_time_ms": 3030.34,
+      "tokens_used": 735,
+      "answer_preview": "Учиться по туристической визе нельзя. Вам нужно подаваться на студенческую визу для учебы. Если у вас есть вопросы по переводу или условиям учёбы, лучше узнать это напрямую в университете.\n\nReferences\n1) https://t.me/unimessina2223/153100\n2) https://t.me/unimessina2223/48364\n3) https://t.me/unimessina2223/67691\n4) https://t.me/unimessina2223/71052\n5) https://t.me/unimessina2223/48359",
+      "keywords_found": [],
+      "keywords_missing": [
+        "учеба",
+        "туристическая виза",
+        "студенческая виза",
+        "подача",
+        "проблемы"
+      ]
+    },
+    {
+      "id": 59,
+      "question": "Когда выйдет второй список стипендий и какие суммы там будут?",
+      "category": "scholarship",
+      "num_results": 5,
+      "top_similarity": 0.8274,
+      "avg_similarity": 0.8106,
+      "response_time_ms": 2647.52,
+      "tokens_used": 486,
+      "answer_preview": "Второй список стипендий пока что не был анонсирован, и точная дата его выхода неизвестна. Также нет информации о суммах стипендий в этом списке. Рекомендуется следить за новостями университета для получения актуальных данных.\n\nReferences\n1) https://t.me/unimessina2223/149026\n2) https://t.me/unimessina2223/108717\n3) https://t.me/unimessina2223/16901\n4) https://t.me/unimessina2223/101292\n5) https://t.me/unimessina2223/85501",
+      "keywords_found": [
+        "второй список",
+        "сумма"
+      ],
+      "keywords_missing": [
+        "стипендия",
+        "ERSU"
+      ]
+    },
+    {
+      "id": 60,
+      "question": "Какие документы нужны для продления ВНЖ?",
+      "category": "vnzh_documents",
+      "num_results": 7,
+      "top_similarity": 0.7417,
+      "avg_similarity": 0.8221,
+      "response_time_ms": 3546.0,
+      "tokens_used": 764,
+      "answer_preview": "Для продления ВНЖ нужны следующие документы:\n\n- справка с банка о текущем счете\n- фото 3х4\n- медицинская страховка\n- паспорт и копия\n- контракт/hospitality\n- ричевута\n- транскрипт с университета с оценками (заказывать в welcome point или написать на почту uop7.ingmift@unime.it с заполненной анкетой)\n- admission letter, выданный университетом для квестуры.\n\nReferences\n1) https://t.me/unimessina2223/37767\n2) https://t.me/unimessina2223/27931\n3) https://t.me/unimessina2223/29135\n4) https://t.me/unimessina2223/47065\n5) https://t.me/unimessina2223/47764",
+      "keywords_found": [
+        "документы",
+        "контракт",
+        "справка",
+        "транскрипт",
+        "ричевута"
+      ],
+      "keywords_missing": []
+    },
+    {
+      "id": 61,
+      "question": "Нужно ли платить налог второкурсникам, и какова его сумма?",
+      "category": "fees",
+      "num_results": 5,
+      "top_similarity": 0.7795,
+      "avg_similarity": 0.6803,
+      "response_time_ms": 2465.79,
+      "tokens_used": 506,
+      "answer_preview": "Второкурсникам нужно платить налог в размере 156 евро. Существуют также вопросы о дедлайне для его оплаты, но точной информации по этому поводу нет.\n\nReferences\n1) https://t.me/unimessina2223/152236\n2) https://t.me/unimessina2223/58536\n3) https://t.me/unimessina2223/119270\n4) https://t.me/unimessina2223/141475\n5) https://t.me/unimessina2223/118033",
+      "keywords_found": [
+        "налог",
+        "платить"
+      ],
+      "keywords_missing": [
+        "второкурсники",
+        "сумма"
+      ]
+    },
+    {
+      "id": 62,
+      "question": "Как получить подтверждение, что я учусь в Мессине?",
+      "category": "documents",
+      "num_results": 5,
+      "top_similarity": 0.78,
+      "avg_similarity": 0.6877,
+      "response_time_ms": 3492.21,
+      "tokens_used": 586,
+      "answer_preview": "Чтобы получить подтверждение, что ты учишься в Мессине, можно написать на почту велком пойнта и запросить справку. Также есть способы получить её, не оплачивая. Если есть вопросы касаемо процесса, лучше обратиться непосредственно в университет.\n\nReferences\n1) https://t.me/unimessina2223/152220\n2) https://t.me/unimessina2223/31122\n3) https://t.me/unimessina2223/100950\n4) https://t.me/unimessina2223/74680\n5) https://t.me/unimessina2223/35119",
+      "keywords_found": [
+        "подтверждение",
+        "университет"
+      ],
+      "keywords_missing": [
+        "студент",
+        "документы"
+      ]
+    },
+    {
+      "id": 63,
+      "question": "Что делать, если у меня просроченный ВНЖ, но есть ричевута?",
+      "category": "vnzh_documents",
+      "num_results": 7,
+      "top_similarity": 0.6642,
+      "avg_similarity": 0.6387,
+      "response_time_ms": 3840.0,
+      "tokens_used": 672,
+      "answer_preview": "Если у вас просроченный ВНЖ, но есть ричевута, вам стоит подготовиться к возможным последствиям. Важно, чтобы дата истечения на ричевуте еще не настала. Если вы уже подались на продление ВНЖ и у вас есть ричевута, это может помочь в вашей ситуации. Однако рекомендую уточнить более детально в миграционной службе или у юриста, так как в разных случаях могут быть разные правила.\n\nReferences\n1) https://t.me/unimessina2223/77094\n2) https://t.me/unimessina2223/116771\n3) https://t.me/unimessina2223/124326\n4) https://t.me/unimessina2223/30880\n5) https://t.me/unimessina2223/82852",
+      "keywords_found": [
+        "просроченный",
+        "ричевута"
+      ],
+      "keywords_missing": [
+        "граница",
+        "документы",
+        "проблемы"
+      ]
+    },
+    {
+      "id": 64,
+      "question": "Когда дедлайн на подачу документов для стипендии?",
+      "category": "scholarship",
+      "num_results": 7,
+      "top_similarity": 0.8784,
+      "avg_similarity": 0.8338,
+      "response_time_ms": 2452.73,
+      "tokens_used": 511,
+      "answer_preview": "Дедлайн на подачу документов для стипендии первый этап до 30 сентября, а второй этап до 31 декабря.\n\nReferences\n1) https://t.me/unimessina2223/12357\n2) https://t.me/unimessina2223/118430\n3) https://t.me/unimessina2223/62103\n4) https://t.me/unimessina2223/108588\n5) https://t.me/unimessina2223/1745",
+      "keywords_found": [
+        "дедлайн"
+      ],
+      "keywords_missing": [
+        "стипендия",
+        "документы",
+        "подача",
+        "ERSU"
+      ]
+    },
+    {
+      "id": 65,
+      "question": "Как оплатить полную регистрацию после фул энролла?",
+      "category": "enrollment",
+      "num_results": 5,
+      "top_similarity": 0.6905,
+      "avg_similarity": 0.6671,
+      "response_time_ms": 3712.26,
+      "tokens_used": 507,
+      "answer_preview": "Для оплаты полной регистрации после фул энролла вам нужно дождаться получения инструкции о том, как это сделать. Чаще всего платёж производится после подтверждения вашего фулл енролмента. Рекомендуется проверить систему или обратитесь за поддержкой, чтобы узнать конкретные шаги для оплаты 156 евро.\n\nReferences\n1) https://t.me/unimessina2223/148428\n2) https://t.me/unimessina2223/32132\n3) https://t.me/unimessina2223/112165\n4) https://t.me/unimessina2223/64348\n5) https://t.me/unimessina2223/68970",
+      "keywords_found": [],
+      "keywords_missing": [
+        "оплата",
+        "фулл энролл",
+        "регистрация",
+        "сайт",
+        "документы"
+      ]
+    },
+    {
+      "id": 66,
+      "question": "Где можно проверить статус моего ВНЖ?",
+      "category": "vnzh_documents",
+      "num_results": 5,
+      "top_similarity": 0.7672,
+      "avg_similarity": 0.7214,
+      "response_time_ms": 2567.03,
+      "tokens_used": 473,
+      "answer_preview": "Вы можете проверить статус вашего ВНЖ на специальных сайтах, но конкретные ссылки не указаны. Попробуйте поискать на официальных правительственных порталах или в онлайн-сервисах, связанных с иммиграцией. Если нужна дополнительная помощь, возможно, стоит обратиться к юристу или в консульство.\n\nReferences\n1) https://t.me/unimessina2223/23504\n2) https://t.me/unimessina2223/94154\n3) https://t.me/unimessina2223/22272\n4) https://t.me/unimessina2223/21674\n5) https://t.me/unimessina2223/130698",
+      "keywords_found": [
+        "статус",
+        "ВНЖ"
+      ],
+      "keywords_missing": [
+        "questura",
+        "документы",
+        "проверка"
+      ]
+    },
+    {
+      "id": 67,
+      "question": "Когда будет следующая выплата стипендии для второкурсников?",
+      "category": "scholarship",
+      "num_results": 6,
+      "top_similarity": 0.869,
+      "avg_similarity": 0.8234,
+      "response_time_ms": 3062.01,
+      "tokens_used": 557,
+      "answer_preview": "Я не уверен, когда будет следующая выплата стипендии для второкурсников, так как в доступной информации не указана четкая дата. Однако иногда выплаты могут происходить в июне. Лучше уточнить у учебного заведения для получения точной информации.\n\nReferences\n1) https://t.me/unimessina2223/55392\n2) https://t.me/unimessina2223/40413\n3) https://t.me/unimessina2223/108565\n4) https://t.me/unimessina2223/156480\n5) https://t.me/unimessina2223/123231",
+      "keywords_found": [
+        "выплата"
+      ],
+      "keywords_missing": [
+        "второкурсники",
+        "май",
+        "июнь",
+        "стипендия"
+      ]
+    },
+    {
+      "id": 68,
+      "question": "Как мне получить справку с места учёбы быстро?",
+      "category": "documents",
+      "num_results": 5,
+      "top_similarity": 0.713,
+      "avg_similarity": 0.7169,
+      "response_time_ms": 4201.12,
+      "tokens_used": 543,
+      "answer_preview": "Чтобы быстро получить справку с места учёбы, можно попробовать обратиться в учебное заведение напрямую, возможно, у них есть возможность предоставить такие справки онлайн или оперативно по запросу. Также стоит проверить, есть ли в вашем вузе специальный отдел, отвечающий за такие документы. Если вы хотите узнать, где именно ставить галочку для получения справки, уточните в администрации вашего учебного заведения.\n\nReferences\n1) https://t.me/unimessina2223/150129\n2) https://t.me/unimessina2223/153143\n3) https://t.me/unimessina2223/17122\n4) https://t.me/unimessina2223/74246\n5) https://t.me/unimessina2223/83932",
+      "keywords_found": [],
+      "keywords_missing": [
+        "справка",
+        "место учёбы",
+        "32 евро",
+        "почта",
+        "ответ"
+      ]
+    },
+    {
+      "id": 69,
+      "question": "Когда начнутся экзамены в этом семестре?",
+      "category": "exams",
+      "num_results": 6,
+      "top_similarity": 0.7563,
+      "avg_similarity": 0.7183,
+      "response_time_ms": 2456.91,
+      "tokens_used": 491,
+      "answer_preview": "Экзамены зимней сессии начинаются с января по февраль.\n\nReferences\n1) https://t.me/unimessina2223/121884\n2) https://t.me/unimessina2223/120842\n3) https://t.me/unimessina2223/59239\n4) https://t.me/unimessina2223/150025\n5) https://t.me/unimessina2223/56550",
+      "keywords_found": [
+        "экзамены"
+      ],
+      "keywords_missing": [
+        "начало",
+        "семестр",
+        "график",
+        "даты"
+      ]
+    },
+    {
+      "id": 70,
+      "question": "Как мне сделать учебный план после зачисления?",
+      "category": "enrollment",
+      "num_results": 5,
+      "top_similarity": 0.6233,
+      "avg_similarity": 0.6024,
+      "response_time_ms": 3440.99,
+      "tokens_used": 506,
+      "answer_preview": "Чтобы сделать учебный план после зачисления, тебе нужно определить свои учебные цели и сроки. Начни с того, чтобы расписать основные предметы и экзамены, которые предстоит пройти. Учебный план поможет организовать ваше время и подготовку. Если у тебя есть конкретные вопросы о том, какие именно предметы выбирать или как их распределить, не стесняйся уточнить у академического куратора или на факультете.\n\nReferences\n1) https://t.me/unimessina2223/72599\n2) https://t.me/unimessina2223/117270\n3) https://t.me/unimessina2223/132717\n4) https://t.me/unimessina2223/72537\n5) https://t.me/unimessina2223/150143",
+      "keywords_found": [
+        "учебный план"
+      ],
+      "keywords_missing": [
+        "зачисление",
+        "инструкция",
+        "документы",
+        "формы"
+      ]
+    },
+    {
+      "id": 71,
+      "question": "Как зарегистрироваться на экзамены в январе?",
+      "category": "exams",
+      "num_results": 6,
+      "top_similarity": 0.7752,
+      "avg_similarity": 0.7413,
+      "response_time_ms": 2091.41,
+      "tokens_used": 447,
+      "answer_preview": "Чтобы зарегистрироваться на экзамены в январе, нужно получить фулл энролмент.\n\nReferences\n1) https://t.me/unimessina2223/148562\n2) https://t.me/c/2852524410/8823\n3) https://t.me/unimessina2223/16036\n4) https://t.me/unimessina2223/135867\n5) https://t.me/unimessina2223/147022",
+      "keywords_found": [
+        "экзамены"
+      ],
+      "keywords_missing": [
+        "январь",
+        "запись",
+        "онлайн",
+        "календарь"
+      ]
+    },
+    {
+      "id": 72,
+      "question": "Что делать после оплаты фулл енрол и как проверить, что я принят?",
+      "category": "enrollment",
+      "num_results": 6,
+      "top_similarity": 0.7532,
+      "avg_similarity": 0.6914,
+      "response_time_ms": 3126.13,
+      "tokens_used": 568,
+      "answer_preview": "После оплаты фулл енрол нужно будет подождать, так как регистрация на экзамены будет доступна в январе. Чтобы проверить, что вы приняты, ожидайте уведомления или письма о статусе вашей заявки. Если у вас есть дополнительные вопросы или нужна помощь, возможно, вы можете обратиться в учебное заведение или к куратору программы.\n\nReferences\n1) https://t.me/unimessina2223/148428\n2) https://t.me/unimessina2223/148554\n3) https://t.me/unimessina2223/151127\n4) https://t.me/unimessina2223/112165\n5) https://t.me/unimessina2223/62131",
+      "keywords_found": [
+        "фулл енрол",
+        "статус"
+      ],
+      "keywords_missing": [
+        "проверка",
+        "прием",
+        "эссе3"
+      ]
+    },
+    {
+      "id": 73,
+      "question": "Как получить информацию о списках стипендий второго потока?",
+      "category": "scholarship",
+      "num_results": 6,
+      "top_similarity": 0.8517,
+      "avg_similarity": 0.7591,
+      "response_time_ms": 2591.66,
+      "tokens_used": 536,
+      "answer_preview": "Чтобы получить информацию о списках стипендий второго потока, нужно использовать приложение ERSU. Перейдите в раздел \"servizi online\", затем \"le mie richieste\". Там можно ввести номер borsa di studio и искать в списке через поиск.\n\nReferences\n1) https://t.me/unimessina2223/149026\n2) https://t.me/unimessina2223/153968\n3) https://t.me/unimessina2223/90805\n4) https://t.me/unimessina2223/150558\n5) https://t.me/unimessina2223/15894",
+      "keywords_found": [],
+      "keywords_missing": [
+        "списки",
+        "стипендии",
+        "второй поток",
+        "результаты",
+        "транш"
+      ]
+    },
+    {
+      "id": 74,
+      "question": "Где найти расписание занятий и как начать ходить на занятия?",
+      "category": "campus",
+      "num_results": 6,
+      "top_similarity": 0.735,
+      "avg_similarity": 0.6111,
+      "response_time_ms": 2700.73,
+      "tokens_used": 597,
+      "answer_preview": "Чтобы узнать расписание занятий, можете зайти на онлайн уроки, которые будут в начале. Это поможет вам начать ходить на занятия. Я не уверен насчет заданий, так как не помню, получали ли мы их после лекции, но главное — это сдать экзамены.\n\nReferences\n1) https://t.me/unimessina2223/147812\n2) https://t.me/c/2852524410/119\n3) https://t.me/unimessina2223/143894\n4) https://t.me/unimessina2223/141113\n5) https://t.me/unimessina2223/141118",
+      "keywords_found": [
+        "расписание",
+        "занятия"
+      ],
+      "keywords_missing": [
+        "начало",
+        "информация",
+        "курсы"
+      ]
+    },
+    {
+      "id": 75,
+      "question": "Когда будет второй транш стипендии?",
+      "category": "scholarship",
+      "num_results": 6,
+      "top_similarity": 0.871,
+      "avg_similarity": 0.8348,
+      "response_time_ms": 2822.27,
+      "tokens_used": 635,
+      "answer_preview": "Второй транш стипендии для тех, кто получил первый транш в июне, выплачивается вместе со всеми в период с 10 июля. Если ты спрашиваешь о другом транше, то первый транш будет выплачен в декабре.\n\nReferences\n1) https://t.me/unimessina2223/119161\n2) https://t.me/unimessina2223/106264\n3) https://t.me/unimessina2223/26700\n4) https://t.me/unimessina2223/24803\n5) https://t.me/unimessina2223/74837",
+      "keywords_found": [
+        "второй транш"
+      ],
+      "keywords_missing": [
+        "стипендия",
+        "даты",
+        "дедлайн",
+        "финансирование"
+      ]
+    },
+    {
+      "id": 76,
+      "question": "Что нужно для получения кодиче фескале в Мессине?",
+      "category": "documents",
+      "num_results": 6,
+      "top_similarity": 0.7168,
+      "avg_similarity": 0.6048,
+      "response_time_ms": 2124.95,
+      "tokens_used": 562,
+      "answer_preview": "Для получения кодиче фескале в Мессине нужно записаться заранее. С собой необходимо взять паспорт и admission letter.\n\nReferences\n1) https://t.me/unimessina2223/146954\n2) https://t.me/unimessina2223/62730\n3) https://t.me/unimessina2223/128336\n4) https://t.me/unimessina2223/60275\n5) https://t.me/unimessina2223/55149",
+      "keywords_found": [
+        "кодиче фескале"
+      ],
+      "keywords_missing": [
+        "апунтаменто",
+        "документы",
+        "сроки",
+        "Мессина"
+      ]
+    },
+    {
+      "id": 77,
+      "question": "Как записаться на полное зачисление и какие документы нужны?",
+      "category": "enrollment",
+      "num_results": 6,
+      "top_similarity": 0.6036,
+      "avg_similarity": 0.5889,
+      "response_time_ms": 2962.9,
+      "tokens_used": 609,
+      "answer_preview": "Чтобы записаться на полное зачисление, вам понадобятся следующие документы: Marca da bollo за 16 евро, конвертик для permesso di soggiorno, копия паспорта и энролмент из университета. Остальные документы, такие как страховка и выписка с банковского счёта, вам нужно будет принести только на отпечатки после приглашения, так что не обязательно всё брать сразу.\n\nReferences\n1) https://t.me/unimessina2223/30888\n2) https://t.me/unimessina2223/74587\n3) https://t.me/unimessina2223/19238\n4) https://t.me/unimessina2223/150697\n5) https://t.me/unimessina2223/12213",
+      "keywords_found": [
+        "полное зачисление",
+        "документы"
+      ],
+      "keywords_missing": [
+        "esse3",
+        "преэнролмент",
+        "CIMIA"
+      ]
+    },
+    {
+      "id": 78,
+      "question": "Когда начинаются экзамены в январе?",
+      "category": "exams",
+      "num_results": 6,
+      "top_similarity": 0.8639,
+      "avg_similarity": 0.8187,
+      "response_time_ms": 2100.98,
+      "tokens_used": 490,
+      "answer_preview": "Экзамены в январе начинаются в январе и проводятся до февраля. Обычно это зимняя сессия.\n\nReferences\n1) https://t.me/unimessina2223/147022\n2) https://t.me/unimessina2223/148834\n3) https://t.me/c/2852524410/8823\n4) https://t.me/unimessina2223/120842\n5) https://t.me/unimessina2223/135867",
+      "keywords_found": [
+        "экзамены",
+        "сессия"
+      ],
+      "keywords_missing": [
+        "начало",
+        "январь",
+        "даты"
+      ]
+    },
+    {
+      "id": 79,
+      "question": "Как и где я могу сделать энроллмент на магистратуру?",
+      "category": "enrollment",
+      "num_results": 5,
+      "top_similarity": 0.7123,
+      "avg_similarity": 0.64,
+      "response_time_ms": 2818.16,
+      "tokens_used": 557,
+      "answer_preview": "Чтобы сделать энроллмент на магистратуру, необходимо пройти первый этап, на который обычно приходит сообщение от Welcome Point о том, что можно переходить ко второму этапу, после отправки запроса. Когда вы получите это сообщение, вы сможете сдать все необходимые документы. Если нужна более точная информация по процедуре или срокам, возможно, стоит обратиться к администраторам магистратуры или проверить на сайте университета.\n\nReferences\n1) https://t.me/unimessina2223/135898\n2) https://t.me/unimessina2223/122351\n3) https://t.me/unimessina2223/150707\n4) https://t.me/unimessina2223/143882\n5) https://t.me/unimessina2223/121040",
+      "keywords_found": [],
+      "keywords_missing": [
+        "онлайн",
+        "велком поинт",
+        "оплата",
+        "156€",
+        "дедлайн"
+      ]
+    },
+    {
+      "id": 80,
+      "question": "Какой срок для подачи документов на стипендию?",
+      "category": "scholarship",
+      "num_results": 7,
+      "top_similarity": 0.8484,
+      "avg_similarity": 0.8147,
+      "response_time_ms": 2375.3,
+      "tokens_used": 536,
+      "answer_preview": "Срок для подачи документов на стипендию: первый этап до 30 сентября, а второй до 31 декабря.\n\nReferences\n1) https://t.me/unimessina2223/53059\n2) https://t.me/unimessina2223/107927\n3) https://t.me/unimessina2223/1745\n4) https://t.me/unimessina2223/12357\n5) https://t.me/unimessina2223/118112",
+      "keywords_found": [],
+      "keywords_missing": [
+        "дедлайн",
+        "заявка",
+        "30 августа",
+        "ерсу",
+        "документы"
+      ]
+    },
+    {
+      "id": 81,
+      "question": "Где можно получить проездную карту и какие документы нужны?",
+      "category": "campus",
+      "num_results": 6,
+      "top_similarity": 0.7089,
+      "avg_similarity": 0.6055,
+      "response_time_ms": 4065.21,
+      "tokens_used": 599,
+      "answer_preview": "Проездную карту можно получить в вашем департаменте. Для её получения нужны следующие документы: Marca da bollo за 16 евро, конвертик для permesso di soggiorno, копия паспорта, энролмент из университета. Остальные документы, такие как страховка и выписка с банковского счёта, нужны будут позже, при приглашении на отпечатки.\n\nReferences\n1) https://t.me/unimessina2223/40325\n2) https://t.me/unimessina2223/145638\n3) https://t.me/unimessina2223/159438\n4) https://t.me/unimessina2223/82478\n5) https://t.me/unimessina2223/30888",
+      "keywords_found": [
+        "департамент",
+        "документы",
+        "получить"
+      ],
+      "keywords_missing": [
+        "проездная карта",
+        "информация"
+      ]
+    },
+    {
+      "id": 82,
+      "question": "Какие международные сертификаты английского языка принимает университет?",
+      "category": "courses",
+      "num_results": 5,
+      "top_similarity": 0.6978,
+      "avg_similarity": 0.6544,
+      "response_time_ms": 3200.01,
+      "tokens_used": 644,
+      "answer_preview": "Университеты могут принимать различные международные сертификаты английского языка. Например, в ряде случаев возможен сертификат Duolingo English Test, а также другие экзамены помимо IELTS. Если ваше первое образование было на английском, в некоторых Европейских университетах языковые сертификаты могут быть необязательными, но это стоит уточнить на сайте конкретного университета.\n\nReferences\n1) https://t.me/unimessina2223/112002\n2) https://t.me/unimessina2223/143613\n3) https://t.me/unimessina2223/17173\n4) https://t.me/unimessina2223/59359\n5) https://t.me/unimessina2223/111915",
+      "keywords_found": [
+        "IELTS",
+        "сертификаты",
+        "университет"
+      ],
+      "keywords_missing": [
+        "TOEFL",
+        "минимальный балл"
+      ]
+    },
+    {
+      "id": 83,
+      "question": "Когда будут известны даты январских экзаменов?",
+      "category": "exams",
+      "num_results": 6,
+      "top_similarity": 0.9632,
+      "avg_similarity": 0.8409,
+      "response_time_ms": 2593.91,
+      "tokens_used": 446,
+      "answer_preview": "Даты январских экзаменов обычно становятся известны ближе к концу декабря.\n\nReferences\n1) https://t.me/unimessina2223/144786\n2) https://t.me/c/2852524410/13282\n3) https://t.me/unimessina2223/148834\n4) https://t.me/unimessina2223/70890\n5) https://t.me/unimessina2223/8168",
+      "keywords_found": [
+        "даты"
+      ],
+      "keywords_missing": [
+        "январь",
+        "экзамены",
+        "расписание"
+      ]
+    },
+    {
+      "id": 84,
+      "question": "Какой список документов нужен для подачи на стипендию?",
+      "category": "scholarship",
+      "num_results": 6,
+      "top_similarity": 0.9144,
+      "avg_similarity": 0.8585,
+      "response_time_ms": 2931.64,
+      "tokens_used": 550,
+      "answer_preview": "Для подачи на стипендию понадобятся следующие документы:\n\n1. Состав семьи.\n2. Справка с места жительства (обычно вместе с составом семьи).\n3. Доход родителей за 2023-2024 год.\n\nЕсли нужны дополнительные детали, возможно, стоит уточнить у учебного заведения.\n\nReferences\n1) https://t.me/unimessina2223/107927\n2) https://t.me/unimessina2223/104722\n3) https://t.me/unimessina2223/144798\n4) https://t.me/unimessina2223/22872\n5) https://t.me/unimessina2223/23853",
+      "keywords_found": [
+        "документы"
+      ],
+      "keywords_missing": [
+        "стипендия",
+        "ричевута",
+        "паспорт",
+        "финансовые"
+      ]
+    },
+    {
+      "id": 85,
+      "question": "Как я могу получить справку о том, что учусь в университете?",
+      "category": "documents",
+      "num_results": 5,
+      "top_similarity": 0.9136,
+      "avg_similarity": 0.8612,
+      "response_time_ms": 3825.32,
+      "tokens_used": 531,
+      "answer_preview": "Чтобы получить справку о том, что вы учитесь в университете, вам следует обратиться в учебный отдел или канцелярию вашего вуза. Обычно такая справка выдается на основании вашего запроса, и может понадобиться указать цель, для которой она нужна. Если у вас есть конкретные требования или процедуры в вашем университете, стоит также уточнить это на его официальном сайте или связаться с соответствующими службами.\n\nReferences\n1) https://t.me/unimessina2223/49357\n2) https://t.me/unimessina2223/46251\n3) https://t.me/unimessina2223/94509\n4) https://t.me/unimessina2223/160420\n5) https://t.me/unimessina2223/51191",
+      "keywords_found": [
+        "справка",
+        "университет"
+      ],
+      "keywords_missing": [
+        "учеба",
+        "фулл энролл"
+      ]
+    },
+    {
+      "id": 86,
+      "question": "Что делать, если у меня красный кружок для оплаты налога не появляется?",
+      "category": "fees",
+      "num_results": 6,
+      "top_similarity": 0.8583,
+      "avg_similarity": 0.698,
+      "response_time_ms": 2430.03,
+      "tokens_used": 517,
+      "answer_preview": "Если у вас не появляется красный кружок для оплаты налога, попробуйте проверить, прошли ли вы процедуру пре-энролмента. Это может быть причиной проблемы.\n\nReferences\n1) https://t.me/unimessina2223/143632\n2) https://t.me/unimessina2223/143520\n3) https://t.me/unimessina2223/148674\n4) https://t.me/unimessina2223/118033\n5) https://t.me/unimessina2223/125374",
+      "keywords_found": [
+        "красный кружок",
+        "налог"
+      ],
+      "keywords_missing": [
+        "оплата",
+        "проблема",
+        "система"
+      ]
+    },
+    {
+      "id": 87,
+      "question": "Как мне активировать абонемент на автобус в Мессине?",
+      "category": "transport_subscription",
+      "num_results": 7,
+      "top_similarity": 0.6433,
+      "avg_similarity": 0.635,
+      "response_time_ms": 3102.57,
+      "tokens_used": 877,
+      "answer_preview": "Чтобы активировать абонемент на автобус в Мессине, вам нужно зайти в систему Esse3, затем выбрать меню \"Iniziative / Bandi\". Там вы найдете опции для первой активации абонемента ATM. Если вам нужно продлить абонемент, также будет соответствующий раздел.\n\nReferences\n1) https://t.me/unimessina2223/159260\n2) https://t.me/unimessina2223/153814\n3) https://t.me/unimessina2223/142758\n4) https://t.me/unimessina2223/150312\n5) https://t.me/unimessina2223/151431",
+      "keywords_found": [
+        "абонемент",
+        "ATM",
+        "Esse3"
+      ],
+      "keywords_missing": [
+        "активация",
+        "инструкция"
+      ]
+    },
+    {
+      "id": 88,
+      "question": "Где найти учебные материалы для Marine Biology?",
+      "category": "courses",
+      "num_results": 5,
+      "top_similarity": 0.6063,
+      "avg_similarity": 0.4937,
+      "response_time_ms": 2476.27,
+      "tokens_used": 510,
+      "answer_preview": "Учебные материалы по всем дисциплинам, в том числе по морской биологии, можно найти на сайте Moodle. Там доступны все необходимые материалы по вашим предметам.\n\nReferences\n1) https://t.me/unimessina2223/142665\n2) https://t.me/unimessina2223/129962\n3) https://t.me/unimessina2223/24372\n4) https://t.me/unimessina2223/40197\n5) https://t.me/unimessina2223/157463",
+      "keywords_found": [
+        "материалы"
+      ],
+      "keywords_missing": [
+        "Marine Biology",
+        "группа",
+        "пдф",
+        "первый курс"
+      ]
+    },
+    {
+      "id": 89,
+      "question": "Каковы сроки сдачи экзаменов в январе?",
+      "category": "exams",
+      "num_results": 6,
+      "top_similarity": 0.7925,
+      "avg_similarity": 0.7437,
+      "response_time_ms": 2877.05,
+      "tokens_used": 543,
+      "answer_preview": "Сроки сдачи экзаменов в январе относятся к зимней сессии, которая проходит с января по февраль. Точные даты экзаменов могут варьироваться, но все экзамены будут в этом периоде. Если нужны более конкретные даты, возможно, стоит уточнить у преподавателей или в учебном офисе.\n\nReferences\n1) https://t.me/unimessina2223/148834\n2) https://t.me/c/2852524410/8823\n3) https://t.me/unimessina2223/144786\n4) https://t.me/unimessina2223/120842\n5) https://t.me/unimessina2223/135867",
+      "keywords_found": [
+        "экзамены",
+        "сроки"
+      ],
+      "keywords_missing": [
+        "январь",
+        "график",
+        "учебный план"
+      ]
+    },
+    {
+      "id": 90,
+      "question": "Что нужно для получения стипендии до 30 ноября?",
+      "category": "scholarship",
+      "num_results": 6,
+      "top_similarity": 0.7571,
+      "avg_similarity": 0.7837,
+      "response_time_ms": 2996.57,
+      "tokens_used": 561,
+      "answer_preview": "Для получения стипендии до 30 ноября нужно загрузить необходимые документы. Это важный дедлайн, и если все документы будут поданы до этой даты, это даст возможность зарегистрироваться на получение стипендии. Убедитесь, что у вас есть все нужные документы до этого срока.\n\nReferences\n1) https://t.me/unimessina2223/142653\n2) https://t.me/unimessina2223/69913\n3) https://t.me/unimessina2223/31499\n4) https://t.me/unimessina2223/63115\n5) https://t.me/unimessina2223/10314",
+      "keywords_found": [
+        "дедлайн",
+        "документы"
+      ],
+      "keywords_missing": [
+        "стипендия",
+        "кодиче",
+        "ISEE"
+      ]
+    },
+    {
+      "id": 91,
+      "question": "Как выглядит справка для общежития?",
+      "category": "campus",
+      "num_results": 5,
+      "top_similarity": 0.8406,
+      "avg_similarity": 0.605,
+      "response_time_ms": 3572.32,
+      "tokens_used": 546,
+      "answer_preview": "Справка для общежития обычно содержит информацию о составе семьи, а также может требовать справки о доходах или об отсутствии доходов. Более того, могут понадобиться справки о наличии или отсутствии недвижимости, а также справки о остатках на счетах на конец прошлого или позапрошлого года. Как именно она выглядит, может зависеть от требований конкретного общежития.\n\nReferences\n1) https://t.me/unimessina2223/142124\n2) https://t.me/unimessina2223/135945\n3) https://t.me/unimessina2223/1753\n4) https://t.me/unimessina2223/24167\n5) https://t.me/unimessina2223/9224",
+      "keywords_found": [
+        "справка"
+      ],
+      "keywords_missing": [
+        "общежитие",
+        "образец",
+        "документы",
+        "подача"
+      ]
+    },
+    {
+      "id": 92,
+      "question": "Какие документы нужны для полного зачисления?",
+      "category": "enrollment",
+      "num_results": 7,
+      "top_similarity": 0.6557,
+      "avg_similarity": 0.6131,
+      "response_time_ms": 3345.42,
+      "tokens_used": 613,
+      "answer_preview": "Для полного зачисления нужны следующие документы: Marca da bollo за 16 евро, конвертик для permesso di soggiorno, копия паспорта, энролмент из университета. Остальные документы, такие как страховка и выписка с банковского счёта, нужно будет принести только на отпечатки после приглашения, так что их не обязательно брать сразу.\n\nReferences\n1) https://t.me/unimessina2223/30888\n2) https://t.me/unimessina2223/12213\n3) https://t.me/unimessina2223/110981\n4) https://t.me/unimessina2223/112952\n5) https://t.me/unimessina2223/53020",
+      "keywords_found": [
+        "документы"
+      ],
+      "keywords_missing": [
+        "полное зачисление",
+        "кодиче",
+        "ricevuta",
+        "перевод"
+      ]
+    },
+    {
+      "id": 93,
+      "question": "Как получить codice fiscale в Италии?",
+      "category": "vnzh_documents",
+      "num_results": 5,
+      "top_similarity": 0.7137,
+      "avg_similarity": 0.6518,
+      "response_time_ms": 3947.15,
+      "tokens_used": 880,
+      "answer_preview": "Чтобы получить codice fiscale в Италии, вам нужно записаться на аппоинтмент, который всегда бесплатен. Не покупайте места на запись, так как это не имеет смысла — вы должны лишь предоставить паспорт и поставить подпись во время процесса. Возможно, вам потребуется помощь кого-то, кто говорит на итальянском, чтобы заполнить документы и вести переговоры с сотрудниками.\n\nReferences\n1) https://t.me/unimessina2223/126114\n2) https://t.me/unimessina2223/33845\n3) https://t.me/unimessina2223/48686\n4) https://t.me/unimessina2223/145289\n5) https://t.me/unimessina2223/141050",
+      "keywords_found": [
+        "codice fiscale",
+        "аппоинтмент",
+        "документы"
+      ],
+      "keywords_missing": [
+        "получение",
+        "виза"
+      ]
+    },
+    {
+      "id": 94,
+      "question": "Есть ли дедлайн для подачи на стипендию?",
+      "category": "deadlines",
+      "num_results": 5,
+      "top_similarity": 0.789,
+      "avg_similarity": 0.8267,
+      "response_time_ms": 2682.15,
+      "tokens_used": 455,
+      "answer_preview": "Да, существует дедлайн для подачи на стипендию. Например, упоминается дедлайн до 29 ноября для поздней подачи.\n\nReferences\n1) https://t.me/unimessina2223/144929\n2) https://t.me/unimessina2223/13031\n3) https://t.me/unimessina2223/69521\n4) https://t.me/unimessina2223/120277\n5) https://t.me/unimessina2223/62103",
+      "keywords_found": [
+        "дедлайн"
+      ],
+      "keywords_missing": [
+        "стипендия",
+        "подача",
+        "документы",
+        "30 ноября"
+      ]
+    },
+    {
+      "id": 95,
+      "question": "Как получить визу, если я задерживаюсь с документами?",
+      "category": "vnzh_documents",
+      "num_results": 7,
+      "top_similarity": 0.7367,
+      "avg_similarity": 0.6739,
+      "response_time_ms": 2979.86,
+      "tokens_used": 643,
+      "answer_preview": "Если вы задерживаетесь с документами для получения визы, вам нужно завершить процесс подачи как можно скорее. Для получения стипендии также необходимо подавать на внж (ричевуту), и это нельзя сделать через кого-то. Если все еще не успеваете, стоит рассмотреть варианты или поговорить с учебным заведением, чтобы получить помощь в вашей ситуации.\n\nReferences\n1) https://t.me/unimessina2223/27239\n2) https://t.me/unimessina2223/69921\n3) https://t.me/unimessina2223/68601\n4) https://t.me/unimessina2223/67732\n5) https://t.me/unimessina2223/69278",
+      "keywords_found": [],
+      "keywords_missing": [
+        "виза",
+        "документы",
+        "ричевута",
+        "просроченная",
+        "решение"
+      ]
+    },
+    {
+      "id": 96,
+      "question": "Можно ли подать документы на стипендию онлайн?",
+      "category": "scholarship",
+      "num_results": 7,
+      "top_similarity": 0.8222,
+      "avg_similarity": 0.8151,
+      "response_time_ms": 1918.44,
+      "tokens_used": 564,
+      "answer_preview": "Да, можно подать документы на стипендию онлайн. Все документы для стипендии загружаются онлайн.\n\nReferences\n1) https://t.me/unimessina2223/31151\n2) https://t.me/unimessina2223/57040\n3) https://t.me/unimessina2223/28882\n4) https://t.me/unimessina2223/12486\n5) https://t.me/unimessina2223/24315",
+      "keywords_found": [
+        "онлайн",
+        "документы"
+      ],
+      "keywords_missing": [
+        "стипендия",
+        "подача",
+        "кодиче"
+      ]
+    },
+    {
+      "id": 97,
+      "question": "Какой срок на получение ISEE после приезда?",
+      "category": "documents",
+      "num_results": 5,
+      "top_similarity": 0.7164,
+      "avg_similarity": 0.7005,
+      "response_time_ms": 3000.66,
+      "tokens_used": 543,
+      "answer_preview": "Срок получения ISEE после приезда может варьироваться, но один из пользователей упомянул, что он получил ISEE через 2 дня после отправки формы. Важно учесть, что время подготовки документа может занять до нескольких дней, поэтому лучше начинать процесс заблаговременно.\n\nReferences\n1) https://t.me/unimessina2223/21330\n2) https://t.me/unimessina2223/118753\n3) https://t.me/unimessina2223/121129\n4) https://t.me/unimessina2223/25267\n5) https://t.me/unimessina2223/109327",
+      "keywords_found": [
+        "ISEE"
+      ],
+      "keywords_missing": [
+        "сроки",
+        "получение",
+        "дедлайн",
+        "документы"
+      ]
+    },
+    {
+      "id": 98,
+      "question": "Что делать, если не успел подать документы на стипендию?",
+      "category": "scholarship",
+      "num_results": 7,
+      "top_similarity": 0.7989,
+      "avg_similarity": 0.749,
+      "response_time_ms": 2765.71,
+      "tokens_used": 588,
+      "answer_preview": "Если не успел подать документы на стипендию, попробуй разобраться, можно ли это как-то решить. Чаще всего уточнения по подаче документов можно получить через кураторов или соответствующий сайт. Не стесняйся спрашивать у сотрудников вашего учебного заведения о возможных вариантах.\n\nReferences\n1) https://t.me/unimessina2223/65914\n2) https://t.me/unimessina2223/57475\n3) https://t.me/unimessina2223/107927\n4) https://t.me/unimessina2223/71442\n5) https://t.me/unimessina2223/144801",
+      "keywords_found": [
+        "документы"
+      ],
+      "keywords_missing": [
+        "стипендия",
+        "дедлайн",
+        "подача",
+        "доверенность"
+      ]
+    },
+    {
+      "id": 99,
+      "question": "Как узнать, проверяют ли визу при вылете из Стамбула?",
+      "category": "vnzh_documents",
+      "num_results": 9,
+      "top_similarity": 0.6213,
+      "avg_similarity": 0.6145,
+      "response_time_ms": 3685.43,
+      "tokens_used": 828,
+      "answer_preview": "При вылете из Стамбула документы могут проверять, но у студентов обычно не возникает проблем. В некоторых случаях на посадке в Стамбуле могут даже пропускать, если у вас есть необходимые документы. Однако если у вас истекла ричевута, могут возникнуть сложности уже в Италии. Лучше всего иметь все документы в порядке, чтобы избежать неприятностей.\n\nReferences\n1) https://t.me/unimessina2223/141702\n2) https://t.me/unimessina2223/111884\n3) https://t.me/unimessina2223/64288\n4) https://t.me/unimessina2223/64291\n5) https://t.me/unimessina2223/152996",
+      "keywords_found": [
+        "Стамбул",
+        "ричевута"
+      ],
+      "keywords_missing": [
+        "виза",
+        "проверка",
+        "выезд"
+      ]
+    },
+    {
+      "id": 100,
+      "question": "Где можно найти информацию о вакансиях для студентов?",
+      "category": "jobs",
+      "num_results": 5,
+      "top_similarity": 0.5913,
+      "avg_similarity": 0.5377,
+      "response_time_ms": 2782.24,
+      "tokens_used": 497,
+      "answer_preview": "Для поиска вакансий для студентов можно воспользоваться различными сайтами и группами, где размещают объявления о работе. Лучше всего искать в специализированных ресурсах для студентов, а также в социальных сетях, где часто публикуются актуальные предложения о работе.\n\nReferences\n1) https://t.me/unimessina2223/129737\n2) https://t.me/unimessina2223/22553\n3) https://t.me/unimessina2223/107804\n4) https://t.me/unimessina2223/121545\n5) https://t.me/unimessina2223/53173",
+      "keywords_found": [
+        "поиск"
+      ],
+      "keywords_missing": [
+        "вакансии",
+        "студенты",
+        "информация",
+        "карьера"
+      ]
+    }
+  ]
+}
