@@ -9,6 +9,7 @@ from telegram.error import Conflict, NetworkError, RetryAfter
 from telegram.ext import (
     Application,
     CallbackQueryHandler,
+    ChatMemberHandler,
     CommandHandler,
     ContextTypes,
     MessageHandler,
@@ -21,7 +22,7 @@ from src.config.settings import (
     SUPABASE_URL,
     TELEGRAM_BOT_TOKEN,
 )
-from src.handlers.commands import ask_command, help_command, start_command
+from src.handlers.commands import ask_command, help_command, new_command, optin_command, optout_command, start_command
 from src.handlers.feedback import feedback_callback_handler
 from src.handlers.messages import dm_handler
 
@@ -32,6 +33,33 @@ logger = logging.getLogger(__name__)
 # Initialize clients
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 client_oa: OpenAI = OpenAI(api_key=OPENAI_API_KEY)
+
+
+WELCOME_NOTICE = (
+    "Привет! Я Vectir AI — отвечаю на вопросы на основе переписки этой группы. "
+    "Если не хочешь чтобы твои сообщения использовались — напиши /optout в любой момент."
+)
+
+# Track chats that already received the welcome notice (per bot session).
+# For persistence across restarts, you could store this in Supabase instead.
+_notified_chats: set[int] = set()
+
+
+async def track_chat_member(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    """Send a one-time opt-out notice when the bot is added to a group."""
+    if update.my_chat_member is None:
+        return
+
+    new_status = update.my_chat_member.new_chat_member.status
+    chat = update.my_chat_member.chat
+
+    # Bot was added or promoted in a group
+    if new_status in ("member", "administrator") and chat.id not in _notified_chats:
+        _notified_chats.add(chat.id)
+        try:
+            await context.bot.send_message(chat_id=chat.id, text=WELCOME_NOTICE)
+        except Exception as e:
+            logger.warning("Could not send welcome notice to chat %s: %s", chat.id, e)
 
 
 async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -59,8 +87,11 @@ def main():
 
             # Add handlers
             app.add_handler(CommandHandler("ask", ask_command))
+            app.add_handler(CommandHandler("new", new_command))
             app.add_handler(CommandHandler("help", help_command))
             app.add_handler(CommandHandler("start", start_command))
+            app.add_handler(CommandHandler("optout", optout_command))
+            app.add_handler(CommandHandler("optin", optin_command))
             app.add_handler(
                 MessageHandler(
                     filters.TEXT & filters.ChatType.PRIVATE & ~filters.COMMAND,
@@ -68,6 +99,7 @@ def main():
                 )
             )
             app.add_handler(CallbackQueryHandler(feedback_callback_handler, pattern="^feedback:"))
+            app.add_handler(ChatMemberHandler(track_chat_member, ChatMemberHandler.MY_CHAT_MEMBER))
 
             # Add error handler
             app.add_error_handler(error_handler)
