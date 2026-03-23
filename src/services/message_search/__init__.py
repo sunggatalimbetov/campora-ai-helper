@@ -13,6 +13,7 @@ from src.services.message_search.search_messages_by_questions import (  # noqa: 
 from src.services.message_search.search_messages_hybrid import (  # noqa: F401
     search_messages_hybrid,
 )
+from src.services.message_search.rewrite_query import rewrite_query  # noqa: F401
 from src.services.message_search.search_messages_semantic_only import (  # noqa: F401
     search_messages_semantic_only,
 )

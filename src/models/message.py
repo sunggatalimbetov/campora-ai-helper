@@ -10,6 +10,7 @@ class MessageDict(TypedDict):
     link: str
     embedding: List[float]
     reply_to_message_id: Optional[int]
+    created_at: Optional[str]  # ISO 8601 timestamp from Telegram message date
     similarity: Optional[float]  # Added by match_messages or hybrid_search (combined_score)
     semantic_similarity: Optional[float]  # Added by hybrid_search
     full_text_rank: Optional[float]  # Added by hybrid_search

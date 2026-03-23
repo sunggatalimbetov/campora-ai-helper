@@ -51,6 +51,7 @@ def search_messages_hybrid(
                     "text": r["text"],
                     "link": r["link"],
                     "reply_to_message_id": r["reply_to_message_id"],
+                    "created_at": r.get("created_at"),
                     "similarity": r.get("semantic_similarity", 0),
                     "semantic_similarity": r.get("semantic_similarity"),
                     "full_text_rank": r.get("full_text_rank"),

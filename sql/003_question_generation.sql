@@ -33,6 +33,7 @@ RETURNS TABLE (
     text text,
     link text,
     reply_to_message_id BIGINT,
+    created_at TIMESTAMPTZ,
     similarity float,
     match_source text  -- 'message' or 'question'
 )
@@ -48,6 +49,7 @@ BEGIN
             m.text,
             m.link,
             m.reply_to_message_id,
+            m.created_at,
             (1 - (m.embedding <=> query_embedding))::float AS similarity,
             'message'::text AS match_source
         FROM public.messages m
@@ -63,6 +65,7 @@ BEGIN
             m.text,
             m.link,
             m.reply_to_message_id,
+            m.created_at,
             (1 - (mq.embedding <=> query_embedding))::float AS similarity,
             'question'::text AS match_source
         FROM public.message_questions mq
@@ -84,6 +87,7 @@ BEGIN
             c.text,
             c.link,
             c.reply_to_message_id,
+            c.created_at,
             c.similarity,
             c.match_source
         FROM combined c
@@ -96,6 +100,7 @@ BEGIN
         d.text,
         d.link,
         d.reply_to_message_id,
+        d.created_at,
         d.similarity,
         d.match_source
     FROM deduplicated d

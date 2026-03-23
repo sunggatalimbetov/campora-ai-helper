@@ -40,6 +40,7 @@ def search_messages_by_questions(
 					"text": r["text"],
 					"link": r["link"],
 					"reply_to_message_id": r["reply_to_message_id"],
+					"created_at": r.get("created_at"),
 					"similarity": r.get("similarity", 0),
 					"match_source": source,
 				}

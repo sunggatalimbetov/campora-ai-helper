@@ -25,6 +25,7 @@ def search_messages_semantic_only(query: str, count: int = 5) -> Tuple[List[Mess
                 "text": r["text"],
                 "link": r["link"],
                 "reply_to_message_id": r["reply_to_message_id"],
+                "created_at": r.get("created_at"),
                 "similarity": r.get("similarity", 0),
             }
         )
