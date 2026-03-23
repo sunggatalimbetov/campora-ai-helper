@@ -40,6 +40,7 @@ RETURNS TABLE (
     text text,
     link text,
     reply_to_message_id BIGINT,
+    created_at TIMESTAMPTZ,
     semantic_similarity float,
     full_text_rank float,
     combined_score float
@@ -56,6 +57,7 @@ BEGIN
             m.text,
             m.link,
             m.reply_to_message_id,
+            m.created_at,
             (1 - (m.embedding <=> query_embedding))::float as similarity,
             ROW_NUMBER() OVER (ORDER BY m.embedding <=> query_embedding) as rank
         FROM public.messages m
@@ -71,6 +73,7 @@ BEGIN
             m.text,
             m.link,
             m.reply_to_message_id,
+            m.created_at,
             ts_rank_cd(m.text_search, websearch_to_tsquery('russian', query_text)) as rank_score,
             ROW_NUMBER() OVER (
                 ORDER BY ts_rank_cd(m.text_search, websearch_to_tsquery('russian', query_text)) DESC
@@ -90,6 +93,7 @@ BEGIN
             COALESCE(ss.text, fts.text) as text,
             COALESCE(ss.link, fts.link) as link,
             COALESCE(ss.reply_to_message_id, fts.reply_to_message_id) as reply_to_message_id,
+            COALESCE(ss.created_at, fts.created_at) as created_at,
             COALESCE(ss.similarity, 0.0)::double precision as semantic_similarity,
             COALESCE(fts.rank_score, 0.0)::double precision as full_text_rank,
             (COALESCE(semantic_weight / (rrf_k + ss.rank), 0.0) +
@@ -104,6 +108,7 @@ BEGIN
         c.text,
         c.link,
         c.reply_to_message_id,
+        c.created_at,
         c.semantic_similarity,
         c.full_text_rank,
         c.combined_score

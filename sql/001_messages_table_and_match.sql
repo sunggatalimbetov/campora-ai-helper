@@ -10,7 +10,8 @@ CREATE TABLE IF NOT EXISTS public.messages (
     text TEXT NOT NULL,
     link TEXT NOT NULL,
     embedding vector(1536),
-    reply_to_message_id BIGINT
+    reply_to_message_id BIGINT,
+    created_at TIMESTAMPTZ
 );
 
 -- Optional: index for faster similarity search (create after you have some rows)
@@ -30,6 +31,7 @@ RETURNS TABLE (
     text TEXT,
     link TEXT,
     reply_to_message_id BIGINT,
+    created_at TIMESTAMPTZ,
     similarity float
 )
 LANGUAGE plpgsql
@@ -43,6 +45,7 @@ BEGIN
         m.text,
         m.link,
         m.reply_to_message_id,
+        m.created_at,
         (1 - (m.embedding <=> query_embedding))::float AS similarity
     FROM public.messages m
     WHERE m.embedding IS NOT NULL
