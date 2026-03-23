@@ -35,6 +35,9 @@ Instructions:
   "according to the information I have", or similar phrases
 - Prioritize information from replies/answers when available
 - Consider similarity scores when weighing the importance of information
+- Newer messages are generally more reliable, especially for time-sensitive topics like
+  admission requirements, deadlines, or procedures. If older and newer messages conflict,
+  prefer the newer one.
 - Write your response in the same language as the user's question
 - Do NOT include any links in your answer - they will be added automatically"""
 
@@ -49,13 +52,17 @@ def _build_context(results: list) -> tuple[str, List[MessageDict], List[MessageD
         context_parts.append("Original relevant messages:")
         for i, msg in enumerate(question_results):
             similarity = msg.get("similarity", 0)
-            context_parts.append(f"{i+1}. (Similarity: {similarity:.2f}) {msg['text']}")
+            date_str = msg.get("created_at", "")
+            date_label = f" [Date: {date_str[:10]}]" if date_str else ""
+            context_parts.append(f"{i+1}. (Similarity: {similarity:.2f}){date_label} {msg['text']}")
 
     if reply_results:
         context_parts.append("\nReplies/Answers to these messages:")
         for i, msg in enumerate(reply_results):
             similarity = msg.get("similarity", 0)
-            context_parts.append(f"Reply {i+1}. (Similarity: {similarity:.2f}) {msg['text']}")
+            date_str = msg.get("created_at", "")
+            date_label = f" [Date: {date_str[:10]}]" if date_str else ""
+            context_parts.append(f"Reply {i+1}. (Similarity: {similarity:.2f}){date_label} {msg['text']}")
 
     return "\n".join(context_parts), question_results, reply_results
 
