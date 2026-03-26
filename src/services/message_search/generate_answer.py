@@ -44,15 +44,18 @@ Instructions:
 
 
 def _build_context(results: list) -> tuple[str, List[MessageDict], List[MessageDict]]:
-    question_results: List[MessageDict] = [msg for msg in results if not msg.get("is_reply", False)]
+    raw_question_results: List[MessageDict] = [msg for msg in results if not msg.get("is_reply", False)]
     reply_results: List[MessageDict] = [msg for msg in results if msg.get("is_reply", False)]
     replies_by_parent: dict[int, List[MessageDict]] = {}
+    reply_ids = {reply["id"] for reply in reply_results if reply.get("id") is not None}
 
     for reply in reply_results:
         parent_id = reply.get("replying_to")
         if parent_id is None:
             continue
         replies_by_parent.setdefault(parent_id, []).append(reply)
+
+    question_results = [msg for msg in raw_question_results if msg.get("id") not in reply_ids]
 
     context_parts: List[str] = []
 
