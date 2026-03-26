@@ -28,6 +28,9 @@ async def feedback_callback_handler(update: Update, context: ContextTypes.DEFAUL
         # Parse callback data: "feedback:like/dislike:interaction_id"
         _, feedback_type, interaction_id = query.data.split(":", 2)
 
+        if feedback_type not in {"like", "dislike"}:
+            return
+
         result = supabase.table("bot_interactions").update({"user_feedback": feedback_type}).eq("id", int(interaction_id)).execute()
 
         if result.data:
