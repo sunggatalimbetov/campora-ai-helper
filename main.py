@@ -24,7 +24,7 @@ from src.config.settings import (
 )
 from src.handlers.commands import ask_command, help_command, new_command, optin_command, optout_command
 from src.handlers.feedback import feedback_callback_handler
-from src.handlers.messages import dm_handler
+from src.handlers.messages import dm_handler, group_mention_handler
 from src.handlers.onboarding import language_callback_handler, language_command, start_command
 from src.services.telegram_commands import register_default_bot_commands
 
@@ -37,9 +37,13 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 client_oa: OpenAI = OpenAI(api_key=OPENAI_API_KEY)
 
 
-WELCOME_NOTICE = (
-    "Привет! Я Vectir AI — отвечаю на вопросы на основе переписки этой группы. "
-    "Если не хочешь чтобы твои сообщения использовались — напиши /optout в любой момент."
+WELCOME_NOTICE_TEMPLATE = (
+    "👋 Привет! Я Vectir AI — помогаю находить ответы по истории переписки этой группы.\n\n"
+    "Как использовать:\n"
+    "• /ask <вопрос>\n"
+    "• @{bot_username} <вопрос>\n"
+    "• /help — все команды\n\n"
+    "Если не хочешь, чтобы твои сообщения использовались — напиши /optout."
 )
 
 # Track chats that already received the welcome notice (per bot session).
@@ -65,7 +69,8 @@ async def track_chat_member(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     if new_status in ("member", "administrator") and chat.id not in _notified_chats:
         _notified_chats.add(chat.id)
         try:
-            await context.bot.send_message(chat_id=chat.id, text=WELCOME_NOTICE)
+            bot_username = (await context.bot.get_me()).username
+            await context.bot.send_message(chat_id=chat.id, text=WELCOME_NOTICE_TEMPLATE.format(bot_username=bot_username))
         except Exception as e:
             logger.warning("Could not send welcome notice to chat %s: %s", chat.id, e)
 
@@ -105,6 +110,14 @@ def main():
                 MessageHandler(
                     filters.TEXT & filters.ChatType.PRIVATE & ~filters.COMMAND,
                     dm_handler,
+                )
+            )
+            app.add_handler(
+                MessageHandler(
+                    filters.TEXT
+                    & (filters.ChatType.GROUP | filters.ChatType.SUPERGROUP)
+                    & ~filters.COMMAND,
+                    group_mention_handler,
                 )
             )
             app.add_handler(CallbackQueryHandler(feedback_callback_handler, pattern="^feedback:"))

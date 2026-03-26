@@ -1,12 +1,10 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 
-from src.handlers.feedback import create_feedback_keyboard
-from src.services.conversation import load_conversation_history, mark_new_session
+from src.handlers.search_flow import run_search_flow
+from src.services.conversation import mark_new_session
 from src.services.interaction_logger import InteractionLogger, ResponseTimer
 from src.services.language import get_string, resolve_ui_language
-from src.services.message_search import generate_answer, search_messages
-from src.services.message_search.rewrite_query import rewrite_query
 from src.services.optout import opt_in_user, opt_out_user
 from src.services.user_preferences import get_user_language
 
@@ -25,77 +23,16 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(get_string(ui_language, "ask_usage"))
         return
 
-    user_id = update.effective_user.id
     chat_id = update.effective_chat.id
 
-    with ResponseTimer() as timer:
-        try:
-            await update.message.reply_text(get_string(ui_language, "searching"))
-
-            history, session_id = load_conversation_history(user_id, chat_id)
-            search_query = rewrite_query(query, history)
-
-            results, query_embedding = search_messages(search_query, chat_id=chat_id)
-            if not results:
-                no_results_message = get_string(ui_language, "no_results")
-                await update.message.reply_text(no_results_message)
-
-                await InteractionLogger.log_interaction(
-                    update=update,
-                    input_message=query,
-                    output_message=no_results_message,
-                    command_used="/ask",
-                    search_results_count=0,
-                    response_time_ms=timer.response_time_ms,
-                    status="no_results",
-                    search_query_embedding=query_embedding,
-                    user_language=ui_language,
-                    session_id=session_id,
-                )
-                return
-
-            answer, tokens_used = generate_answer(query, results, conversation_history=history, answer_language=ui_language)
-
-            referenced_message_ids = [msg.get("id") for msg in results if msg.get("id")]
-            similarity_scores = [msg.get("similarity") for msg in results if msg.get("similarity")]
-
-            interaction_id = await InteractionLogger.log_interaction(
-                update=update,
-                input_message=query,
-                output_message=answer,
-                command_used="/ask",
-                search_results_count=len(results),
-                referenced_message_ids=referenced_message_ids,
-                response_time_ms=timer.response_time_ms,
-                status="success",
-                tokens_used=tokens_used,
-                search_query_embedding=query_embedding,
-                similarity_scores=similarity_scores,
-                user_language=ui_language,
-                session_id=session_id,
-            )
-
-            if interaction_id:
-                keyboard = create_feedback_keyboard(interaction_id)
-                await update.message.reply_text(answer, reply_markup=keyboard)
-            else:
-                await update.message.reply_text(answer)
-
-        except Exception as e:
-            print(f"Error handling /ask command: {e}")
-            error_response = get_string(ui_language, "error")
-            await update.message.reply_text(error_response)
-
-            await InteractionLogger.log_interaction(
-                update=update,
-                input_message=query,
-                output_message=error_response,
-                command_used="/ask",
-                response_time_ms=timer.response_time_ms,
-                status="error",
-                error_message=str(e),
-                user_language=ui_language,
-            )
+    await run_search_flow(
+        update,
+        query=query,
+        ui_language=ui_language,
+        command_used="/ask",
+        search_chat_id=chat_id,
+        use_typing_indicator=True,
+    )
 
 
 async def new_command(update: Update, context: ContextTypes.DEFAULT_TYPE):

@@ -1,4 +1,9 @@
+from __future__ import annotations
+
 import re
+from typing import Iterable
+
+from telegram import MessageEntity
 
 
 def should_process_message(text: str) -> bool:
@@ -30,3 +35,43 @@ def should_process_message(text: str) -> bool:
         return False
 
     return True
+
+
+def iter_matching_mentions(text: str, entities: Iterable[MessageEntity] | None, bot_username: str) -> list[tuple[int, int]]:
+    """Return ranges for @mentions that target this bot."""
+    if not text or not entities or not bot_username:
+        return []
+
+    normalized_username = bot_username.lstrip("@").lower()
+    matching_ranges: list[tuple[int, int]] = []
+
+    for entity in entities:
+        if entity.type != MessageEntity.MENTION:
+            continue
+
+        mention_text = text[entity.offset : entity.offset + entity.length]
+        if mention_text.lstrip("@").lower() == normalized_username:
+            matching_ranges.append((entity.offset, entity.offset + entity.length))
+
+    return matching_ranges
+
+
+def extract_mentioned_query(text: str, entities: Iterable[MessageEntity] | None, bot_username: str) -> str | None:
+    """Extract the user question from a group message that mentions this bot."""
+    matching_ranges = iter_matching_mentions(text, entities, bot_username)
+    if not matching_ranges:
+        return None
+
+    remaining_parts: list[str] = []
+    last_index = 0
+
+    for start, end in sorted(matching_ranges):
+        if last_index < start:
+            remaining_parts.append(text[last_index:start])
+        last_index = end
+
+    if last_index < len(text):
+        remaining_parts.append(text[last_index:])
+
+    cleaned_query = re.sub(r"\s+", " ", "".join(remaining_parts)).strip(" ,:-\n\t")
+    return cleaned_query or ""
