@@ -623,3 +623,4 @@ Two-stage is faster because:
 - [ ] Add configuration options
 - [ ] Test and benchmark against current search
 - [ ] Monitor fallback rate and adjust thresholds
+- [ ] Validate retrieval behavior in Supabase before merge

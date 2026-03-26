@@ -80,6 +80,7 @@ Recommend starting with the Python-level batch query — simpler, already a ~5x 
 - [ ] Test: verify replies are still correctly associated with parent messages
 - [ ] Benchmark: compare response times before and after
 - [ ] Verify fallback to semantic-only search still works
+- [ ] Validate reply fetching behavior against Supabase data before merge
 
 ## Status
 

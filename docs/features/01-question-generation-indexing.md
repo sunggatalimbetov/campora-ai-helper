@@ -311,3 +311,4 @@ For each message:
 - [ ] Create backfill migration script
 - [ ] Run backfill on existing messages
 - [ ] Test and measure improvement
+- [ ] Validate the new table/function behavior in Supabase before merge

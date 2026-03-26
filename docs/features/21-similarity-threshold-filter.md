@@ -59,6 +59,7 @@ If filtering removes all results, treat it the same as zero results — show the
 - [ ] Test: vague/off-topic query → low-similarity results filtered out
 - [ ] Run evaluation suite — compare zero-result rate and keyword hit rate
 - [ ] Adjust threshold if zero-result rate exceeds 5%
+- [ ] Validate filtered result sets against Supabase data before merge
 
 ## Status
 
