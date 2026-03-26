@@ -23,8 +23,9 @@ If the question IS relevant to university/student life, answer it using ONLY the
 below, but do NOT mention that you are using any "context", "provided information",
 or "sources" in your answer. Respond naturally and directly, as if you already know the answer.
 
-The information includes both original relevant messages and their replies/answers.
-Pay special attention to the replies as they often contain the actual answers to questions.
+The information is organized as threads. Each thread contains an original message
+and any replies to it. Replies often contain the actual answers to questions,
+so pay close attention to them.
 
 Note: Each message has a similarity score indicating how relevant it is to the query.
 Higher scores (closer to 1.0) are more relevant.
@@ -43,26 +44,33 @@ Instructions:
 
 
 def _build_context(results: list) -> tuple[str, List[MessageDict], List[MessageDict]]:
-    question_results: List[MessageDict] = [msg for msg in results if not msg.get("is_reply", False)]
+    raw_question_results: List[MessageDict] = [msg for msg in results if not msg.get("is_reply", False)]
     reply_results: List[MessageDict] = [msg for msg in results if msg.get("is_reply", False)]
+    replies_by_parent: dict[int, List[MessageDict]] = {}
+    reply_ids = {reply["id"] for reply in reply_results if reply.get("id") is not None}
+
+    for reply in reply_results:
+        parent_id = reply.get("replying_to")
+        if parent_id is None:
+            continue
+        replies_by_parent.setdefault(parent_id, []).append(reply)
+
+    question_results = [msg for msg in raw_question_results if msg.get("id") not in reply_ids]
 
     context_parts: List[str] = []
 
     if question_results:
-        context_parts.append("Original relevant messages:")
         for i, msg in enumerate(question_results):
             similarity = msg.get("similarity", 0)
             date_str = msg.get("created_at", "")
-            date_label = f" [Date: {date_str[:10]}]" if date_str else ""
-            context_parts.append(f"{i+1}. (Similarity: {similarity:.2f}){date_label} {msg['text']}")
+            date_label = f" [{date_str[:10]}]" if date_str else ""
+            context_parts.append(f"Thread {i+1} (Similarity: {similarity:.2f}){date_label}:")
+            context_parts.append(f"  Message: {msg['text']}")
 
-    if reply_results:
-        context_parts.append("\nReplies/Answers to these messages:")
-        for i, msg in enumerate(reply_results):
-            similarity = msg.get("similarity", 0)
-            date_str = msg.get("created_at", "")
-            date_label = f" [Date: {date_str[:10]}]" if date_str else ""
-            context_parts.append(f"Reply {i+1}. (Similarity: {similarity:.2f}){date_label} {msg['text']}")
+            for reply in replies_by_parent.get(msg["id"], []):
+                reply_date = reply.get("created_at", "")
+                reply_date_label = f" [{reply_date[:10]}]" if reply_date else ""
+                context_parts.append(f"  Reply{reply_date_label}: {reply['text']}")
 
     return "\n".join(context_parts), question_results, reply_results
 
