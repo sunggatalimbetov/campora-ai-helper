@@ -26,6 +26,7 @@ from src.handlers.commands import ask_command, help_command, new_command, optin_
 from src.handlers.feedback import feedback_callback_handler
 from src.handlers.messages import dm_handler
 from src.handlers.onboarding import language_callback_handler, language_command, start_command
+from src.services.telegram_commands import register_default_bot_commands
 
 # Add logging configuration
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
@@ -44,6 +45,12 @@ WELCOME_NOTICE = (
 # Track chats that already received the welcome notice (per bot session).
 # For persistence across restarts, you could store this in Supabase instead.
 _notified_chats: set[int] = set()
+
+
+async def register_bot_commands(app: Application) -> None:
+    """Register Telegram slash commands so clients can show the command menu."""
+    await register_default_bot_commands(app)
+    logger.info("Telegram slash commands registered")
 
 
 async def track_chat_member(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -84,7 +91,7 @@ def main():
     while True:
         try:
             # Create the Application
-            app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+            app = Application.builder().token(TELEGRAM_BOT_TOKEN).post_init(register_bot_commands).build()
 
             # Add handlers
             app.add_handler(CommandHandler("ask", ask_command))
