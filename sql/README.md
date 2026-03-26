@@ -23,6 +23,7 @@ Migrations live in **`../supabase/migrations/`**:
 - `20260214120000_add_hybrid_search.sql` – adds `text_search` tsvector column, GIN index, trigger, and `hybrid_search` RPC for vector + full-text search
 - `20260214200000_add_question_generation.sql` – creates `message_questions` table, ivfflat + message_id indexes, and `match_messages_and_questions` RPC
 - `20260214210000_add_bot_interactions.sql` – creates `bot_interactions` table for storing user queries, bot responses, and like/dislike feedback
+- `202603260001_group_scoped_search.sql` – adds optional `filter_chat_id` parameters to retrieval RPCs so group queries stay inside their own chat
 
 ---
 
@@ -34,6 +35,8 @@ Migrations live in **`../supabase/migrations/`**:
     - Paste the contents of `002_hybrid_search.sql` and click **Run**.
     - Paste the contents of `003_question_generation.sql` and click **Run**.
     - Paste the contents of `004_bot_interactions.sql` and click **Run**.
+    - Paste the contents of `005_opted_out_users.sql` and click **Run**.
+    - Paste the contents of `006_group_scoped_search.sql` and click **Run**.
 
 ---
 

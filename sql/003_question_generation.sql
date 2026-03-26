@@ -24,7 +24,8 @@ ON public.message_questions (message_id);
 -- deduplicates by message_id keeping the highest similarity score.
 CREATE OR REPLACE FUNCTION public.match_messages_and_questions(
     query_embedding vector(1536),
-    match_count int DEFAULT 5
+    match_count int DEFAULT 5,
+    filter_chat_id BIGINT DEFAULT NULL
 )
 RETURNS TABLE (
     id BIGINT,
@@ -54,6 +55,7 @@ BEGIN
             'message'::text AS match_source
         FROM public.messages m
         WHERE m.embedding IS NOT NULL
+          AND (filter_chat_id IS NULL OR m.chat_id = filter_chat_id)
         ORDER BY m.embedding <=> query_embedding
         LIMIT match_count * 2
     ),
@@ -71,6 +73,7 @@ BEGIN
         FROM public.message_questions mq
         JOIN public.messages m ON m.id = mq.message_id
         WHERE mq.embedding IS NOT NULL
+          AND (filter_chat_id IS NULL OR m.chat_id = filter_chat_id)
         ORDER BY mq.embedding <=> query_embedding
         LIMIT match_count * 2
     ),

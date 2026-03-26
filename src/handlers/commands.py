@@ -30,7 +30,7 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             history, session_id = load_conversation_history(user_id, chat_id)
             search_query = rewrite_query(query, history)
 
-            results, query_embedding = search_messages(search_query)
+            results, query_embedding = search_messages(search_query, chat_id=chat_id)
             if not results:
                 await update.message.reply_text("❌ No relevant messages found.")
 
