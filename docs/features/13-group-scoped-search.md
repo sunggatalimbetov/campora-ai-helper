@@ -113,6 +113,7 @@ This is optional and can be added later based on user feedback.
 - [ ] Verify DM search still works across all groups (no `chat_id` passed)
 - [ ] Test: ask in Group A → results only from Group A
 - [ ] Test: ask in DM → results from all groups
+- [ ] Validate the RPC behavior in Supabase before merge
 
 ## Status
 
