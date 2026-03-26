@@ -31,7 +31,8 @@ CREATE OR REPLACE FUNCTION public.hybrid_search(
     match_count int DEFAULT 10,
     full_text_weight float DEFAULT 0.5,
     semantic_weight float DEFAULT 0.5,
-    rrf_k int DEFAULT 60
+    rrf_k int DEFAULT 60,
+    filter_chat_id BIGINT DEFAULT NULL
 )
 RETURNS TABLE (
     id BIGINT,
@@ -62,6 +63,7 @@ BEGIN
             ROW_NUMBER() OVER (ORDER BY m.embedding <=> query_embedding) as rank
         FROM public.messages m
         WHERE m.embedding IS NOT NULL
+          AND (filter_chat_id IS NULL OR m.chat_id = filter_chat_id)
         ORDER BY m.embedding <=> query_embedding
         LIMIT match_count * 2
     ),
@@ -80,6 +82,7 @@ BEGIN
             ) as rank
         FROM public.messages m
         WHERE m.text_search IS NOT NULL
+          AND (filter_chat_id IS NULL OR m.chat_id = filter_chat_id)
           AND trim(COALESCE(query_text, '')) <> ''
           AND m.text_search @@ websearch_to_tsquery('russian', query_text)
         ORDER BY rank_score DESC
