@@ -1,6 +1,11 @@
 -- Mirrors sql/006_group_scoped_search.sql.
 -- Adds optional chat scoping to retrieval RPCs.
 
+-- Drop legacy overloads first so PostgREST RPC resolution stays unambiguous.
+DROP FUNCTION IF EXISTS public.hybrid_search(text, vector, integer, double precision, double precision, integer);
+DROP FUNCTION IF EXISTS public.match_messages(vector, integer);
+DROP FUNCTION IF EXISTS public.match_messages_and_questions(vector, integer);
+
 CREATE OR REPLACE FUNCTION public.match_messages(
     query_embedding vector(1536),
     match_count int DEFAULT 5,
