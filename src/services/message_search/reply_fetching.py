@@ -40,13 +40,13 @@ def fetch_replies_by_parent(messages: List[MessageDict]) -> Dict[Tuple[int, int]
     return replies_by_parent
 
 
-def attach_replies_to_messages(messages: List[MessageDict]) -> List[MessageDict]:
-    """Return messages followed by any fetched replies, preserving parent order."""
-    replies_by_parent = fetch_replies_by_parent(messages)
-
-    enhanced_results: List[MessageDict] = []
+def build_reply_entries(
+    messages: List[MessageDict],
+    replies_by_parent: Dict[Tuple[int, int], List[MessageDict]],
+) -> List[MessageDict]:
+    """Build enhanced reply entries for the given parent messages."""
+    reply_entries: List[MessageDict] = []
     for msg in messages:
-        enhanced_results.append(msg)
         for reply in replies_by_parent.get((msg["id"], msg["chat_id"]), []):
             enhanced_reply: MessageDict = {
                 **reply,
@@ -54,6 +54,18 @@ def attach_replies_to_messages(messages: List[MessageDict]) -> List[MessageDict]
                 "replying_to": msg["id"],
                 "similarity": msg.get("similarity", 0),
             }
-            enhanced_results.append(enhanced_reply)
+            reply_entries.append(enhanced_reply)
+
+    return reply_entries
+
+
+def attach_replies_to_messages(messages: List[MessageDict]) -> List[MessageDict]:
+    """Return messages followed by any fetched replies, preserving parent order."""
+    replies_by_parent = fetch_replies_by_parent(messages)
+
+    enhanced_results: List[MessageDict] = []
+    for msg in messages:
+        enhanced_results.append(msg)
+        enhanced_results.extend(build_reply_entries([msg], replies_by_parent))
 
     return enhanced_results

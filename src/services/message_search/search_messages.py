@@ -3,7 +3,10 @@ from typing import List
 from src.config.settings import HYBRID_SEARCH_ENABLED, MIN_RESULT_SCORE
 from src.models.message import MessageDict
 from src.services.message_search.get_search_weights import get_search_weights
-from src.services.message_search.reply_fetching import fetch_replies_by_parent
+from src.services.message_search.reply_fetching import (
+    build_reply_entries,
+    fetch_replies_by_parent,
+)
 from src.services.message_search.search_messages_by_questions import (
     search_messages_by_questions,
 )
@@ -58,16 +61,7 @@ def _merge_results(
     existing_reply_parents = {(r.get("replying_to"), r.get("chat_id")) for r in replies}
     missing_reply_parents = [msg for msg in merged if (msg["id"], msg["chat_id"]) not in existing_reply_parents]
     replies_by_parent = fetch_replies_by_parent(missing_reply_parents)
-
-    for msg in missing_reply_parents:
-        for reply in replies_by_parent.get((msg["id"], msg["chat_id"]), []):
-            enhanced_reply: MessageDict = {
-                **reply,
-                "is_reply": True,
-                "replying_to": msg["id"],
-                "similarity": msg.get("similarity", 0),
-            }
-            replies.append(enhanced_reply)
+    replies.extend(build_reply_entries(missing_reply_parents, replies_by_parent))
 
     return merged + replies
 
