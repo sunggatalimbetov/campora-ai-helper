@@ -181,6 +181,11 @@ For each new university:
 
 Steps 1–7 are pure refactoring with no behavior change for current users. Steps 8–10 are the actual Torino onboarding.
 
+## Validation
+
+- Validate schema and RPC changes in Supabase before merge
+- Verify university-scoped retrieval against real remote data before rollout
+
 ## What's NOT Needed (Yet)
 
 - **Microservices** — The monolith is fine at this scale. Don't split into services until 10+ universities.
