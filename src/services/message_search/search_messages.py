@@ -76,7 +76,11 @@ def _merge_results(
     return merged + replies
 
 
-def search_messages(query: str, count: int = 5) -> tuple[List[MessageDict], List[float]]:
+def search_messages(
+    query: str,
+    count: int = 5,
+    chat_id: int | None = None,
+) -> tuple[List[MessageDict], List[float]]:
     """
     Search for messages using hybrid search (vector + full-text) with dynamic weights,
     then merge with question-embedding search for improved retrieval.
@@ -90,13 +94,14 @@ def search_messages(query: str, count: int = 5) -> tuple[List[MessageDict], List
             count=count,
             semantic_weight=semantic_weight,
             full_text_weight=full_text_weight,
+            chat_id=chat_id,
         )
     else:
-        results, query_embedding = search_messages_semantic_only(query, count)
+        results, query_embedding = search_messages_semantic_only(query, count, chat_id=chat_id)
 
     # Also search via hypothetical question embeddings
     print("🔍 Searching message_questions...")
-    question_results = search_messages_by_questions(query_embedding, count=count)
+    question_results = search_messages_by_questions(query_embedding, count=count, chat_id=chat_id)
 
     # Merge hybrid + question results
     if question_results:

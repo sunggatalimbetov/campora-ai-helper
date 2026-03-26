@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS public.messages (
 -- RPC used by message_search.search_messages()
 CREATE OR REPLACE FUNCTION public.match_messages(
     query_embedding vector(1536),
-    match_count int DEFAULT 5
+    match_count int DEFAULT 5,
+    filter_chat_id BIGINT DEFAULT NULL
 )
 RETURNS TABLE (
     id BIGINT,
@@ -49,6 +50,7 @@ BEGIN
         (1 - (m.embedding <=> query_embedding))::float AS similarity
     FROM public.messages m
     WHERE m.embedding IS NOT NULL
+      AND (filter_chat_id IS NULL OR m.chat_id = filter_chat_id)
     ORDER BY m.embedding <=> query_embedding
     LIMIT match_count;
 END;
