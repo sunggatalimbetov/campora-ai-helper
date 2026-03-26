@@ -3,31 +3,13 @@ from __future__ import annotations
 from typing import Final
 
 
-DEFAULT_LANGUAGE: Final[str] = "ru"
+DEFAULT_LANGUAGE: Final[str] = "en"
 SUPPORTED_LANGUAGES: Final[set[str]] = {"ru", "kk", "en"}
 LANGUAGE_LABELS: Final[dict[str, str]] = {
     "ru": "Русский",
     "kk": "Қазақша",
     "en": "English",
 }
-KAZAKH_WORD_MARKERS: Final[tuple[str, ...]] = (
-    "кашан",
-    "калай",
-    "кандай",
-    "неге",
-    "ушин",
-    "келеси",
-    "казир",
-    "бугин",
-    "ертен",
-    "жок",
-    "барма",
-    "жатакхана",
-    "кужат",
-    "кужаттар",
-    "сурак",
-)
-
 STRINGS: Final[dict[str, dict[str, str]]] = {
     "ru": {
         "searching": "🔍 Ищу, подожди...",
@@ -159,9 +141,6 @@ def detect_language(text: str, telegram_language_code: str | None = None) -> str
     if _contains_kazakh_specific_letters(normalized_text):
         return "kk"
 
-    if _contains_kazakh_word_markers(normalized_text):
-        return "kk"
-
     if _contains_cyrillic(normalized_text):
         return "ru"
 
@@ -235,8 +214,3 @@ def _contains_cyrillic(text: str) -> bool:
 
 def _contains_latin_letters(text: str) -> bool:
     return any("a" <= char <= "z" for char in text)
-
-
-def _contains_kazakh_word_markers(text: str) -> bool:
-    words = set(text.split())
-    return any(marker in words for marker in KAZAKH_WORD_MARKERS)

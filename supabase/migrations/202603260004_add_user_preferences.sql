@@ -3,7 +3,7 @@
 CREATE TABLE IF NOT EXISTS public.user_preferences (
     user_id BIGINT PRIMARY KEY,
     selected_group TEXT,
-    language TEXT NOT NULL DEFAULT 'ru' CHECK (language IN ('ru', 'kk', 'en')),
+    language TEXT NOT NULL DEFAULT 'en' CHECK (language IN ('ru', 'kk', 'en')),
     onboarded_at TIMESTAMPTZ,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

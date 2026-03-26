@@ -4,7 +4,7 @@ from telegram.ext import ContextTypes
 from src.handlers.feedback import create_feedback_keyboard
 from src.services.conversation import load_conversation_history
 from src.services.interaction_logger import InteractionLogger, ResponseTimer
-from src.services.language import get_string, resolve_query_language, resolve_ui_language
+from src.services.language import get_string, resolve_ui_language
 from src.services.message_search import generate_answer, search_messages
 from src.services.message_search.rewrite_query import rewrite_query
 from src.services.user_preferences import get_user_language
@@ -26,7 +26,6 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     preferred_language = get_user_language(user_id)
     ui_language = resolve_ui_language(preferred_language, query, update.effective_user.language_code)
-    query_language = resolve_query_language(query, update.effective_user.language_code)
 
     with ResponseTimer() as timer:
         try:
@@ -49,12 +48,12 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     response_time_ms=timer.response_time_ms,
                     status="no_results",
                     search_query_embedding=query_embedding,
-                    user_language=query_language,
+                    user_language=ui_language,
                     session_id=session_id,
                 )
                 return
 
-            answer, tokens_used = generate_answer(query, results, conversation_history=history, answer_language=query_language)
+            answer, tokens_used = generate_answer(query, results, conversation_history=history, answer_language=ui_language)
 
             referenced_message_ids = [msg.get("id") for msg in results if msg.get("id")]
             similarity_scores = [msg.get("similarity") for msg in results if msg.get("similarity")]
@@ -71,7 +70,7 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 tokens_used=tokens_used,
                 search_query_embedding=query_embedding,
                 similarity_scores=similarity_scores,
-                user_language=query_language,
+                user_language=ui_language,
                 session_id=session_id,
             )
 
@@ -94,5 +93,5 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 response_time_ms=timer.response_time_ms,
                 status="error",
                 error_message=str(e),
-                user_language=query_language,
+                user_language=ui_language,
             )
