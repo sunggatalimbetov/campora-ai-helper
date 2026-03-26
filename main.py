@@ -4,7 +4,7 @@ import time
 
 from openai import OpenAI
 from supabase import Client, create_client
-from telegram import BotCommand, BotCommandScopeAllGroupChats, BotCommandScopeAllPrivateChats, Update
+from telegram import Update
 from telegram.error import Conflict, NetworkError, RetryAfter
 from telegram.ext import (
     Application,
@@ -26,6 +26,7 @@ from src.handlers.commands import ask_command, help_command, new_command, optin_
 from src.handlers.feedback import feedback_callback_handler
 from src.handlers.messages import dm_handler
 from src.handlers.onboarding import language_callback_handler, language_command, start_command
+from src.services.telegram_commands import register_default_bot_commands
 
 # Add logging configuration
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
@@ -46,28 +47,9 @@ WELCOME_NOTICE = (
 _notified_chats: set[int] = set()
 
 
-PRIVATE_COMMANDS = [
-    BotCommand("start", "Start the bot"),
-    BotCommand("help", "Show help"),
-    BotCommand("new", "Start a fresh conversation"),
-    BotCommand("language", "Change interface language"),
-    BotCommand("optout", "Remove your messages from indexing"),
-    BotCommand("optin", "Enable indexing for your messages again"),
-]
-
-GROUP_COMMANDS = [
-    BotCommand("ask", "Ask a question about the group history"),
-    BotCommand("help", "Show help"),
-    BotCommand("new", "Start a fresh conversation"),
-    BotCommand("optout", "Remove your messages from indexing"),
-    BotCommand("optin", "Enable indexing for your messages again"),
-]
-
-
 async def register_bot_commands(app: Application) -> None:
     """Register Telegram slash commands so clients can show the command menu."""
-    await app.bot.set_my_commands(PRIVATE_COMMANDS, scope=BotCommandScopeAllPrivateChats())
-    await app.bot.set_my_commands(GROUP_COMMANDS, scope=BotCommandScopeAllGroupChats())
+    await register_default_bot_commands(app)
     logger.info("Telegram slash commands registered")
 
 
