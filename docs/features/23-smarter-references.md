@@ -81,6 +81,7 @@ If MarkdownV2 escaping is too fragile, fall back to plain text with the preview 
 - [ ] Test with MarkdownV2 parsing in Telegram
 - [ ] Fallback to plain text if markdown causes issues
 - [ ] Verify references only include messages that were in the LLM context
+- [ ] Validate reference output against Supabase-backed retrieval results before merge
 
 ## Status
 

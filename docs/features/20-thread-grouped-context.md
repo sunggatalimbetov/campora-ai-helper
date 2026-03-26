@@ -104,6 +104,7 @@ and its replies. Replies often contain the actual answers — prioritize them.
 - [ ] Test: verify generated answers correctly use reply content
 - [ ] Run evaluation suite and compare keyword hit rate before/after
 - [ ] Verify token usage doesn't increase significantly
+- [ ] Validate thread grouping against real Supabase message/reply data before merge
 
 ## Status
 
