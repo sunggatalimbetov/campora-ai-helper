@@ -132,28 +132,6 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "optin_success": "Okay, your messages will now be indexed again.",
     },
 }
-
-
-def detect_language(text: str, telegram_language_code: str | None = None) -> str:
-    """Detect whether the user is writing in Russian, Kazakh, or English."""
-    normalized_text = (text or "").strip().lower()
-
-    if _contains_kazakh_specific_letters(normalized_text):
-        return "kk"
-
-    if _contains_cyrillic(normalized_text):
-        return "ru"
-
-    if _contains_latin_letters(normalized_text):
-        return "en"
-
-    normalized_telegram_code = normalize_language_code(telegram_language_code)
-    if normalized_telegram_code is not None:
-        return normalized_telegram_code
-
-    return DEFAULT_LANGUAGE
-
-
 def normalize_language_code(language_code: str | None) -> str | None:
     if not language_code:
         return None
@@ -175,22 +153,13 @@ def resolve_ui_language(
     query_text: str | None = None,
     telegram_language_code: str | None = None,
 ) -> str:
+    del query_text
+    del telegram_language_code
     normalized_preference = normalize_language_code(preferred_language)
     if normalized_preference is not None:
         return normalized_preference
 
-    if query_text and query_text.strip():
-        return detect_language(query_text, telegram_language_code=telegram_language_code)
-
-    normalized_telegram_code = normalize_language_code(telegram_language_code)
-    if normalized_telegram_code is not None:
-        return normalized_telegram_code
-
     return DEFAULT_LANGUAGE
-
-
-def resolve_query_language(text: str, telegram_language_code: str | None = None) -> str:
-    return detect_language(text, telegram_language_code=telegram_language_code)
 
 
 def get_string(language: str, key: str, **kwargs) -> str:
@@ -202,15 +171,3 @@ def get_string(language: str, key: str, **kwargs) -> str:
 def get_language_label(language: str) -> str:
     lang = normalize_language_code(language) or DEFAULT_LANGUAGE
     return LANGUAGE_LABELS.get(lang, LANGUAGE_LABELS[DEFAULT_LANGUAGE])
-
-
-def _contains_kazakh_specific_letters(text: str) -> bool:
-    return any(char in text for char in "әіңғүұқөһ")
-
-
-def _contains_cyrillic(text: str) -> bool:
-    return any("а" <= char <= "я" or char == "ё" for char in text)
-
-
-def _contains_latin_letters(text: str) -> bool:
-    return any("a" <= char <= "z" for char in text)

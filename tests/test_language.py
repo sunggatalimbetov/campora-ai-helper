@@ -1,7 +1,6 @@
 import unittest
 
 from src.services.language import (
-    detect_language,
     get_language_label,
     get_string,
     normalize_language_code,
@@ -10,21 +9,6 @@ from src.services.language import (
 
 
 class LanguageServiceTests(unittest.TestCase):
-    def test_detects_russian_from_cyrillic_text(self):
-        self.assertEqual(detect_language("Когда дедлайн на стипендию?"), "ru")
-
-    def test_detects_kazakh_from_specific_letters(self):
-        self.assertEqual(detect_language("Жатақханаға құжаттар қашан керек?"), "kk")
-
-    def test_detects_english_from_latin_text(self):
-        self.assertEqual(detect_language("When is the housing deadline?"), "en")
-
-    def test_falls_back_to_telegram_language_code(self):
-        self.assertEqual(detect_language("12345", telegram_language_code="kk-KZ"), "kk")
-
-    def test_defaults_to_english_when_language_is_ambiguous(self):
-        self.assertEqual(detect_language("12345"), "en")
-
     def test_normalizes_supported_telegram_language_codes(self):
         self.assertEqual(normalize_language_code("ru-RU"), "ru")
         self.assertEqual(normalize_language_code("kk_KZ"), "kk")
@@ -33,8 +17,8 @@ class LanguageServiceTests(unittest.TestCase):
     def test_resolve_ui_language_prefers_saved_preference(self):
         self.assertEqual(resolve_ui_language("kk", "When is the deadline?", "en-US"), "kk")
 
-    def test_resolve_ui_language_falls_back_to_query_detection(self):
-        self.assertEqual(resolve_ui_language(None, "When is the deadline?", "ru-RU"), "en")
+    def test_resolve_ui_language_defaults_to_english_without_preference(self):
+        self.assertEqual(resolve_ui_language(None, "Когда дедлайн?", "ru-RU"), "en")
 
     def test_get_string_returns_localized_messages(self):
         self.assertIn("По этому вопросу ничего не нашлось", get_string("ru", "no_results"))

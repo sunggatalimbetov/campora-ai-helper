@@ -7,7 +7,7 @@ from supabase import Client, create_client
 from telegram import Update
 
 from src.config.settings import SUPABASE_SERVICE_KEY, SUPABASE_URL
-from src.services.language import resolve_query_language
+from src.services.language import DEFAULT_LANGUAGE, normalize_language_code
 
 # Initialize Supabase client
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
@@ -63,9 +63,10 @@ class InteractionLogger:
             if session_id is None:
                 session_id = str(uuid.uuid4())
 
-            # Simple language detection (you can enhance this)
             if user_language is None:
-                user_language = InteractionLogger._detect_language(input_message)
+                user_language = DEFAULT_LANGUAGE
+            else:
+                user_language = normalize_language_code(user_language) or DEFAULT_LANGUAGE
 
             interaction_data = {
                 "user_id": user.id,
@@ -103,12 +104,6 @@ class InteractionLogger:
         except Exception as e:
             print(f"Error logging interaction: {e}")
             return None
-
-    @staticmethod
-    def _detect_language(text: str) -> str:
-        """Simple language detection based on common patterns."""
-        return resolve_query_language(text)
-
 
 class ResponseTimer:
     """Context manager to measure response time"""
