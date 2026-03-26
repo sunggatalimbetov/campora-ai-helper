@@ -46,8 +46,8 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
             "Сначала выбери язык интерфейса."
         ),
         "choose_language": "Выбери язык интерфейса:",
-        "language_command": "🌐 *Язык интерфейса*\n\nСейчас: *{language}*\n\nВыбери новый язык:",
-        "language_updated": "✅ Язык интерфейса изменён на {language}.",
+        "language_command": "🌐 *Язык интерфейса*\n\nСейчас: *{language_label}*\n\nВыбери новый язык:",
+        "language_updated": "✅ Язык интерфейса изменён на {language_label}.",
         "optout_success": "Готово. Твои сообщения удалены из базы и больше не будут индексироваться.",
         "optin_success": "Окей, теперь твои сообщения снова будут индексироваться.",
     },
@@ -86,8 +86,8 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
             "Алдымен интерфейс тілін таңдаңыз."
         ),
         "choose_language": "Интерфейс тілін таңдаңыз:",
-        "language_command": "🌐 *Интерфейс тілі*\n\nҚазір: *{language}*\n\nЖаңа тілді таңдаңыз:",
-        "language_updated": "✅ Интерфейс тілі {language} болып өзгертілді.",
+        "language_command": "🌐 *Интерфейс тілі*\n\nҚазір: *{language_label}*\n\nЖаңа тілді таңдаңыз:",
+        "language_updated": "✅ Интерфейс тілі {language_label} болып өзгертілді.",
         "optout_success": "Дайын. Сіздің хабарламаларыңыз базадан өшірілді және енді индекстелмейді.",
         "optin_success": "Жарайды, енді сіздің хабарламаларыңыз қайтадан индекстеледі.",
     },
@@ -126,8 +126,8 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
             "First, choose your interface language."
         ),
         "choose_language": "Choose your interface language:",
-        "language_command": "🌐 *Interface Language*\n\nCurrent: *{language}*\n\nChoose a new language:",
-        "language_updated": "✅ Interface language changed to {language}.",
+        "language_command": "🌐 *Interface Language*\n\nCurrent: *{language_label}*\n\nChoose a new language:",
+        "language_updated": "✅ Interface language changed to {language_label}.",
         "optout_success": "Done. Your messages were removed from the database and will no longer be indexed.",
         "optin_success": "Okay, your messages will now be indexed again.",
     },
