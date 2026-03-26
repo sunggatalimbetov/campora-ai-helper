@@ -1,7 +1,3 @@
-from .message_search import generate_answer, get_embedding, search_messages
+"""Service package for the Telegram bot."""
 
-__all__ = [
-    "generate_answer",
-    "get_embedding",
-    "search_messages",
-]
+__all__: list[str] = []

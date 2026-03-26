@@ -4,6 +4,7 @@ from telegram.ext import ContextTypes
 from src.handlers.feedback import create_feedback_keyboard
 from src.services.conversation import load_conversation_history, mark_new_session
 from src.services.interaction_logger import InteractionLogger, ResponseTimer
+from src.services.language import detect_language, get_no_results_message
 from src.services.message_search import generate_answer, search_messages
 from src.services.message_search.rewrite_query import rewrite_query
 from src.services.optout import opt_in_user, opt_out_user
@@ -22,6 +23,7 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
+    user_language = detect_language(query, update.effective_user.language_code)
 
     with ResponseTimer() as timer:
         try:
@@ -32,17 +34,19 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
             results, query_embedding = search_messages(search_query, chat_id=chat_id)
             if not results:
-                await update.message.reply_text("❌ No relevant messages found.")
+                no_results_message = get_no_results_message(query, update.effective_user.language_code)
+                await update.message.reply_text(no_results_message)
 
                 await InteractionLogger.log_interaction(
                     update=update,
                     input_message=query,
-                    output_message="❌ No relevant messages found.",
+                    output_message=no_results_message,
                     command_used="/ask",
                     search_results_count=0,
                     response_time_ms=timer.response_time_ms,
                     status="no_results",
                     search_query_embedding=query_embedding,
+                    user_language=user_language,
                     session_id=session_id,
                 )
                 return
@@ -64,6 +68,7 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 tokens_used=tokens_used,
                 search_query_embedding=query_embedding,
                 similarity_scores=similarity_scores,
+                user_language=user_language,
                 session_id=session_id,
             )
 
@@ -79,7 +84,14 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await update.message.reply_text(error_response)
 
             await InteractionLogger.log_interaction(
-                update=update, input_message=query, output_message=error_response, command_used="/ask", response_time_ms=timer.response_time_ms, status="error", error_message=str(e)
+                update=update,
+                input_message=query,
+                output_message=error_response,
+                command_used="/ask",
+                response_time_ms=timer.response_time_ms,
+                status="error",
+                error_message=str(e),
+                user_language=user_language,
             )
 
 
