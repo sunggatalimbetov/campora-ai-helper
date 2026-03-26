@@ -50,7 +50,7 @@ async def language_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     current_label = get_language_label(preferred_language or ui_language)
 
     await update.message.reply_text(
-        get_string(ui_language, "language_command", language=current_label),
+        get_string(ui_language, "language_command", language_label=current_label),
         reply_markup=create_language_keyboard(),
         parse_mode="Markdown",
     )
@@ -72,5 +72,5 @@ async def language_callback_handler(update: Update, context: ContextTypes.DEFAUL
         return
 
     await query.edit_message_text(
-        get_string(normalized_language, "language_updated", language=get_language_label(normalized_language))
+        get_string(normalized_language, "language_updated", language_label=get_language_label(normalized_language))
     )

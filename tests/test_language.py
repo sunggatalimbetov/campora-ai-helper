@@ -27,6 +27,8 @@ class LanguageServiceTests(unittest.TestCase):
         self.assertIn("удалены из базы", get_string("ru", "optout_success"))
         self.assertIn("қайтадан индекстеледі", get_string("kk", "optin_success"))
         self.assertIn("no longer be indexed", get_string("en", "optout_success"))
+        self.assertIn("English", get_string("en", "language_command", language_label="English"))
+        self.assertIn("Русский", get_string("ru", "language_updated", language_label="Русский"))
 
     def test_get_language_label_returns_human_readable_name(self):
         self.assertEqual(get_language_label("kk"), "Қазақша")
