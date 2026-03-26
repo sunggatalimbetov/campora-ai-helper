@@ -5,6 +5,7 @@ from src.models.message import MessageDict
 from src.services.message_search._clients import supabase
 from src.services.message_search.extract_fulltext_terms import extract_fulltext_terms
 from src.services.message_search.get_embedding import get_embedding
+from src.services.message_search.reply_fetching import attach_replies_to_messages
 from src.services.message_search.search_messages_semantic_only import (
     search_messages_semantic_only,
 )
@@ -59,25 +60,7 @@ def search_messages_hybrid(
                 }
             )
 
-        enhanced_results: List[MessageDict] = []
-        for msg in messages:
-            enhanced_results.append(msg)
-            try:
-                replies_response = supabase.table("messages").select("*").eq("reply_to_message_id", msg["id"]).eq("chat_id", msg["chat_id"]).execute()
-                replies = replies_response.data
-                if replies:
-                    for reply in replies:
-                        enhanced_reply: MessageDict = {
-                            **reply,
-                            "is_reply": True,
-                            "replying_to": msg["id"],
-                            "similarity": msg.get("similarity", 0),
-                        }
-                        enhanced_results.append(enhanced_reply)
-            except Exception as e:
-                print(f"Error fetching replies for message {msg['id']}: {e}")
-
-        return enhanced_results, query_embedding
+        return attach_replies_to_messages(messages), query_embedding
 
     except Exception as e:
         print(f"Error in hybrid search: {e}, falling back to semantic-only")

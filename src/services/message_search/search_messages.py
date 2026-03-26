@@ -2,8 +2,8 @@ from typing import List
 
 from src.config.settings import HYBRID_SEARCH_ENABLED, MIN_RESULT_SCORE
 from src.models.message import MessageDict
-from src.services.message_search._clients import supabase
 from src.services.message_search.get_search_weights import get_search_weights
+from src.services.message_search.reply_fetching import fetch_replies_by_parent
 from src.services.message_search.search_messages_by_questions import (
     search_messages_by_questions,
 )
@@ -54,24 +54,20 @@ def _merge_results(
     # Sort non-reply messages by similarity descending
     merged = sorted(by_key.values(), key=lambda x: x.get("similarity", 0), reverse=True)
 
-    # Fetch replies for all merged messages (not just question-sourced)
+    # Fetch replies for merged messages that do not already have them.
     existing_reply_parents = {(r.get("replying_to"), r.get("chat_id")) for r in replies}
-    for msg in merged:
-        if (msg["id"], msg["chat_id"]) in existing_reply_parents:
-            continue
-        try:
-            replies_response = supabase.table("messages").select("*").eq("reply_to_message_id", msg["id"]).eq("chat_id", msg["chat_id"]).execute()
-            if replies_response.data:
-                for reply in replies_response.data:
-                    enhanced_reply: MessageDict = {
-                        **reply,
-                        "is_reply": True,
-                        "replying_to": msg["id"],
-                        "similarity": msg.get("similarity", 0),
-                    }
-                    replies.append(enhanced_reply)
-        except Exception as e:
-            print(f"Error fetching replies for message {msg['id']}: {e}")
+    missing_reply_parents = [msg for msg in merged if (msg["id"], msg["chat_id"]) not in existing_reply_parents]
+    replies_by_parent = fetch_replies_by_parent(missing_reply_parents)
+
+    for msg in missing_reply_parents:
+        for reply in replies_by_parent.get((msg["id"], msg["chat_id"]), []):
+            enhanced_reply: MessageDict = {
+                **reply,
+                "is_reply": True,
+                "replying_to": msg["id"],
+                "similarity": msg.get("similarity", 0),
+            }
+            replies.append(enhanced_reply)
 
     return merged + replies
 
