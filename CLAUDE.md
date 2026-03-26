@@ -1,5 +1,8 @@
 # CLAUDE.md — Vectir AI Helper
 
+## Project Context
+Read `~/Documents/Obsidian Vault/vectir-ai/` for goals, evaluation plan, roadmap, backlog, and architecture docs before making decisions.
+
 ## What is this?
 Telegram bot that answers student questions by searching scraped university group chat history. Part of the Vectir AI system (3 repos: helper, scrapper, dashboard).
 
