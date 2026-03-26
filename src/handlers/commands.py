@@ -121,24 +121,24 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def optout_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle /optout — exclude user's messages from search."""
     user_id = update.effective_user.id
+    preferred_language = get_user_language(user_id)
+    ui_language = resolve_ui_language(preferred_language, telegram_language_code=update.effective_user.language_code)
     try:
         opt_out_user(user_id)
-        await update.message.reply_text(
-            "Готово. Твои сообщения удалены из базы и больше не будут индексироваться."
-        )
+        await update.message.reply_text(get_string(ui_language, "optout_success"))
     except Exception as e:
         print(f"Error handling /optout: {e}")
-        await update.message.reply_text("❌ Произошла ошибка. Попробуй ещё раз.")
+        await update.message.reply_text(get_string(ui_language, "error"))
 
 
 async def optin_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle /optin — re-enable message indexing."""
     user_id = update.effective_user.id
+    preferred_language = get_user_language(user_id)
+    ui_language = resolve_ui_language(preferred_language, telegram_language_code=update.effective_user.language_code)
     try:
         opt_in_user(user_id)
-        await update.message.reply_text(
-            "Окей, теперь твои сообщения снова будут индексироваться."
-        )
+        await update.message.reply_text(get_string(ui_language, "optin_success"))
     except Exception as e:
         print(f"Error handling /optin: {e}")
-        await update.message.reply_text("❌ Произошла ошибка. Попробуй ещё раз.")
+        await update.message.reply_text(get_string(ui_language, "error"))

@@ -66,6 +66,8 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "choose_language": "Выбери язык интерфейса:",
         "language_command": "🌐 *Язык интерфейса*\n\nСейчас: *{language}*\n\nВыбери новый язык:",
         "language_updated": "✅ Язык интерфейса изменён на {language}.",
+        "optout_success": "Готово. Твои сообщения удалены из базы и больше не будут индексироваться.",
+        "optin_success": "Окей, теперь твои сообщения снова будут индексироваться.",
     },
     "kk": {
         "searching": "🔍 Іздеп жатырмын, күте тұрыңыз...",
@@ -104,6 +106,8 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "choose_language": "Интерфейс тілін таңдаңыз:",
         "language_command": "🌐 *Интерфейс тілі*\n\nҚазір: *{language}*\n\nЖаңа тілді таңдаңыз:",
         "language_updated": "✅ Интерфейс тілі {language} болып өзгертілді.",
+        "optout_success": "Дайын. Сіздің хабарламаларыңыз базадан өшірілді және енді индекстелмейді.",
+        "optin_success": "Жарайды, енді сіздің хабарламаларыңыз қайтадан индекстеледі.",
     },
     "en": {
         "searching": "🔍 Searching, please wait...",
@@ -142,6 +146,8 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "choose_language": "Choose your interface language:",
         "language_command": "🌐 *Interface Language*\n\nCurrent: *{language}*\n\nChoose a new language:",
         "language_updated": "✅ Interface language changed to {language}.",
+        "optout_success": "Done. Your messages were removed from the database and will no longer be indexed.",
+        "optin_success": "Okay, your messages will now be indexed again.",
     },
 }
 
