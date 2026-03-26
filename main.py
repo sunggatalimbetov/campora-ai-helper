@@ -4,7 +4,7 @@ import time
 
 from openai import OpenAI
 from supabase import Client, create_client
-from telegram import Update
+from telegram import BotCommand, BotCommandScopeAllGroupChats, BotCommandScopeAllPrivateChats, Update
 from telegram.error import Conflict, NetworkError, RetryAfter
 from telegram.ext import (
     Application,
@@ -46,6 +46,31 @@ WELCOME_NOTICE = (
 _notified_chats: set[int] = set()
 
 
+PRIVATE_COMMANDS = [
+    BotCommand("start", "Start the bot"),
+    BotCommand("help", "Show help"),
+    BotCommand("new", "Start a fresh conversation"),
+    BotCommand("language", "Change interface language"),
+    BotCommand("optout", "Remove your messages from indexing"),
+    BotCommand("optin", "Enable indexing for your messages again"),
+]
+
+GROUP_COMMANDS = [
+    BotCommand("ask", "Ask a question about the group history"),
+    BotCommand("help", "Show help"),
+    BotCommand("new", "Start a fresh conversation"),
+    BotCommand("optout", "Remove your messages from indexing"),
+    BotCommand("optin", "Enable indexing for your messages again"),
+]
+
+
+async def register_bot_commands(app: Application) -> None:
+    """Register Telegram slash commands so clients can show the command menu."""
+    await app.bot.set_my_commands(PRIVATE_COMMANDS, scope=BotCommandScopeAllPrivateChats())
+    await app.bot.set_my_commands(GROUP_COMMANDS, scope=BotCommandScopeAllGroupChats())
+    logger.info("Telegram slash commands registered")
+
+
 async def track_chat_member(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send a one-time opt-out notice when the bot is added to a group."""
     if update.my_chat_member is None:
@@ -84,7 +109,7 @@ def main():
     while True:
         try:
             # Create the Application
-            app = Application.builder().token(TELEGRAM_BOT_TOKEN).build()
+            app = Application.builder().token(TELEGRAM_BOT_TOKEN).post_init(register_bot_commands).build()
 
             # Add handlers
             app.add_handler(CommandHandler("ask", ask_command))
