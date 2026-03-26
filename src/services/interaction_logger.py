@@ -7,6 +7,7 @@ from supabase import Client, create_client
 from telegram import Update
 
 from src.config.settings import SUPABASE_SERVICE_KEY, SUPABASE_URL
+from src.services.language import resolve_query_language
 
 # Initialize Supabase client
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
@@ -106,16 +107,7 @@ class InteractionLogger:
     @staticmethod
     def _detect_language(text: str) -> str:
         """Simple language detection based on common patterns."""
-        # You can enhance this with a proper language detection library
-        # For now, just basic detection
-        if any(char in text for char in "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"):
-            return "ru"
-        elif any(char in text for char in "áéíóúñü"):
-            return "es"
-        elif any(char in text for char in "әіңғүұқ"):
-            return "kz"
-        else:
-            return "en"  # default to English
+        return resolve_query_language(text)
 
 
 class ResponseTimer:

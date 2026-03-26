@@ -39,7 +39,7 @@ Instructions:
 - Newer messages are generally more reliable, especially for time-sensitive topics like
   admission requirements, deadlines, or procedures. If older and newer messages conflict,
   prefer the newer one.
-- Write your response in the same language as the user's question
+- Write your response in the language requested below
 - Do NOT include any links in your answer - they will be added automatically"""
 
 
@@ -79,6 +79,7 @@ def generate_answer(
     query: str,
     results: list,
     conversation_history: Optional[List[ConversationTurn]] = None,
+    answer_language: str = "ru",
 ) -> tuple[str, int]:
     """Generate answer using OpenAI based on search results and conversation history."""
     if not results:
@@ -86,7 +87,7 @@ def generate_answer(
 
     context, question_results, reply_results = _build_context(results)
 
-    system_content = f"{SYSTEM_PROMPT}\n\nInformation:\n{context}"
+    system_content = f"{SYSTEM_PROMPT}\n\nAnswer language: {answer_language}\n\nInformation:\n{context}"
 
     messages: list[dict] = [{"role": "system", "content": system_content}]
 

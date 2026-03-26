@@ -22,9 +22,10 @@ from src.config.settings import (
     SUPABASE_URL,
     TELEGRAM_BOT_TOKEN,
 )
-from src.handlers.commands import ask_command, help_command, new_command, optin_command, optout_command, start_command
+from src.handlers.commands import ask_command, help_command, new_command, optin_command, optout_command
 from src.handlers.feedback import feedback_callback_handler
 from src.handlers.messages import dm_handler
+from src.handlers.onboarding import language_callback_handler, language_command, start_command
 
 # Add logging configuration
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
@@ -90,6 +91,7 @@ def main():
             app.add_handler(CommandHandler("new", new_command))
             app.add_handler(CommandHandler("help", help_command))
             app.add_handler(CommandHandler("start", start_command))
+            app.add_handler(CommandHandler("language", language_command))
             app.add_handler(CommandHandler("optout", optout_command))
             app.add_handler(CommandHandler("optin", optin_command))
             app.add_handler(
@@ -99,6 +101,7 @@ def main():
                 )
             )
             app.add_handler(CallbackQueryHandler(feedback_callback_handler, pattern="^feedback:"))
+            app.add_handler(CallbackQueryHandler(language_callback_handler, pattern="^language:"))
             app.add_handler(ChatMemberHandler(track_chat_member, ChatMemberHandler.MY_CHAT_MEMBER))
 
             # Add error handler
