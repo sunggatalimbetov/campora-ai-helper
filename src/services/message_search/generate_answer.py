@@ -3,7 +3,7 @@ from typing import List, Optional
 from src.models.message import MessageDict
 from src.services.conversation import ConversationTurn
 from src.services.message_search._clients import client_oa
-from src.utils.answer_utils import strip_references
+from src.utils.answer_utils import GROUP_CHAT_TYPES, build_references, strip_references
 
 SYSTEM_PROMPT = """\
 You are a helpful assistant for university students.
@@ -43,6 +43,13 @@ Instructions:
 - Write your response in the language requested below
 - Do NOT include any links in your answer - they will be added automatically"""
 
+GROUP_PROMPT_ADDENDUM = """
+IMPORTANT — Group chat mode:
+You are answering in a group chat. Keep your response very concise:
+- Maximum 2-3 sentences
+- Give the direct answer only, no elaboration
+- If the topic is complex, give the short answer and suggest the user message you directly for a detailed response"""
+
 
 def _build_context(results: list) -> tuple[str, List[MessageDict], List[MessageDict]]:
     raw_question_results: List[MessageDict] = [msg for msg in results if not msg.get("is_reply", False)]
@@ -81,6 +88,7 @@ def generate_answer(
     results: list,
     conversation_history: Optional[List[ConversationTurn]] = None,
     answer_language: str = "ru",
+    chat_type: str = "private",
 ) -> tuple[str, int]:
     """Generate answer using OpenAI based on search results and conversation history."""
     if not results:
@@ -89,6 +97,9 @@ def generate_answer(
     context, question_results, reply_results = _build_context(results)
 
     system_content = f"{SYSTEM_PROMPT}\n\nAnswer language: {answer_language}\n\nInformation:\n{context}"
+
+    if chat_type in GROUP_CHAT_TYPES:
+        system_content += GROUP_PROMPT_ADDENDUM
 
     messages: list[dict] = [{"role": "system", "content": system_content}]
 
@@ -104,8 +115,6 @@ def generate_answer(
     answer: str = response.choices[0].message.content.strip()
     tokens_used: int = response.usage.total_tokens
 
-    references: str = "\n\nReferences"
-    for i, msg in enumerate(question_results, 1):
-        references += f"\n{i}) {msg['link']}"
+    references = build_references(question_results, chat_type)
 
     return answer + references, tokens_used

@@ -19,6 +19,26 @@ def strip_references(answer: str) -> str:
     return answer
 
 
+GROUP_CHAT_TYPES = {"group", "supergroup", "channel"}
+
+
+def build_references(question_results: list[dict], chat_type: str) -> str:
+    """Build the references string based on chat type.
+
+    Private: full numbered list. Group: condensed top 2 on one line.
+    """
+    if chat_type == "private":
+        references = "\n\nReferences"
+        for i, msg in enumerate(question_results, 1):
+            references += f"\n{i}) {msg['link']}"
+        return references
+
+    top_refs = question_results[:2]
+    if top_refs:
+        return "\n\nRef: " + " | ".join(msg["link"] for msg in top_refs)
+    return ""
+
+
 def filter_by_similarity(results: list[dict], threshold: float) -> list[dict]:
     """Drop search results below the similarity threshold."""
     return [r for r in results if r.get("semantic_similarity", 0) >= threshold]
