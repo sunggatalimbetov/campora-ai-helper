@@ -42,5 +42,7 @@ RATE_LIMIT_WINDOW_SECONDS: int = int(os.getenv("RATE_LIMIT_WINDOW_SECONDS", "360
 _raw_overrides = os.getenv("SEARCH_SOURCE_OVERRIDES", "{}")
 try:
     SEARCH_SOURCE_OVERRIDES: dict[int, int] = {int(k): int(v) for k, v in json.loads(_raw_overrides).items()}
-except (ValueError, TypeError):
+except (ValueError, TypeError) as e:
+    print(f"⚠️ Failed to parse SEARCH_SOURCE_OVERRIDES: {e!r}, raw={_raw_overrides!r}")
     SEARCH_SOURCE_OVERRIDES: dict[int, int] = {}
+print(f"🔧 SEARCH_SOURCE_OVERRIDES = {SEARCH_SOURCE_OVERRIDES}")
