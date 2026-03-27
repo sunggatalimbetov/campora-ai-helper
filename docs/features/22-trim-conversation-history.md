@@ -66,4 +66,4 @@ A more sophisticated approach would summarize each prior answer via an LLM call.
 
 ## Status
 
-Planned
+Implemented
