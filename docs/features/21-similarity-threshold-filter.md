@@ -63,4 +63,4 @@ If filtering removes all results, treat it the same as zero results — show the
 
 ## Status
 
-Planned
+Implemented
