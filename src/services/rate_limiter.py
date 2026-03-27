@@ -11,7 +11,7 @@ from src.config.settings import RATE_LIMIT_MAX_REQUESTS, RATE_LIMIT_WINDOW_SECON
 class RateLimiter:
     max_requests: int = RATE_LIMIT_MAX_REQUESTS
     window_seconds: int = RATE_LIMIT_WINDOW_SECONDS
-    _requests: dict = field(default_factory=lambda: defaultdict(list))
+    _requests: dict[tuple[int, int], list[float]] = field(default_factory=lambda: defaultdict(list))
 
     def is_allowed(self, user_id: int, chat_id: int) -> bool:
         """Check if user is within rate limit for this chat."""
@@ -20,7 +20,10 @@ class RateLimiter:
 
         self._requests[key] = [t for t in self._requests[key] if now - t < self.window_seconds]
 
-        if len(self._requests[key]) >= self.max_requests:
+        if not self._requests[key]:
+            del self._requests[key]
+
+        if len(self._requests.get(key, [])) >= self.max_requests:
             return False
 
         self._requests[key].append(now)
