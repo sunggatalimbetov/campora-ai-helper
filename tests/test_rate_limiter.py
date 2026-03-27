@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import time
 import unittest
 from unittest.mock import patch
 
@@ -33,11 +32,13 @@ class RateLimiterTests(unittest.TestCase):
         self.assertFalse(limiter.is_allowed(1, 1))
 
     def test_window_expiry_resets_limit(self):
-        limiter = RateLimiter(max_requests=1, window_seconds=1)
-        self.assertTrue(limiter.is_allowed(1, 1))
-        self.assertFalse(limiter.is_allowed(1, 1))
-        time.sleep(1.1)
-        self.assertTrue(limiter.is_allowed(1, 1))
+        limiter = RateLimiter(max_requests=1, window_seconds=60)
+        with patch("src.services.rate_limiter.time") as mock_time:
+            mock_time.time.return_value = 1000.0
+            self.assertTrue(limiter.is_allowed(1, 1))
+            self.assertFalse(limiter.is_allowed(1, 1))
+            mock_time.time.return_value = 1061.0
+            self.assertTrue(limiter.is_allowed(1, 1))
 
     def test_blocked_request_does_not_count(self):
         limiter = RateLimiter(max_requests=1, window_seconds=60)
