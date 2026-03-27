@@ -20,7 +20,11 @@ DEFAULT_SEMANTIC_WEIGHT: float = 0.5
 DEFAULT_FULLTEXT_WEIGHT: float = 0.5
 MIN_RESULT_SCORE: float = 0.1
 RRF_K: int = 60
-SIMILARITY_THRESHOLD: float = float(os.getenv("SIMILARITY_THRESHOLD", "0.45"))
+_raw_threshold = os.getenv("SIMILARITY_THRESHOLD", "0.45")
+try:
+    SIMILARITY_THRESHOLD: float = max(0.0, min(1.0, float(_raw_threshold)))
+except ValueError:
+    SIMILARITY_THRESHOLD: float = 0.45
 
 # Conversation memory
 CONVERSATION_TIMEOUT_MINUTES: int = 30
