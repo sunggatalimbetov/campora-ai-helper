@@ -8,6 +8,7 @@ from src.services.language import get_string, resolve_ui_language
 from src.services.message_search import generate_answer, search_messages
 from src.services.message_search.rewrite_query import rewrite_query
 from src.services.user_preferences import get_user_language
+from src.utils.split_message import split_message
 
 
 async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -74,11 +75,14 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 session_id=session_id,
             )
 
-            if interaction_id:
-                keyboard = create_feedback_keyboard(interaction_id)
-                await update.message.reply_text(answer, reply_markup=keyboard)
-            else:
-                await update.message.reply_text(answer)
+            chunks = split_message(answer)
+            for i, chunk in enumerate(chunks):
+                is_last = i == len(chunks) - 1
+                if is_last and interaction_id:
+                    keyboard = create_feedback_keyboard(interaction_id)
+                    await update.message.reply_text(chunk, reply_markup=keyboard)
+                else:
+                    await update.message.reply_text(chunk)
 
         except Exception as e:
             print(f"Error handling DM: {e}")
