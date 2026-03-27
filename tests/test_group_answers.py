@@ -31,8 +31,17 @@ class GroupAnswerReferencesTests(unittest.TestCase):
         refs = build_references(results, "supergroup")
         self.assertIn("Ref:", refs)
 
+    def test_channel_uses_condensed_refs(self):
+        results = [_make_result(1, "https://t.me/c/1/1")]
+        refs = build_references(results, "channel")
+        self.assertIn("Ref:", refs)
+
     def test_group_empty_results_returns_empty(self):
         refs = build_references([], "group")
+        self.assertEqual(refs, "")
+
+    def test_private_empty_results_returns_empty(self):
+        refs = build_references([], "private")
         self.assertEqual(refs, "")
 
     def test_group_type_check_is_explicit(self):
