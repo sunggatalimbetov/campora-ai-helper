@@ -3,6 +3,11 @@ from typing import List, Optional
 from src.models.message import MessageDict
 from src.services.conversation import ConversationTurn
 from src.services.message_search._clients import client_oa
+from src.services.message_search.answer_utils import (
+    GROUP_CHAT_TYPES,
+    build_references,
+    strip_references,
+)
 
 SYSTEM_PROMPT = """\
 You are a helpful assistant for university students.
@@ -42,8 +47,6 @@ Instructions:
 - Write your response in the language requested below
 - Do NOT include any links in your answer - they will be added automatically"""
 
-_GROUP_CHAT_TYPES = {"group", "supergroup", "channel"}
-
 GROUP_PROMPT_ADDENDUM = """
 IMPORTANT — Group chat mode:
 You are answering in a group chat. Keep your response very concise:
@@ -51,17 +54,6 @@ You are answering in a group chat. Keep your response very concise:
 - Give the direct answer only, no elaboration
 - If the topic is complex, give the short answer and suggest the user message you directly for a detailed response"""
 
-
-def _strip_references(answer: str) -> str:
-    """Strip the references section appended to prior answers.
-
-    References are always appended in English (see bottom of generate_answer),
-    even when the answer body is in another language.
-    """
-    ref_marker = "\n\nReferences"
-    if ref_marker in answer:
-        return answer[: answer.index(ref_marker)]
-    return answer
 
 
 def _build_context(results: list) -> tuple[str, List[MessageDict], List[MessageDict]]:
@@ -111,7 +103,7 @@ def generate_answer(
 
     system_content = f"{SYSTEM_PROMPT}\n\nAnswer language: {answer_language}\n\nInformation:\n{context}"
 
-    if chat_type in _GROUP_CHAT_TYPES:
+    if chat_type in GROUP_CHAT_TYPES:
         system_content += GROUP_PROMPT_ADDENDUM
 
     messages: list[dict] = [{"role": "system", "content": system_content}]
@@ -119,7 +111,7 @@ def generate_answer(
     if conversation_history:
         for turn in conversation_history:
             messages.append({"role": "user", "content": turn.query})
-            messages.append({"role": "assistant", "content": _strip_references(turn.answer)})
+            messages.append({"role": "assistant", "content": strip_references(turn.answer)})
 
     messages.append({"role": "user", "content": query})
 
@@ -128,12 +120,6 @@ def generate_answer(
     answer: str = response.choices[0].message.content.strip()
     tokens_used: int = response.usage.total_tokens
 
-    if chat_type == "private":
-        references = "\n\nReferences"
-        for i, msg in enumerate(question_results, 1):
-            references += f"\n{i}) {msg['link']}"
-    else:
-        top_refs = question_results[:2]
-        references = "\n\nRef: " + " | ".join(msg["link"] for msg in top_refs) if top_refs else ""
+    references = build_references(question_results, chat_type)
 
     return answer + references, tokens_used
