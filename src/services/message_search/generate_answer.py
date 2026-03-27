@@ -43,6 +43,18 @@ Instructions:
 - Do NOT include any links in your answer - they will be added automatically"""
 
 
+def _strip_references(answer: str) -> str:
+    """Strip the references section appended to prior answers.
+
+    References are always appended in English (see bottom of generate_answer),
+    even when the answer body is in another language.
+    """
+    ref_marker = "\n\nReferences"
+    if ref_marker in answer:
+        return answer[: answer.index(ref_marker)]
+    return answer
+
+
 def _build_context(results: list) -> tuple[str, List[MessageDict], List[MessageDict]]:
     raw_question_results: List[MessageDict] = [msg for msg in results if not msg.get("is_reply", False)]
     reply_results: List[MessageDict] = [msg for msg in results if msg.get("is_reply", False)]
@@ -94,7 +106,7 @@ def generate_answer(
     if conversation_history:
         for turn in conversation_history:
             messages.append({"role": "user", "content": turn.query})
-            messages.append({"role": "assistant", "content": turn.answer})
+            messages.append({"role": "assistant", "content": _strip_references(turn.answer)})
 
     messages.append({"role": "user", "content": query})
 
