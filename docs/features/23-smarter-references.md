@@ -85,4 +85,4 @@ If MarkdownV2 escaping is too fragile, fall back to plain text with the preview 
 
 ## Status
 
-Planned
+Implemented
