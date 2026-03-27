@@ -29,3 +29,7 @@ except ValueError:
 # Conversation memory
 CONVERSATION_TIMEOUT_MINUTES: int = 30
 CONVERSATION_MAX_TURNS: int = 5
+
+# Rate limiting
+RATE_LIMIT_MAX_REQUESTS: int = int(os.getenv("RATE_LIMIT_MAX_REQUESTS", "10"))
+RATE_LIMIT_WINDOW_SECONDS: int = int(os.getenv("RATE_LIMIT_WINDOW_SECONDS", "3600"))
