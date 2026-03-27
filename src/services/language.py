@@ -24,11 +24,13 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         ),
         "ask_private_only": "Эта команда работает только в группах. В личке просто отправь вопрос сообщением.",
         "ask_usage": "Использование: /ask <твой вопрос>",
+        "mention_usage": "Упомяни меня и добавь вопрос. Пример: {bot_username} когда дедлайн подачи документов?",
         "new_session": "🔄 Разговор сброшен. Следующий вопрос начнёт новую сессию.",
         "help": (
             "🤖 *Vectir AI*\n\n"
             "*В группах:*\n"
             "• `/ask <вопрос>` - задать вопрос по истории чата\n"
+            "• `@bot <вопрос>` - спросить прямо в сообщении\n"
             "• `/new` - начать новый разговор\n"
             "• `/help` - показать помощь\n\n"
             "*В личке:*\n"
@@ -64,11 +66,13 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         ),
         "ask_private_only": "Бұл команда тек топта жұмыс істейді. Жекеде сұрағыңызды жай хабарлама ретінде жіберіңіз.",
         "ask_usage": "Қолданылуы: /ask <сұрағыңыз>",
+        "mention_usage": "Мені атап, сұрақты жазыңыз. Мысалы: {bot_username} құжат тапсыру дедлайны қашан?",
         "new_session": "🔄 Әңгіме тазартылды. Келесі сұрақ жаңа сессияны бастайды.",
         "help": (
             "🤖 *Vectir AI*\n\n"
             "*Топтарда:*\n"
             "• `/ask <сұрақ>` - чат тарихы бойынша сұрақ қою\n"
+            "• `@bot <сұрақ>` - хабарламада тікелей сұрау\n"
             "• `/new` - жаңа әңгімені бастау\n"
             "• `/help` - көмекті көрсету\n\n"
             "*Жекеде:*\n"
@@ -104,11 +108,13 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         ),
         "ask_private_only": "This command works only in group chats. In private messages, just send your question directly.",
         "ask_usage": "Usage: /ask <your question>",
+        "mention_usage": "Mention me and include a question. Example: {bot_username} when is the application deadline?",
         "new_session": "🔄 Conversation reset. Your next question will start a fresh session.",
         "help": (
             "🤖 *Vectir AI*\n\n"
             "*In Groups:*\n"
             "• `/ask <question>` - ask about the chat history\n"
+            "• `@bot <question>` - ask directly in a message\n"
             "• `/new` - start a fresh conversation\n"
             "• `/help` - show help\n\n"
             "*In Private Messages:*\n"
