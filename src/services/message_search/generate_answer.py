@@ -43,20 +43,15 @@ Instructions:
 - Do NOT include any links in your answer - they will be added automatically"""
 
 
-_TRIM_MAX_CHARS = 400
+def _strip_references(answer: str) -> str:
+    """Strip the references section appended to prior answers.
 
-
-def _trim_answer(answer: str) -> str:
-    """Strip references section and truncate to keep history compact."""
-    # References are always appended in English (see bottom of generate_answer),
-    # even when the answer body is in another language.
+    References are always appended in English (see bottom of generate_answer),
+    even when the answer body is in another language.
+    """
     ref_marker = "\n\nReferences"
     if ref_marker in answer:
-        answer = answer[: answer.index(ref_marker)]
-
-    if len(answer) > _TRIM_MAX_CHARS:
-        answer = answer[:_TRIM_MAX_CHARS].rsplit(" ", 1)[0] + "..."
-
+        return answer[: answer.index(ref_marker)]
     return answer
 
 
@@ -111,7 +106,7 @@ def generate_answer(
     if conversation_history:
         for turn in conversation_history:
             messages.append({"role": "user", "content": turn.query})
-            messages.append({"role": "assistant", "content": _trim_answer(turn.answer)})
+            messages.append({"role": "assistant", "content": _strip_references(turn.answer)})
 
     messages.append({"role": "user", "content": query})
 
