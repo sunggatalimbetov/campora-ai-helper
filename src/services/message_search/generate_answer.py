@@ -117,6 +117,16 @@ def generate_answer(
     answer: str = response.choices[0].message.content.strip()
     tokens_used: int = response.usage.total_tokens
 
-    references = build_references(question_results, chat_type, language=answer_language)
+    # Only append references if the LLM gave a real answer, not a fallback/decline
+    DECLINE_PHRASES = [
+        "i can only help with university",
+        "я могу помочь только с вопросами",
+        "мен тек университетке",
+    ]
+    is_declined = any(phrase in answer.lower() for phrase in DECLINE_PHRASES)
 
-    return answer + references, tokens_used
+    if not is_declined:
+        references = build_references(question_results, chat_type, language=answer_language)
+        answer = answer + references
+
+    return answer, tokens_used
