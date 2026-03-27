@@ -6,6 +6,7 @@ from src.handlers.feedback import create_feedback_keyboard
 from src.services.conversation import load_conversation_history, mark_new_session
 from src.services.interaction_logger import InteractionLogger, ResponseTimer
 from src.services.language import get_string, resolve_ui_language
+from src.config.settings import SEARCH_SOURCE_OVERRIDES
 from src.services.message_search import generate_answer, search_messages
 from src.services.message_search.rewrite_query import rewrite_query
 from src.services.optout import opt_in_user, opt_out_user
@@ -29,6 +30,7 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
+    search_chat_id = SEARCH_SOURCE_OVERRIDES.get(chat_id, chat_id)
 
     with ResponseTimer() as timer:
         try:
@@ -37,7 +39,7 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             history, session_id = load_conversation_history(user_id, chat_id)
             search_query = rewrite_query(query, history)
 
-            results, query_embedding = search_messages(search_query, chat_id=chat_id)
+            results, query_embedding = search_messages(search_query, chat_id=search_chat_id)
             if not results:
                 no_results_message = get_string(ui_language, "no_results")
                 await update.message.reply_text(no_results_message)

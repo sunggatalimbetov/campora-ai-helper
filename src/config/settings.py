@@ -1,3 +1,4 @@
+import json
 import os
 
 from dotenv import load_dotenv
@@ -29,3 +30,13 @@ except ValueError:
 # Conversation memory
 CONVERSATION_TIMEOUT_MINUTES: int = 30
 CONVERSATION_MAX_TURNS: int = 5
+
+# Search source overrides: map a group's chat_id to a different source chat_id.
+# Format: JSON object with string keys and values, e.g.
+#   SEARCH_SOURCE_OVERRIDES={"<group_chat_id>": "<source_chat_id>"}
+# When a /ask comes from <group_chat_id>, the search runs against <source_chat_id> instead.
+_raw_overrides = os.getenv("SEARCH_SOURCE_OVERRIDES", "{}")
+try:
+    SEARCH_SOURCE_OVERRIDES: dict[int, int] = {int(k): int(v) for k, v in json.loads(_raw_overrides).items()}
+except (ValueError, TypeError):
+    SEARCH_SOURCE_OVERRIDES: dict[int, int] = {}
