@@ -38,9 +38,11 @@ def search_messages_hybrid(
         if chat_id is not None:
             params["filter_chat_id"] = chat_id
 
+        print(f"🔍 hybrid_search params: filter_chat_id={params.get('filter_chat_id')}, type={type(chat_id)}")
         resp = supabase.rpc("hybrid_search", params).execute()
 
         results = resp.data
+        print(f"🔍 hybrid_search returned {len(results)} raw results")
 
         for r in results:
             print(f"  ID {r['id']}: semantic={r.get('semantic_similarity', 0):.3f}, " f"fulltext={r.get('full_text_rank', 0):.3f}, combined={r.get('combined_score', 0):.3f}")

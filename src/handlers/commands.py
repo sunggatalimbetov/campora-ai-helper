@@ -33,6 +33,7 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
     search_chat_id = SEARCH_SOURCE_OVERRIDES.get(chat_id, chat_id)
+    print(f"🔍 /ask: chat_id={chat_id}, search_chat_id={search_chat_id}, override_hit={chat_id != search_chat_id}")
 
     if not rate_limiter.is_allowed(user_id, chat_id):
         return
