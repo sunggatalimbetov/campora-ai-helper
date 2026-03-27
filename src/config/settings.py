@@ -41,7 +41,10 @@ RATE_LIMIT_WINDOW_SECONDS: int = int(os.getenv("RATE_LIMIT_WINDOW_SECONDS", "360
 # When a /ask comes from <group_chat_id>, the search runs against <source_chat_id> instead.
 _raw_overrides = os.getenv("SEARCH_SOURCE_OVERRIDES", "{}")
 try:
-    SEARCH_SOURCE_OVERRIDES: dict[int, int] = {int(k): int(v) for k, v in json.loads(_raw_overrides).items()}
+    _parsed = {int(k): int(v) for k, v in json.loads(_raw_overrides).items()}
+    # Keys are group IDs where /ask is sent. Convert positive Telethon-style IDs
+    # to negative Bot API format (-100 prefix) so lookup matches update.effective_chat.id.
+    SEARCH_SOURCE_OVERRIDES: dict[int, int] = {(-int(f"100{k}") if k > 0 else k): v for k, v in _parsed.items()}
 except (ValueError, TypeError) as e:
     print(f"⚠️ Failed to parse SEARCH_SOURCE_OVERRIDES: {e!r}, raw={_raw_overrides!r}")
     SEARCH_SOURCE_OVERRIDES: dict[int, int] = {}
