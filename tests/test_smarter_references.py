@@ -60,8 +60,15 @@ class BuildReferencesTests(unittest.TestCase):
     def test_escapes_markdown_brackets(self):
         results = [_make_result(1, "Use [this] function(x)", "https://t.me/c/1/1")]
         refs = build_references(results, "private", language="en")
-        self.assertNotIn("[this]", refs.split("📎")[1].split("](")[0])
-        self.assertNotIn("(x)", refs.split("📎")[1].split("](")[0])
+        # Characters must be escaped (backslash-prefixed), not deleted
+        label = refs.split("📎")[1].split("](")[0]
+        self.assertIn("\\[", label)
+        self.assertIn("\\]", label)
+        self.assertIn("\\(", label)
+        self.assertIn("\\)", label)
+        # Original text content must be preserved
+        self.assertIn("this", label)
+        self.assertIn("function", label)
 
 
 class StripReferencesTests(unittest.TestCase):

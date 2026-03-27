@@ -27,9 +27,8 @@ REFERENCES_HEADER = {"ru": "📎 Источники:", "kk": "📎 Дерекк�
 
 def _escape_markdown(text: str) -> str:
     """Escape characters that break Telegram Markdown v1 inside link labels."""
-    for ch in ("[]", "()", "`"):
-        for c in ch:
-            text = text.replace(c, "")
+    for ch in ("[", "]", "(", ")", "`"):
+        text = text.replace(ch, f"\\{ch}")
     return text
 
 
@@ -37,7 +36,8 @@ def _message_preview(text: str) -> str:
     """Return a truncated, single-line preview of a message."""
     preview = text[:_PREVIEW_MAX_CHARS].replace("\n", " ")
     if len(text) > _PREVIEW_MAX_CHARS:
-        preview = preview.rsplit(" ", 1)[0] + "..."
+        parts = preview.rsplit(" ", 1)
+        preview = (parts[0] if len(parts) > 1 else preview) + "..."
     return _escape_markdown(preview)
 
 
@@ -50,17 +50,9 @@ def build_references(question_results: list[dict], chat_type: str, language: str
         return ""
 
     header = REFERENCES_HEADER.get(language, REFERENCES_HEADER["en"])
-
-    if chat_type in GROUP_CHAT_TYPES:
-        top_refs = question_results[:2]
-        lines = [f"\n\n{header}"]
-        for i, msg in enumerate(top_refs, 1):
-            preview = _message_preview(msg["text"])
-            lines.append(f"{i}. [{preview}]({msg['link']})")
-        return "\n".join(lines)
-
+    refs = question_results[:2] if chat_type in GROUP_CHAT_TYPES else question_results
     lines = [f"\n\n{header}"]
-    for i, msg in enumerate(question_results, 1):
+    for i, msg in enumerate(refs, 1):
         preview = _message_preview(msg["text"])
         lines.append(f"{i}. [{preview}]({msg['link']})")
     return "\n".join(lines)
