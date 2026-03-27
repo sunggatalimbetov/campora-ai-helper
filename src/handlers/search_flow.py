@@ -1,3 +1,5 @@
+import logging
+
 from telegram import Update
 from telegram.constants import ChatAction
 
@@ -7,6 +9,8 @@ from src.services.interaction_logger import InteractionLogger, ResponseTimer
 from src.services.language import get_string
 from src.services.message_search import generate_answer, search_messages
 from src.services.message_search.rewrite_query import rewrite_query
+
+logger = logging.getLogger(__name__)
 
 
 async def run_search_flow(
@@ -79,7 +83,7 @@ async def run_search_flow(
                 await update.message.reply_text(answer)
 
         except Exception as e:
-            print(f"Error handling {command_used}: {e}")
+            logger.exception("Error handling %s", command_used)
             error_response = get_string(ui_language, "error")
             await update.message.reply_text(error_response)
 

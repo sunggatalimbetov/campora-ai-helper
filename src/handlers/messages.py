@@ -34,9 +34,9 @@ async def group_mention_handler(update: Update, context: ContextTypes.DEFAULT_TY
     if not update.message or not update.message.text or update.message.text.startswith("/"):
         return
 
-    bot_username = getattr(context.bot, "username", None)
+    bot_username = context.application.bot_data.get("bot_username") or context.bot.username
     if not bot_username:
-        bot_username = (await context.bot.get_me()).username
+        return
 
     query = extract_mentioned_query(update.message.text, update.message.entities, bot_username)
     if query is None:

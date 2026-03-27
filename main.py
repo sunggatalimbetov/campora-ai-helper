@@ -53,8 +53,10 @@ _notified_chats: set[int] = set()
 
 async def register_bot_commands(app: Application) -> None:
     """Register Telegram slash commands so clients can show the command menu."""
+    bot_username = (await app.bot.get_me()).username
+    app.bot_data["bot_username"] = bot_username
     await register_default_bot_commands(app)
-    logger.info("Telegram slash commands registered")
+    logger.info("Telegram slash commands registered for @%s", bot_username)
 
 
 async def track_chat_member(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -69,7 +71,7 @@ async def track_chat_member(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     if new_status in ("member", "administrator") and chat.id not in _notified_chats:
         _notified_chats.add(chat.id)
         try:
-            bot_username = (await context.bot.get_me()).username
+            bot_username = context.application.bot_data.get("bot_username") or context.bot.username
             await context.bot.send_message(chat_id=chat.id, text=WELCOME_NOTICE_TEMPLATE.format(bot_username=bot_username))
         except Exception as e:
             logger.warning("Could not send welcome notice to chat %s: %s", chat.id, e)
