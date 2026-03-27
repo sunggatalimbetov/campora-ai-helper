@@ -43,6 +43,21 @@ Instructions:
 - Do NOT include any links in your answer - they will be added automatically"""
 
 
+_TRIM_MAX_CHARS = 300
+
+
+def _trim_answer(answer: str) -> str:
+    """Strip references section and truncate to keep history compact."""
+    ref_marker = "\n\nReferences"
+    if ref_marker in answer:
+        answer = answer[: answer.index(ref_marker)]
+
+    if len(answer) > _TRIM_MAX_CHARS:
+        answer = answer[:_TRIM_MAX_CHARS].rsplit(" ", 1)[0] + "..."
+
+    return answer
+
+
 def _build_context(results: list) -> tuple[str, List[MessageDict], List[MessageDict]]:
     raw_question_results: List[MessageDict] = [msg for msg in results if not msg.get("is_reply", False)]
     reply_results: List[MessageDict] = [msg for msg in results if msg.get("is_reply", False)]
@@ -94,7 +109,7 @@ def generate_answer(
     if conversation_history:
         for turn in conversation_history:
             messages.append({"role": "user", "content": turn.query})
-            messages.append({"role": "assistant", "content": turn.answer})
+            messages.append({"role": "assistant", "content": _trim_answer(turn.answer)})
 
     messages.append({"role": "user", "content": query})
 
