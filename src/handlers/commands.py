@@ -9,6 +9,7 @@ from src.services.language import get_string, resolve_ui_language
 from src.services.message_search import generate_answer, search_messages
 from src.services.message_search.rewrite_query import rewrite_query
 from src.services.optout import opt_in_user, opt_out_user
+from src.services.rate_limiter import rate_limiter
 from src.services.user_preferences import get_user_language
 from src.utils.split_message import split_message
 
@@ -29,6 +30,9 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
+
+    if not rate_limiter.is_allowed(user_id, chat_id):
+        return
 
     with ResponseTimer() as timer:
         try:
