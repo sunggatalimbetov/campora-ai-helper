@@ -22,7 +22,7 @@ def split_message(text: str, max_length: int = TELEGRAM_MAX_LENGTH) -> list[str]
             split_at = text.rfind("\n", 0, max_length)
         if split_at == -1:
             split_at = text.rfind(" ", 0, max_length)
-        if split_at == -1:
+        if split_at <= 0:
             split_at = max_length
 
         chunks.append(text[:split_at])
