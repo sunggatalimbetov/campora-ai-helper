@@ -3,7 +3,7 @@ from typing import List, Optional
 from src.models.message import MessageDict
 from src.services.conversation import ConversationTurn
 from src.services.message_search._clients import client_oa
-from src.services.message_search.answer_utils import (
+from src.utils.answer_utils import (
     GROUP_CHAT_TYPES,
     build_references,
     strip_references,

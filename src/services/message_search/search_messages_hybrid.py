@@ -2,7 +2,7 @@ from typing import List, Tuple
 
 from src.config.settings import RRF_K, SIMILARITY_THRESHOLD
 from src.models.message import MessageDict
-from src.services.message_search.answer_utils import filter_by_similarity
+from src.utils.answer_utils import filter_by_similarity
 from src.services.message_search._clients import supabase
 from src.services.message_search.extract_fulltext_terms import extract_fulltext_terms
 from src.services.message_search.get_embedding import get_embedding
