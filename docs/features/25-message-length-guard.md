@@ -94,4 +94,4 @@ If using `parse_mode="MarkdownV2"`, splitting mid-formatting (e.g., inside `**bo
 
 ## Status
 
-Planned
+Implemented
