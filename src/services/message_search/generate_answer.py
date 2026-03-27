@@ -3,6 +3,7 @@ from typing import List, Optional
 from src.models.message import MessageDict
 from src.services.conversation import ConversationTurn
 from src.services.message_search._clients import client_oa
+from src.utils.answer_utils import strip_references
 
 SYSTEM_PROMPT = """\
 You are a helpful assistant for university students.
@@ -41,18 +42,6 @@ Instructions:
   prefer the newer one.
 - Write your response in the language requested below
 - Do NOT include any links in your answer - they will be added automatically"""
-
-
-def _strip_references(answer: str) -> str:
-    """Strip the references section appended to prior answers.
-
-    References are always appended in English (see bottom of generate_answer),
-    even when the answer body is in another language.
-    """
-    ref_marker = "\n\nReferences"
-    if ref_marker in answer:
-        return answer[: answer.index(ref_marker)]
-    return answer
 
 
 def _build_context(results: list) -> tuple[str, List[MessageDict], List[MessageDict]]:
@@ -106,7 +95,7 @@ def generate_answer(
     if conversation_history:
         for turn in conversation_history:
             messages.append({"role": "user", "content": turn.query})
-            messages.append({"role": "assistant", "content": _strip_references(turn.answer)})
+            messages.append({"role": "assistant", "content": strip_references(turn.answer)})
 
     messages.append({"role": "user", "content": query})
 
