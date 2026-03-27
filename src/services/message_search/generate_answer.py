@@ -43,11 +43,13 @@ Instructions:
 - Do NOT include any links in your answer - they will be added automatically"""
 
 
-_TRIM_MAX_CHARS = 300
+_TRIM_MAX_CHARS = 400
 
 
 def _trim_answer(answer: str) -> str:
     """Strip references section and truncate to keep history compact."""
+    # References are always appended in English (see bottom of generate_answer),
+    # even when the answer body is in another language.
     ref_marker = "\n\nReferences"
     if ref_marker in answer:
         answer = answer[: answer.index(ref_marker)]
