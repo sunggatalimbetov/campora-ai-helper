@@ -1,4 +1,5 @@
 from telegram import Update
+from telegram.constants import ChatAction
 from telegram.ext import ContextTypes
 
 from src.handlers.feedback import create_feedback_keyboard
@@ -31,7 +32,7 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     with ResponseTimer() as timer:
         try:
-            await update.message.reply_text(get_string(ui_language, "searching"))
+            await update.effective_chat.send_action(ChatAction.TYPING)
 
             history, session_id = load_conversation_history(user_id, chat_id)
             search_query = rewrite_query(query, history)
