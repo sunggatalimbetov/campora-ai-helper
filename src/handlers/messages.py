@@ -1,4 +1,5 @@
 from telegram import Update
+from telegram.error import BadRequest
 from telegram.ext import ContextTypes
 
 from src.handlers.feedback import create_feedback_keyboard
@@ -7,6 +8,7 @@ from src.services.interaction_logger import InteractionLogger, ResponseTimer
 from src.services.language import get_string, resolve_ui_language
 from src.services.message_search import generate_answer, search_messages
 from src.services.message_search.rewrite_query import rewrite_query
+from src.services.rate_limiter import rate_limiter
 from src.services.user_preferences import get_user_language
 from src.utils.split_message import split_message
 
@@ -27,6 +29,10 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
     preferred_language = get_user_language(user_id)
     ui_language = resolve_ui_language(preferred_language, query, update.effective_user.language_code)
+
+    if not rate_limiter.is_allowed(user_id, chat_id):
+        await update.message.reply_text(get_string(ui_language, "rate_limited"))
+        return
 
     with ResponseTimer() as timer:
         try:
@@ -78,11 +84,12 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             chunks = split_message(answer)
             for i, chunk in enumerate(chunks):
                 is_last = i == len(chunks) - 1
-                if is_last and interaction_id:
-                    keyboard = create_feedback_keyboard(interaction_id)
-                    await update.message.reply_text(chunk, reply_markup=keyboard)
-                else:
-                    await update.message.reply_text(chunk)
+                kwargs = {"reply_markup": create_feedback_keyboard(interaction_id)} if is_last and interaction_id else {}
+                try:
+                    await update.message.reply_text(chunk, parse_mode="Markdown", **kwargs)
+                except BadRequest as e:
+                    print(f"Markdown render failed, retrying as plain text: {e}")
+                    await update.message.reply_text(chunk, **kwargs)
 
         except Exception as e:
             print(f"Error handling DM: {e}")

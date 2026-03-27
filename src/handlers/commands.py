@@ -1,5 +1,6 @@
 from telegram import Update
 from telegram.constants import ChatAction
+from telegram.error import BadRequest
 from telegram.ext import ContextTypes
 
 from src.handlers.feedback import create_feedback_keyboard
@@ -10,6 +11,7 @@ from src.config.settings import SEARCH_SOURCE_OVERRIDES
 from src.services.message_search import generate_answer, search_messages
 from src.services.message_search.rewrite_query import rewrite_query
 from src.services.optout import opt_in_user, opt_out_user
+from src.services.rate_limiter import rate_limiter
 from src.services.user_preferences import get_user_language
 from src.utils.split_message import split_message
 
@@ -31,6 +33,9 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
     search_chat_id = SEARCH_SOURCE_OVERRIDES.get(chat_id, chat_id)
+
+    if not rate_limiter.is_allowed(user_id, chat_id):
+        return
 
     with ResponseTimer() as timer:
         try:
@@ -82,11 +87,12 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             chunks = split_message(answer)
             for i, chunk in enumerate(chunks):
                 is_last = i == len(chunks) - 1
-                if is_last and interaction_id:
-                    keyboard = create_feedback_keyboard(interaction_id)
-                    await update.message.reply_text(chunk, reply_markup=keyboard)
-                else:
-                    await update.message.reply_text(chunk)
+                kwargs = {"reply_markup": create_feedback_keyboard(interaction_id)} if is_last and interaction_id else {}
+                try:
+                    await update.message.reply_text(chunk, parse_mode="Markdown", **kwargs)
+                except BadRequest as e:
+                    print(f"Markdown render failed, retrying as plain text: {e}")
+                    await update.message.reply_text(chunk, **kwargs)
 
         except Exception as e:
             print(f"Error handling /ask command: {e}")

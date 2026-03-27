@@ -31,6 +31,10 @@ except ValueError:
 CONVERSATION_TIMEOUT_MINUTES: int = 30
 CONVERSATION_MAX_TURNS: int = 5
 
+# Rate limiting
+RATE_LIMIT_MAX_REQUESTS: int = int(os.getenv("RATE_LIMIT_MAX_REQUESTS", "10"))
+RATE_LIMIT_WINDOW_SECONDS: int = int(os.getenv("RATE_LIMIT_WINDOW_SECONDS", "3600"))
+
 # Search source overrides: map a group's chat_id to a different source chat_id.
 # Format: JSON object with string keys and values, e.g.
 #   SEARCH_SOURCE_OVERRIDES={"<group_chat_id>": "<source_chat_id>"}
