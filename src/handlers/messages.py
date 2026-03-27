@@ -80,9 +80,9 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 is_last = i == len(chunks) - 1
                 if is_last and interaction_id:
                     keyboard = create_feedback_keyboard(interaction_id)
-                    await update.message.reply_text(chunk, reply_markup=keyboard)
+                    await update.message.reply_text(chunk, reply_markup=keyboard, parse_mode="Markdown")
                 else:
-                    await update.message.reply_text(chunk)
+                    await update.message.reply_text(chunk, parse_mode="Markdown")
 
         except Exception as e:
             print(f"Error handling DM: {e}")
