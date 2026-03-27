@@ -114,4 +114,4 @@ RATE_LIMIT_WINDOW_SECONDS = int(os.getenv("RATE_LIMIT_WINDOW_SECONDS", "3600"))
 
 ## Status
 
-Planned
+Implemented
