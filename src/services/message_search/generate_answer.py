@@ -44,6 +44,7 @@ Instructions:
 - Do NOT include any links in your answer - they will be added automatically"""
 
 GROUP_PROMPT_ADDENDUM = """
+
 IMPORTANT — Group chat mode:
 You are answering in a group chat. Keep your response very concise:
 - Maximum 2-3 sentences

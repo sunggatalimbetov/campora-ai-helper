@@ -27,6 +27,9 @@ def build_references(question_results: list[dict], chat_type: str) -> str:
 
     Private: full numbered list. Group: condensed top 2 on one line.
     """
+    if not question_results:
+        return ""
+
     if chat_type == "private":
         references = "\n\nReferences"
         for i, msg in enumerate(question_results, 1):
