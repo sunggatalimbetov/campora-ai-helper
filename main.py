@@ -24,7 +24,7 @@ from src.config.settings import (
 )
 from src.handlers.commands import ask_command, help_command, new_command, optin_command, optout_command
 from src.handlers.feedback import feedback_callback_handler
-from src.handlers.messages import dm_handler, group_mention_handler
+from src.handlers.messages import dm_handler
 from src.handlers.onboarding import language_callback_handler, language_command, start_command
 from src.services.telegram_commands import register_default_bot_commands
 
@@ -112,14 +112,6 @@ def main():
                 MessageHandler(
                     filters.TEXT & filters.ChatType.PRIVATE & ~filters.COMMAND,
                     dm_handler,
-                )
-            )
-            app.add_handler(
-                MessageHandler(
-                    filters.TEXT
-                    & (filters.ChatType.GROUP | filters.ChatType.SUPERGROUP)
-                    & ~filters.COMMAND,
-                    group_mention_handler,
                 )
             )
             app.add_handler(CallbackQueryHandler(feedback_callback_handler, pattern="^feedback:"))
