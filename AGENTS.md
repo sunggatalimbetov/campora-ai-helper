@@ -1,4 +1,4 @@
-# CLAUDE.md — Campora AI Helper
+# AGENTS.md — Campora AI Helper
 
 ## Project Context
 Read `~/Documents/Obsidian Vault/campora-ai/` for goals, evaluation plan, roadmap, backlog, and architecture docs before making decisions.

@@ -1,1 +1,1 @@
-# Evaluation tests for Vectir AI bot
+# Evaluation tests for Campora AI bot

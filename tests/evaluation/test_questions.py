@@ -1,4 +1,4 @@
-"""Evaluation test questions for Vectir AI bot (Russian, University of Messina context)."""
+"""Evaluation test questions for Campora AI bot (Russian, University of Messina context)."""
 
 EVALUATION_QUESTIONS = [
     {
