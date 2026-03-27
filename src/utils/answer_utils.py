@@ -27,7 +27,7 @@ REFERENCES_HEADER = {"ru": "📎 Источники:", "kk": "📎 Дерекк�
 
 def _escape_markdown(text: str) -> str:
     """Escape characters that break Telegram Markdown v1 inside link labels."""
-    for ch in ("[", "]", "(", ")", "`"):
+    for ch in ("[", "]", "(", ")", "`", "*", "_"):
         text = text.replace(ch, f"\\{ch}")
     return text
 
@@ -53,7 +53,7 @@ def build_references(question_results: list[dict], chat_type: str, language: str
     refs = question_results[:2] if chat_type in GROUP_CHAT_TYPES else question_results
     lines = [f"\n\n{header}"]
     for i, msg in enumerate(refs, 1):
-        preview = _message_preview(msg["text"])
+        preview = _message_preview(msg.get("text", ""))
         lines.append(f"{i}. [{preview}]({msg['link']})")
     return "\n".join(lines)
 

@@ -82,7 +82,8 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 kwargs = {"reply_markup": create_feedback_keyboard(interaction_id)} if is_last and interaction_id else {}
                 try:
                     await update.message.reply_text(chunk, parse_mode="Markdown", **kwargs)
-                except BadRequest:
+                except BadRequest as e:
+                    print(f"Markdown render failed, retrying as plain text: {e}")
                     await update.message.reply_text(chunk, **kwargs)
 
         except Exception as e:
