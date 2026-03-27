@@ -16,7 +16,7 @@ Telegram bot that answers university student questions by searching scraped grou
 - **Python** with python-telegram-bot (async)
 - **OpenAI** — GPT-4o-mini for answers, text-embedding-3-small for embeddings
 - **Supabase** — PostgreSQL + pgvector for hybrid search
-- **Streamlit** — analytics via [vectir-ai-dashboard](https://github.com/sunggatalimbetov/vectir-ai-dashboard)
+- **Streamlit** — analytics via [campora-ai-dashboard](https://github.com/sunggatalimbetov/campora-ai-dashboard)
 
 ## Prerequisites
 
@@ -82,5 +82,5 @@ docs/features/       # Feature specifications
 
 ## Related Repos
 
-- [vectir-ai-scrapper](https://github.com/sunggatalimbetov/vectir-ai-scrapper) — Telegram group message scraper
-- [vectir-ai-dashboard](https://github.com/sunggatalimbetov/vectir-ai-dashboard) — Analytics dashboard
+- [campora-ai-scrapper](https://github.com/sunggatalimbetov/campora-ai-scrapper) — Telegram group message scraper
+- [campora-ai-dashboard](https://github.com/sunggatalimbetov/campora-ai-dashboard) — Analytics dashboard
