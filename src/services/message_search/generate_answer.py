@@ -3,7 +3,7 @@ from typing import List, Optional
 from src.models.message import MessageDict
 from src.services.conversation import ConversationTurn
 from src.services.message_search._clients import client_oa
-from src.utils.answer_utils import strip_references
+from src.utils.answer_utils import GROUP_CHAT_TYPES, build_references, strip_references
 
 SYSTEM_PROMPT = """\
 You are a helpful assistant for university students.
@@ -117,12 +117,6 @@ def generate_answer(
     answer: str = response.choices[0].message.content.strip()
     tokens_used: int = response.usage.total_tokens
 
-    if chat_type == "private":
-        references = "\n\nReferences"
-        for i, msg in enumerate(question_results, 1):
-            references += f"\n{i}) {msg['link']}"
-    else:
-        top_refs = question_results[:2]
-        references = "\n\nRef: " + " | ".join(msg["link"] for msg in top_refs) if top_refs else ""
+    references = build_references(question_results, chat_type, language=answer_language)
 
     return answer + references, tokens_used
