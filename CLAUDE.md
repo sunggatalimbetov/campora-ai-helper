@@ -4,13 +4,13 @@
 Read `~/Documents/Obsidian Vault/campora-ai/` for goals, evaluation plan, roadmap, backlog, and architecture docs before making decisions.
 
 ## What is this?
-Telegram bot that answers student questions by searching scraped university group chat history. Part of the Campora AI system (3 repos: helper, scrapper, dashboard).
+Telegram bot that answers student questions by searching scraped university group chat history. Part of the Campora AI system (3 repos: helper, scraper, dashboard).
 
 ## Architecture
 ```
 [Supabase DB] ← messages + embeddings + bot_interactions
       ↑ writes                    ↓ reads
-campora-ai-scrapper          campora-ai-helper (this repo)
+campora-ai-scraper          campora-ai-helper (this repo)
 (Telethon userbot)          (python-telegram-bot)
 ```
 
