@@ -1,5 +1,5 @@
 -- Opt-out support: users can request their messages be excluded from search.
--- The scrapper (vectir-ai-scrapper) should also check this table before ingesting
+-- The scrapper (campora-ai-scrapper) should also check this table before ingesting
 -- new messages: skip any message where author is in opted_out_users.
 
 CREATE TABLE IF NOT EXISTS public.opted_out_users (

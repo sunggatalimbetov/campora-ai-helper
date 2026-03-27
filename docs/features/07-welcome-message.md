@@ -28,7 +28,7 @@ Keep it concise — max 5-6 lines to avoid being intrusive.
 
 ```python
 WELCOME_NOTICE = (
-    "👋 Привет! Я Vectir AI — помогаю находить ответы на вопросы "
+    "👋 Привет! Я Campora AI — помогаю находить ответы на вопросы "
     "по истории переписки этой группы.\n\n"
     "Как использовать:\n"
     "• /ask <вопрос> — задать вопрос\n"

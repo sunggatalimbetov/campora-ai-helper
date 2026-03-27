@@ -6,13 +6,13 @@ Currently the bot can only be used in groups where it's been added as a member, 
 
 ## Solution
 
-Implement Telegram's inline mode, allowing users to type `@vectir_bot <question>` in any chat to get a quick answer without the bot being a member of that group.
+Implement Telegram's inline mode, allowing users to type `@campora_ai_bot <question>` in any chat to get a quick answer without the bot being a member of that group.
 
 ## Technical Design
 
 ### How Inline Mode Works
 
-1. User types `@vectir_bot when is the exam?` in any chat
+1. User types `@campora_ai_bot when is the exam?` in any chat
 2. Telegram sends an `InlineQuery` to the bot
 3. Bot searches and returns results as `InlineQueryResult` cards
 4. User selects a result → it gets posted in the chat
@@ -57,7 +57,7 @@ async def inline_query_handler(update: Update, context: ContextTypes.DEFAULT_TYP
         inline_results = [
             InlineQueryResultArticle(
                 id=str(uuid4()),
-                title="Vectir AI Answer",
+                title="Campora AI Answer",
                 description=answer[:100] + "..." if len(answer) > 100 else answer,
                 input_message_content=InputTextMessageContent(answer),
             )
