@@ -42,6 +42,8 @@ Instructions:
 - Write your response in the language requested below
 - Do NOT include any links in your answer - they will be added automatically"""
 
+_GROUP_CHAT_TYPES = {"group", "supergroup", "channel"}
+
 GROUP_PROMPT_ADDENDUM = """
 IMPORTANT — Group chat mode:
 You are answering in a group chat. Keep your response very concise:
@@ -109,7 +111,7 @@ def generate_answer(
 
     system_content = f"{SYSTEM_PROMPT}\n\nAnswer language: {answer_language}\n\nInformation:\n{context}"
 
-    if chat_type != "private":
+    if chat_type in _GROUP_CHAT_TYPES:
         system_content += GROUP_PROMPT_ADDENDUM
 
     messages: list[dict] = [{"role": "system", "content": system_content}]
