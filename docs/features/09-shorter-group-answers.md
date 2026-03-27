@@ -90,4 +90,4 @@ answer, tokens_used = generate_answer(query, results, history, chat_type=chat_ty
 
 ## Status
 
-Planned
+Implemented

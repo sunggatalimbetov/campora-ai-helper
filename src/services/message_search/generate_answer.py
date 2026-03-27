@@ -42,6 +42,15 @@ Instructions:
 - Write your response in the language requested below
 - Do NOT include any links in your answer - they will be added automatically"""
 
+_GROUP_CHAT_TYPES = {"group", "supergroup", "channel"}
+
+GROUP_PROMPT_ADDENDUM = """
+IMPORTANT — Group chat mode:
+You are answering in a group chat. Keep your response very concise:
+- Maximum 2-3 sentences
+- Give the direct answer only, no elaboration
+- If the topic is complex, give the short answer and suggest the user message you directly for a detailed response"""
+
 
 def _strip_references(answer: str) -> str:
     """Strip the references section appended to prior answers.
@@ -92,6 +101,7 @@ def generate_answer(
     results: list,
     conversation_history: Optional[List[ConversationTurn]] = None,
     answer_language: str = "ru",
+    chat_type: str = "private",
 ) -> tuple[str, int]:
     """Generate answer using OpenAI based on search results and conversation history."""
     if not results:
@@ -100,6 +110,9 @@ def generate_answer(
     context, question_results, reply_results = _build_context(results)
 
     system_content = f"{SYSTEM_PROMPT}\n\nAnswer language: {answer_language}\n\nInformation:\n{context}"
+
+    if chat_type in _GROUP_CHAT_TYPES:
+        system_content += GROUP_PROMPT_ADDENDUM
 
     messages: list[dict] = [{"role": "system", "content": system_content}]
 
@@ -115,8 +128,12 @@ def generate_answer(
     answer: str = response.choices[0].message.content.strip()
     tokens_used: int = response.usage.total_tokens
 
-    references: str = "\n\nReferences"
-    for i, msg in enumerate(question_results, 1):
-        references += f"\n{i}) {msg['link']}"
+    if chat_type == "private":
+        references = "\n\nReferences"
+        for i, msg in enumerate(question_results, 1):
+            references += f"\n{i}) {msg['link']}"
+    else:
+        top_refs = question_results[:2]
+        references = "\n\nRef: " + " | ".join(msg["link"] for msg in top_refs) if top_refs else ""
 
     return answer + references, tokens_used

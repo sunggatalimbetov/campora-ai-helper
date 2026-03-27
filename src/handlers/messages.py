@@ -54,7 +54,7 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 )
                 return
 
-            answer, tokens_used = generate_answer(query, results, conversation_history=history, answer_language=ui_language)
+            answer, tokens_used = generate_answer(query, results, conversation_history=history, answer_language=ui_language, chat_type="private")
 
             referenced_message_ids = [msg.get("id") for msg in results if msg.get("id")]
             similarity_scores = [msg.get("similarity") for msg in results if msg.get("similarity")]
