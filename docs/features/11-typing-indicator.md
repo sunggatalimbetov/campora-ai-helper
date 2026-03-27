@@ -74,4 +74,4 @@ However, this adds complexity. Start simple (single typing action) and only add 
 
 ## Status
 
-Planned
+Implemented
