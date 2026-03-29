@@ -32,9 +32,21 @@ class TrimAnswerForHistoryTests(unittest.TestCase):
         answer = "Quick answer about deadlines."
         self.assertEqual(trim_answer_for_history(answer), answer)
 
+    def test_preserves_answer_at_exact_boundary(self):
+        answer = "x" * 40
+        self.assertEqual(trim_answer_for_history(answer, max_chars=40), answer)
+
     def test_strips_references_before_truncation(self):
         answer = "Core answer text.\n\n📎 Sources:\n1. [preview](https://t.me/c/1/1)"
         self.assertEqual(trim_answer_for_history(answer), "Core answer text.")
+
+    def test_strips_references_and_still_truncates_long_body(self):
+        answer = ("word " * 20) + "\n\n📎 Sources:\n1. [preview](https://t.me/c/1/1)"
+        trimmed = trim_answer_for_history(answer, max_chars=40)
+        self.assertTrue(trimmed.endswith("..."))
+        self.assertLessEqual(len(trimmed), 43)
+        self.assertNotIn("📎 Sources:", trimmed)
+        self.assertNotIn("https://t.me/c/1/1", trimmed)
 
     def test_truncates_long_answer_at_word_boundary(self):
         answer = "word " * 100
