@@ -115,7 +115,7 @@ def main():
                 )
             )
             app.add_handler(CallbackQueryHandler(feedback_callback_handler, pattern="^feedback:"))
-            app.add_handler(CallbackQueryHandler(language_callback_handler, pattern="^language:"))
+            app.add_handler(CallbackQueryHandler(language_callback_handler, pattern=r"^(language:|onboard:group:|onboard:language:)"))
             app.add_handler(ChatMemberHandler(track_chat_member, ChatMemberHandler.MY_CHAT_MEMBER))
 
             # Add error handler

@@ -9,7 +9,7 @@ from src.services.language import get_string, resolve_ui_language
 from src.services.message_search import generate_answer, search_messages
 from src.services.message_search.rewrite_query import rewrite_query
 from src.services.rate_limiter import rate_limiter
-from src.services.user_preferences import get_user_language
+from src.services.user_preferences import get_user_language, get_user_preferences, resolve_selected_group_chat_id
 from src.utils.split_message import split_message
 
 
@@ -27,8 +27,10 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.message.text.strip()
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
-    preferred_language = get_user_language(user_id)
+    preferences = get_user_preferences(user_id)
+    preferred_language = preferences.get("language") if preferences else get_user_language(user_id)
     ui_language = resolve_ui_language(preferred_language, query, update.effective_user.language_code)
+    search_chat_id = resolve_selected_group_chat_id(preferences)
 
     if not rate_limiter.is_allowed(user_id, chat_id):
         await update.message.reply_text(get_string(ui_language, "rate_limited"))
@@ -41,7 +43,7 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             history, session_id = load_conversation_history(user_id, chat_id)
             search_query = rewrite_query(query, history)
 
-            results, query_embedding = search_messages(search_query)
+            results, query_embedding = search_messages(search_query, chat_id=search_chat_id)
             if not results:
                 no_results_message = get_string(ui_language, "no_results")
                 await update.message.reply_text(no_results_message)
