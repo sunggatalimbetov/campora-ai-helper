@@ -8,10 +8,19 @@ supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 
 def get_all_universities() -> list[tuple[str, str]]:
-    """Return [(id, label), ...] from the universities table, ordered by id."""
+    """Return [(id, label), ...] for universities that have at least one chat mapping, ordered by id."""
     try:
-        result = supabase.table("universities").select("id, label").order("id").execute()
-        return [(row["id"], row["label"]) for row in result.data]
+        result = (
+            supabase.table("universities")
+            .select("id, label, university_chats(chat_id)")
+            .order("id")
+            .execute()
+        )
+        return [
+            (row["id"], row["label"])
+            for row in result.data
+            if row.get("university_chats")
+        ]
     except Exception as e:
         print(f"Error fetching universities: {e}")
         return []
