@@ -5,7 +5,8 @@ from typing import Any, Optional
 
 from supabase import Client, create_client
 
-from src.config.settings import ONBOARDING_GROUP_CHAT_IDS, SUPABASE_SERVICE_KEY, SUPABASE_URL
+from src.config.settings import SUPABASE_SERVICE_KEY, SUPABASE_URL
+from src.services import university_service
 from src.services.language import DEFAULT_LANGUAGE, normalize_language_code
 
 supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
@@ -29,7 +30,7 @@ def get_user_language(user_id: int) -> Optional[str]:
     return normalize_language_code(preferences.get("language"))
 
 
-def resolve_selected_group_chat_id(preferences: Optional[dict[str, Any]]) -> Optional[int]:
+def resolve_selected_group_chat_ids(preferences: Optional[dict[str, Any]]) -> Optional[list[int]]:
     if not preferences:
         return None
 
@@ -37,12 +38,13 @@ def resolve_selected_group_chat_id(preferences: Optional[dict[str, Any]]) -> Opt
     if not isinstance(selected_group, str):
         return None
 
-    return ONBOARDING_GROUP_CHAT_IDS.get(selected_group.strip().lower())
+    chat_ids = university_service.get_chat_ids_for_university(selected_group.strip().lower())
+    return chat_ids if chat_ids else None
 
 
 def save_user_group(user_id: int, selected_group: str) -> dict[str, Any]:
     normalized_group = selected_group.strip().lower()
-    if normalized_group not in ONBOARDING_GROUP_CHAT_IDS:
+    if not university_service.get_chat_ids_for_university(normalized_group):
         raise ValueError(f"Unsupported onboarding group: {selected_group}")
 
     result = (

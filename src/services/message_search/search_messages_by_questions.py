@@ -7,7 +7,7 @@ from src.services.message_search._clients import supabase
 def search_messages_by_questions(
     query_embedding: List[float],
     count: int = 5,
-    chat_id: int | None = None,
+    chat_ids: list[int] | None = None,
 ) -> List[MessageDict]:
     """
     Search both messages and message_questions embeddings.
@@ -21,8 +21,8 @@ def search_messages_by_questions(
             "query_embedding": query_embedding,
             "match_count": count,
         }
-        if chat_id is not None:
-            params["filter_chat_id"] = chat_id
+        if chat_ids is not None:
+            params["filter_chat_ids"] = chat_ids
 
         resp = supabase.rpc("match_messages_and_questions", params).execute()
 

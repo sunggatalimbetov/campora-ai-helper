@@ -17,7 +17,7 @@ def search_messages_hybrid(
     count: int = 5,
     semantic_weight: float = 0.5,
     full_text_weight: float = 0.5,
-    chat_id: int | None = None,
+    chat_ids: list[int] | None = None,
 ) -> Tuple[List[MessageDict], List[float]]:
     """
     Hybrid search combining vector similarity and full-text search via RRF.
@@ -35,10 +35,10 @@ def search_messages_hybrid(
             "full_text_weight": full_text_weight,
             "rrf_k": RRF_K,
         }
-        if chat_id is not None:
-            params["filter_chat_id"] = chat_id
+        if chat_ids is not None:
+            params["filter_chat_ids"] = chat_ids
 
-        print(f"🔍 hybrid_search params: filter_chat_id={params.get('filter_chat_id')}, type={type(chat_id)}")
+        print(f"🔍 hybrid_search params: filter_chat_ids={params.get('filter_chat_ids')}")
         resp = supabase.rpc("hybrid_search", params).execute()
 
         results = resp.data
@@ -74,4 +74,4 @@ def search_messages_hybrid(
 
     except Exception as e:
         print(f"Error in hybrid search: {e}, falling back to semantic-only")
-        return search_messages_semantic_only(query, count, chat_id=chat_id)
+        return search_messages_semantic_only(query, count, chat_ids=chat_ids)

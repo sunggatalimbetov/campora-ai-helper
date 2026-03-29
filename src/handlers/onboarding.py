@@ -6,12 +6,11 @@ from src.services.onboarding_options import (
     ONBOARD_GROUP_CALLBACK_PREFIX,
     ONBOARD_LANGUAGE_CALLBACK_PREFIX,
     create_group_keyboard,
-    get_available_onboarding_groups,
     resolve_group_selection_state,
 )
 from src.services.telegram_commands import register_private_chat_commands
 from src.services.user_preferences import get_user_language, get_user_preferences, save_user_group, save_user_language
-from src.config.settings import ONBOARDING_GROUP_LABELS
+from src.services import university_service
 
 LANGUAGE_CALLBACK_PREFIX = "language:"
 
@@ -41,13 +40,23 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(get_string(ui_language, "start_group"))
         return
 
+    await register_private_chat_commands(context.application, update.effective_chat.id, ui_language)
+    available_groups = university_service.get_all_universities()
+
     if preferences and preferences.get("onboarded_at"):
-        await register_private_chat_commands(context.application, update.effective_chat.id, ui_language)
+        selected_group = preferences.get("selected_group")
+        resolved_group, should_prompt_for_group = resolve_group_selection_state(selected_group, available_groups)
+        if should_prompt_for_group:
+            await update.message.reply_text(
+                get_string(ui_language, "choose_group"),
+                reply_markup=create_group_keyboard(available_groups),
+            )
+            return
+        if resolved_group and resolved_group != selected_group:
+            save_user_group(user.id, resolved_group)
         await update.message.reply_text(get_string(ui_language, "start_ready"))
         return
 
-    await register_private_chat_commands(context.application, update.effective_chat.id, ui_language)
-    available_groups = get_available_onboarding_groups()
     selected_group = preferences.get("selected_group") if preferences else None
     resolved_group, should_prompt_for_group = resolve_group_selection_state(selected_group, available_groups)
 
@@ -101,7 +110,7 @@ async def onboarding_group_callback_handler(update: Update, context: ContextType
         telegram_language_code=query.from_user.language_code,
     )
     await query.edit_message_text(
-        f"{get_string(ui_language, 'group_updated', group_label=ONBOARDING_GROUP_LABELS.get(selected_group, selected_group.upper()))}\n\n"
+        f"{get_string(ui_language, 'group_updated', group_label=university_service.get_university_label(selected_group))}\n\n"
         f"{get_string(ui_language, 'choose_language')}",
         reply_markup=create_language_keyboard(prefix=ONBOARD_LANGUAGE_CALLBACK_PREFIX),
     )
