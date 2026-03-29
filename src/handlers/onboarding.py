@@ -45,13 +45,15 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     if preferences and preferences.get("onboarded_at"):
         selected_group = preferences.get("selected_group")
-        _, should_prompt_for_group = resolve_group_selection_state(selected_group, available_groups)
+        resolved_group, should_prompt_for_group = resolve_group_selection_state(selected_group, available_groups)
         if should_prompt_for_group:
             await update.message.reply_text(
                 get_string(ui_language, "choose_group"),
                 reply_markup=create_group_keyboard(available_groups),
             )
             return
+        if resolved_group and resolved_group != selected_group:
+            save_user_group(user.id, resolved_group)
         await update.message.reply_text(get_string(ui_language, "start_ready"))
         return
 
