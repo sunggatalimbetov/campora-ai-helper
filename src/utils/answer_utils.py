@@ -8,6 +8,7 @@ from __future__ import annotations
 
 
 _REFERENCE_MARKERS = ("\n\n📎 Sources:", "\n\n📎 Источники:", "\n\n📎 Дереккөздер:", "\n\nReferences")
+_HISTORY_ANSWER_MAX_CHARS = 300
 
 
 def strip_references(answer: str) -> str:
@@ -16,6 +17,16 @@ def strip_references(answer: str) -> str:
         if marker in answer:
             return answer[: answer.index(marker)]
     return answer
+
+
+def trim_answer_for_history(answer: str, max_chars: int = _HISTORY_ANSWER_MAX_CHARS) -> str:
+    """Strip references and cap prior assistant answers used as prompt history."""
+    trimmed = strip_references(answer)
+    if len(trimmed) <= max_chars:
+        return trimmed
+
+    truncated = trimmed[:max_chars].rsplit(" ", 1)[0]
+    return (truncated or trimmed[:max_chars]) + "..."
 
 
 GROUP_CHAT_TYPES = {"group", "supergroup", "channel"}

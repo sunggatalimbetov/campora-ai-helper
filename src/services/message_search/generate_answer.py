@@ -3,7 +3,7 @@ from typing import List, Optional
 from src.models.message import MessageDict
 from src.services.conversation import ConversationTurn
 from src.services.message_search._clients import client_oa
-from src.utils.answer_utils import GROUP_CHAT_TYPES, build_references, strip_references
+from src.utils.answer_utils import GROUP_CHAT_TYPES, build_references, trim_answer_for_history
 
 SYSTEM_PROMPT = """\
 You are a helpful assistant for university students.
@@ -108,7 +108,7 @@ def generate_answer(
     if conversation_history:
         for turn in conversation_history:
             messages.append({"role": "user", "content": turn.query})
-            messages.append({"role": "assistant", "content": strip_references(turn.answer)})
+            messages.append({"role": "assistant", "content": trim_answer_for_history(turn.answer)})
 
     messages.append({"role": "user", "content": query})
 
