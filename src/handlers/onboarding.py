@@ -2,8 +2,16 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
 
 from src.services.language import DEFAULT_LANGUAGE, get_language_label, get_string, normalize_language_code, resolve_ui_language
+from src.services.onboarding_options import (
+    ONBOARD_GROUP_CALLBACK_PREFIX,
+    ONBOARD_LANGUAGE_CALLBACK_PREFIX,
+    create_group_keyboard,
+    get_available_onboarding_groups,
+    resolve_group_selection_state,
+)
 from src.services.telegram_commands import register_private_chat_commands
-from src.services.user_preferences import get_user_language, get_user_preferences, save_user_language
+from src.services.user_preferences import get_user_language, get_user_preferences, save_user_group, save_user_language
+from src.config.settings import ONBOARDING_GROUP_LABELS
 
 LANGUAGE_CALLBACK_PREFIX = "language:"
 
@@ -39,9 +47,23 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
 
     await register_private_chat_commands(context.application, update.effective_chat.id, ui_language)
+    available_groups = get_available_onboarding_groups()
+    selected_group = preferences.get("selected_group") if preferences else None
+    resolved_group, should_prompt_for_group = resolve_group_selection_state(selected_group, available_groups)
+
+    if should_prompt_for_group:
+        await update.message.reply_text(
+            f"{get_string(ui_language, 'start_welcome')}\n\n{get_string(ui_language, 'choose_group')}",
+            reply_markup=create_group_keyboard(available_groups),
+        )
+        return
+
+    if resolved_group and resolved_group != selected_group:
+        save_user_group(user.id, resolved_group)
+
     await update.message.reply_text(
         f"{get_string(ui_language, 'start_welcome')}\n\n{get_string(ui_language, 'choose_language')}",
-        reply_markup=create_language_keyboard(),
+        reply_markup=create_language_keyboard(prefix=ONBOARD_LANGUAGE_CALLBACK_PREFIX),
     )
 
 
@@ -59,12 +81,41 @@ async def language_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
-async def language_callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    """Handle onboarding and /language inline button clicks."""
+async def onboarding_group_callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handle onboarding group selection callbacks."""
     query = update.callback_query
     await query.answer()
 
-    _, selected_language = query.data.split(":", 1)
+    selected_group = query.data.removeprefix(ONBOARD_GROUP_CALLBACK_PREFIX)
+    try:
+        save_user_group(query.from_user.id, selected_group)
+    except Exception as e:
+        fallback_language = resolve_ui_language(None, telegram_language_code=query.from_user.language_code)
+        print(f"Error saving user group: {e}")
+        await query.edit_message_text(get_string(fallback_language, "error"))
+        return
+
+    preferences = get_user_preferences(query.from_user.id)
+    ui_language = resolve_ui_language(
+        preferences.get("language") if preferences else None,
+        telegram_language_code=query.from_user.language_code,
+    )
+    await query.edit_message_text(
+        f"{get_string(ui_language, 'group_updated', group_label=ONBOARDING_GROUP_LABELS.get(selected_group, selected_group.upper()))}\n\n"
+        f"{get_string(ui_language, 'choose_language')}",
+        reply_markup=create_language_keyboard(prefix=ONBOARD_LANGUAGE_CALLBACK_PREFIX),
+    )
+
+
+async def language_callback_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handle onboarding language selection and /language inline button clicks."""
+    query = update.callback_query
+    await query.answer()
+
+    if query.data.startswith(ONBOARD_LANGUAGE_CALLBACK_PREFIX):
+        selected_language = query.data.removeprefix(ONBOARD_LANGUAGE_CALLBACK_PREFIX)
+    else:
+        selected_language = query.data.removeprefix(LANGUAGE_CALLBACK_PREFIX)
     normalized_language = normalize_language_code(selected_language) or DEFAULT_LANGUAGE
     try:
         save_user_language(query.from_user.id, normalized_language)

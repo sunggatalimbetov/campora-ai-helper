@@ -44,10 +44,11 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "start_ready": "👋 С возвращением! Просто напиши свой вопрос.",
         "start_welcome": (
             "👋 Привет! Я Campora AI.\n\n"
-            "Помогаю искать ответы по истории университетских чатов. "
-            "Сначала выбери язык интерфейса."
+            "Помогаю искать ответы по истории университетских чатов."
         ),
+        "choose_group": "Сначала выбери свой университет:",
         "choose_language": "Выбери язык интерфейса:",
+        "group_updated": "✅ Университет выбран: {group_label}.",
         "language_command": "🌐 *Язык интерфейса*\n\nСейчас: *{language_label}*\n\nВыбери новый язык:",
         "language_updated": "✅ Язык интерфейса изменён на {language_label}.",
         "rate_limited": "⏳ Слишком много запросов. Подожди немного перед следующим вопросом.",
@@ -87,10 +88,11 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "start_ready": "👋 Қайта келгеніңізге қуаныштымын! Сұрағыңызды жаза беріңіз.",
         "start_welcome": (
             "👋 Сәлем! Мен Campora AI.\n\n"
-            "Университет чаттарының тарихынан жауап табуға көмектесемін. "
-            "Алдымен интерфейс тілін таңдаңыз."
+            "Университет чаттарының тарихынан жауап табуға көмектесемін."
         ),
+        "choose_group": "Алдымен университетіңізді таңдаңыз:",
         "choose_language": "Интерфейс тілін таңдаңыз:",
+        "group_updated": "✅ Университет таңдалды: {group_label}.",
         "language_command": "🌐 *Интерфейс тілі*\n\nҚазір: *{language_label}*\n\nЖаңа тілді таңдаңыз:",
         "language_updated": "✅ Интерфейс тілі {language_label} болып өзгертілді.",
         "rate_limited": "⏳ Сұраулар тым көп. Келесі сұрақ алдында аздап күтіңіз.",
@@ -130,10 +132,11 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "start_ready": "👋 Welcome back! Just send your question.",
         "start_welcome": (
             "👋 Hi! I'm Campora AI.\n\n"
-            "I help find answers from university chat history. "
-            "First, choose your interface language."
+            "I help find answers from university chat history."
         ),
+        "choose_group": "First, choose your university:",
         "choose_language": "Choose your interface language:",
+        "group_updated": "✅ University selected: {group_label}.",
         "language_command": "🌐 *Interface Language*\n\nCurrent: *{language_label}*\n\nChoose a new language:",
         "language_updated": "✅ Interface language changed to {language_label}.",
         "rate_limited": "⏳ Too many requests. Please wait a bit before asking again.",
