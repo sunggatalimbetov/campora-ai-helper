@@ -28,7 +28,7 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
     preferences = get_user_preferences(user_id)
-    preferred_language = preferences.get("language") if preferences else get_user_language(user_id)
+    preferred_language = preferences.get("language") if preferences else None
     ui_language = resolve_ui_language(preferred_language, query, update.effective_user.language_code)
     search_chat_id = resolve_selected_group_chat_id(preferences)
 

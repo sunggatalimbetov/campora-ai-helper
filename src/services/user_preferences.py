@@ -42,6 +42,9 @@ def resolve_selected_group_chat_id(preferences: Optional[dict[str, Any]]) -> Opt
 
 def save_user_group(user_id: int, selected_group: str) -> dict[str, Any]:
     normalized_group = selected_group.strip().lower()
+    if normalized_group not in ONBOARDING_GROUP_CHAT_IDS:
+        raise ValueError(f"Unsupported onboarding group: {selected_group}")
+
     result = (
         supabase.table("user_preferences")
         .upsert(

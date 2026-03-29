@@ -25,7 +25,7 @@ from src.config.settings import (
 from src.handlers.commands import ask_command, help_command, new_command, optin_command, optout_command
 from src.handlers.feedback import feedback_callback_handler
 from src.handlers.messages import dm_handler
-from src.handlers.onboarding import language_callback_handler, language_command, start_command
+from src.handlers.onboarding import language_callback_handler, language_command, onboarding_group_callback_handler, start_command
 from src.services.telegram_commands import register_default_bot_commands
 
 # Add logging configuration
@@ -115,7 +115,8 @@ def main():
                 )
             )
             app.add_handler(CallbackQueryHandler(feedback_callback_handler, pattern="^feedback:"))
-            app.add_handler(CallbackQueryHandler(language_callback_handler, pattern=r"^(language:|onboard:group:|onboard:language:)"))
+            app.add_handler(CallbackQueryHandler(onboarding_group_callback_handler, pattern=r"^onboard:group:"))
+            app.add_handler(CallbackQueryHandler(language_callback_handler, pattern=r"^(language:|onboard:language:)"))
             app.add_handler(ChatMemberHandler(track_chat_member, ChatMemberHandler.MY_CHAT_MEMBER))
 
             # Add error handler

@@ -17,6 +17,17 @@ def get_available_onboarding_groups() -> list[tuple[str, str]]:
     return groups
 
 
+def resolve_group_selection_state(selected_group: str | None, available_groups: list[tuple[str, str]]) -> tuple[str | None, bool]:
+    available_group_ids = {group_id for group_id, _ in available_groups}
+    if selected_group in available_group_ids:
+        return selected_group, False
+    if len(available_groups) == 1:
+        return available_groups[0][0], False
+    if len(available_groups) > 1:
+        return None, True
+    return None, False
+
+
 def create_group_keyboard(groups: list[tuple[str, str]] | None = None) -> InlineKeyboardMarkup:
     available_groups = groups or get_available_onboarding_groups()
     return InlineKeyboardMarkup(

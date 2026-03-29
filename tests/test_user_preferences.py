@@ -23,5 +23,12 @@ class ResolveSelectedGroupChatIdTests(unittest.TestCase):
         self.assertEqual(chat_id, 123)
 
 
+class SaveUserGroupValidationTests(unittest.TestCase):
+    def test_raises_for_unknown_group(self):
+        with patch.object(user_preferences, "ONBOARDING_GROUP_CHAT_IDS", {"nu": 123}):
+            with self.assertRaises(ValueError):
+                user_preferences.save_user_group(1, "unime")
+
+
 if __name__ == "__main__":
     unittest.main()
