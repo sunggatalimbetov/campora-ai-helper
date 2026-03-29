@@ -11,7 +11,7 @@ from src.services.onboarding_options import (
 )
 from src.services.telegram_commands import register_private_chat_commands
 from src.services.user_preferences import get_user_language, get_user_preferences, save_user_group, save_user_language
-from src.config.settings import ONBOARDING_GROUP_LABELS
+from src.services import university_service
 
 LANGUAGE_CALLBACK_PREFIX = "language:"
 
@@ -101,7 +101,7 @@ async def onboarding_group_callback_handler(update: Update, context: ContextType
         telegram_language_code=query.from_user.language_code,
     )
     await query.edit_message_text(
-        f"{get_string(ui_language, 'group_updated', group_label=ONBOARDING_GROUP_LABELS.get(selected_group, selected_group.upper()))}\n\n"
+        f"{get_string(ui_language, 'group_updated', group_label=university_service.get_university_label(selected_group))}\n\n"
         f"{get_string(ui_language, 'choose_language')}",
         reply_markup=create_language_keyboard(prefix=ONBOARD_LANGUAGE_CALLBACK_PREFIX),
     )

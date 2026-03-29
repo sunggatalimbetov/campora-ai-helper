@@ -2,19 +2,14 @@ from __future__ import annotations
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 
-from src.config.settings import ONBOARDING_GROUP_CHAT_IDS, ONBOARDING_GROUP_LABELS
+from src.services import university_service
 
 ONBOARD_GROUP_CALLBACK_PREFIX = "onboard:group:"
 ONBOARD_LANGUAGE_CALLBACK_PREFIX = "onboard:language:"
 
 
 def get_available_onboarding_groups() -> list[tuple[str, str]]:
-    preferred_order = ("unime", "nu")
-    groups: list[tuple[str, str]] = []
-    for group_id in preferred_order:
-        if group_id in ONBOARDING_GROUP_CHAT_IDS:
-            groups.append((group_id, ONBOARDING_GROUP_LABELS.get(group_id, group_id.upper())))
-    return groups
+    return university_service.get_all_universities()
 
 
 def resolve_group_selection_state(selected_group: str | None, available_groups: list[tuple[str, str]]) -> tuple[str | None, bool]:

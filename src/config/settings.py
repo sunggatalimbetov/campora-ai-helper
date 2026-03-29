@@ -53,27 +53,3 @@ except (ValueError, TypeError) as e:
 print(f"🔧 SEARCH_SOURCE_OVERRIDES = {SEARCH_SOURCE_OVERRIDES}")
 
 
-def _parse_optional_chat_id(env_name: str) -> int | None:
-    raw_value = os.getenv(env_name)
-    if not raw_value:
-        return None
-
-    try:
-        return int(raw_value)
-    except ValueError:
-        print(f"⚠️ Failed to parse {env_name}: {raw_value!r}")
-        return None
-
-
-ONBOARDING_GROUP_LABELS: dict[str, str] = {
-    "unime": "UNIME",
-    "nu": "NU",
-}
-ONBOARDING_GROUP_CHAT_IDS: dict[str, int] = {
-    group_id: chat_id
-    for group_id, chat_id in {
-        "unime": _parse_optional_chat_id("UNIME_SEARCH_CHAT_ID"),
-        "nu": _parse_optional_chat_id("NU_SEARCH_CHAT_ID"),
-    }.items()
-    if chat_id is not None
-}

@@ -45,7 +45,7 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
             history, session_id = load_conversation_history(user_id, chat_id)
             search_query = rewrite_query(query, history)
 
-            results, query_embedding = search_messages(search_query, chat_id=search_chat_id)
+            results, query_embedding = search_messages(search_query, chat_ids=[search_chat_id])
             if not results:
                 no_results_message = get_string(ui_language, "no_results")
                 await update.message.reply_text(no_results_message)

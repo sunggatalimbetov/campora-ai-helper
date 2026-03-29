@@ -69,7 +69,7 @@ def _merge_results(
 def search_messages(
     query: str,
     count: int = 5,
-    chat_id: int | None = None,
+    chat_ids: list[int] | None = None,
 ) -> tuple[List[MessageDict], List[float]]:
     """
     Search for messages using hybrid search (vector + full-text) with dynamic weights,
@@ -84,14 +84,14 @@ def search_messages(
             count=count,
             semantic_weight=semantic_weight,
             full_text_weight=full_text_weight,
-            chat_id=chat_id,
+            chat_ids=chat_ids,
         )
     else:
-        results, query_embedding = search_messages_semantic_only(query, count, chat_id=chat_id)
+        results, query_embedding = search_messages_semantic_only(query, count, chat_ids=chat_ids)
 
     # Also search via hypothetical question embeddings
     print("🔍 Searching message_questions...")
-    question_results = search_messages_by_questions(query_embedding, count=count, chat_id=chat_id)
+    question_results = search_messages_by_questions(query_embedding, count=count, chat_ids=chat_ids)
 
     # Merge hybrid + question results
     if question_results:
