@@ -6,7 +6,6 @@ from src.services.onboarding_options import (
     ONBOARD_GROUP_CALLBACK_PREFIX,
     ONBOARD_LANGUAGE_CALLBACK_PREFIX,
     create_group_keyboard,
-    get_available_onboarding_groups,
     resolve_group_selection_state,
 )
 from src.services.telegram_commands import register_private_chat_commands
@@ -41,13 +40,21 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text(get_string(ui_language, "start_group"))
         return
 
+    await register_private_chat_commands(context.application, update.effective_chat.id, ui_language)
+    available_groups = university_service.get_all_universities()
+
     if preferences and preferences.get("onboarded_at"):
-        await register_private_chat_commands(context.application, update.effective_chat.id, ui_language)
+        selected_group = preferences.get("selected_group")
+        _, should_prompt_for_group = resolve_group_selection_state(selected_group, available_groups)
+        if should_prompt_for_group:
+            await update.message.reply_text(
+                get_string(ui_language, "choose_group"),
+                reply_markup=create_group_keyboard(available_groups),
+            )
+            return
         await update.message.reply_text(get_string(ui_language, "start_ready"))
         return
 
-    await register_private_chat_commands(context.application, update.effective_chat.id, ui_language)
-    available_groups = get_available_onboarding_groups()
     selected_group = preferences.get("selected_group") if preferences else None
     resolved_group, should_prompt_for_group = resolve_group_selection_state(selected_group, available_groups)
 
