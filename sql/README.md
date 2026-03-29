@@ -23,7 +23,13 @@ Migrations live in **`../supabase/migrations/`**:
 - `20260214120000_add_hybrid_search.sql` – adds `text_search` tsvector column, GIN index, trigger, and `hybrid_search` RPC for vector + full-text search
 - `20260214200000_add_question_generation.sql` – creates `message_questions` table, ivfflat + message_id indexes, and `match_messages_and_questions` RPC
 - `20260214210000_add_bot_interactions.sql` – creates `bot_interactions` table for storing user queries, bot responses, and like/dislike feedback
+- `20260214220000_add_opted_out_users.sql` – creates `opted_out_users` for search opt-out support
 - `202603260001_group_scoped_search.sql` – adds optional `filter_chat_id` parameters to retrieval RPCs so group queries stay inside their own chat
+- `202603280001_add_user_preferences.sql` – creates `user_preferences` for language and onboarding state
+- `202603280002_default_user_preferences_language_to_english.sql` – backfills missing user preference language values to `en`
+- `202603290001_add_universities_and_chats.sql` – creates `universities` and `university_chats` for DB-backed university selection
+- `202603290002_array_chat_id_filter.sql` – updates retrieval RPCs to accept `BIGINT[]` chat filters
+- `202603300001_enable_rls.sql` – enables RLS on helper-owned tables; service-role access still works
 
 ---
 
@@ -37,6 +43,11 @@ Migrations live in **`../supabase/migrations/`**:
     - Paste the contents of `004_bot_interactions.sql` and click **Run**.
     - Paste the contents of `005_opted_out_users.sql` and click **Run**.
     - Paste the contents of `006_group_scoped_search.sql` and click **Run**.
+    - Paste the contents of `007_user_preferences.sql` and click **Run**.
+    - Paste the contents of `008_default_user_preferences_language_to_english.sql` and click **Run**.
+    - Paste the contents of `009_universities_and_chats.sql` and click **Run**.
+    - Paste the contents of `010_array_chat_id_filter.sql` and click **Run**.
+    - Paste the contents of `011_enable_rls.sql` and click **Run**.
 
 ---
 
