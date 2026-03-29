@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from src.utils.answer_utils import strip_references
+from src.utils.answer_utils import strip_references, trim_answer_for_history
 
 
 class StripReferencesTests(unittest.TestCase):
@@ -25,6 +25,27 @@ class StripReferencesTests(unittest.TestCase):
         long_body = "word " * 200
         refs = "\n\nReferences\n1) https://t.me/c/1/1"
         self.assertEqual(strip_references(long_body + refs), long_body)
+
+
+class TrimAnswerForHistoryTests(unittest.TestCase):
+    def test_keeps_short_answer_unchanged(self):
+        answer = "Quick answer about deadlines."
+        self.assertEqual(trim_answer_for_history(answer), answer)
+
+    def test_strips_references_before_truncation(self):
+        answer = "Core answer text.\n\n📎 Sources:\n1. [preview](https://t.me/c/1/1)"
+        self.assertEqual(trim_answer_for_history(answer), "Core answer text.")
+
+    def test_truncates_long_answer_at_word_boundary(self):
+        answer = "word " * 100
+        trimmed = trim_answer_for_history(answer, max_chars=40)
+        self.assertTrue(trimmed.endswith("..."))
+        self.assertLessEqual(len(trimmed), 43)
+        self.assertNotIn("\n\nReferences", trimmed)
+
+    def test_falls_back_to_hard_cut_when_no_spaces_exist(self):
+        answer = "x" * 50
+        self.assertEqual(trim_answer_for_history(answer, max_chars=10), "xxxxxxxxxx...")
 
 
 if __name__ == "__main__":
