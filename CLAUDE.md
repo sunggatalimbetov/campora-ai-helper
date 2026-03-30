@@ -49,10 +49,12 @@ campora-ai-scrapper          campora-ai-helper (this repo)
 - Python: follow existing code style (200 char line length, black formatting)
 
 ## Current State
-- Bot works in DMs only (group mentions not yet implemented)
-- Search returns results from ALL groups (not scoped by chat_id yet)
-- messages table has no created_at column yet
-- /optout and /optin commands exist on feat/optout-command branch
+- Bot works in DMs and group mentions (group mention handler shipped)
+- Search is scoped by chat_id via DB-driven university/chat mapping (PR #36)
+- Onboarding flow ships — users pick university on /start, preferences stored in DB
+- /optout and /optin commands shipped
+- Rate limiting, typing indicator, language-aware UI, smarter references all shipped
+- Next: /settings command (feature 18) — lets users change university/language post-onboarding
 
 ## Target Users
 Kazakh and CIS university students. Groups are in Russian, Kazakh, and English. The bot must handle all three languages.
