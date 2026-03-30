@@ -1,16 +1,20 @@
+import asyncio
+
 from telegram import Update
-from telegram.error import BadRequest
 from telegram.ext import ContextTypes
 
 from src.handlers.feedback import create_feedback_keyboard
 from src.services.conversation import load_conversation_history
 from src.services.interaction_logger import InteractionLogger, ResponseTimer
 from src.services.language import get_string, resolve_ui_language
-from src.services.message_search import generate_answer, search_messages
+from src.services.message_search import search_messages
+from src.services.message_search.generate_answer import is_declined
 from src.services.message_search.rewrite_query import rewrite_query
+from src.services.message_search.stream_answer import stream_answer
 from src.services.rate_limiter import rate_limiter
 from src.services.user_preferences import get_user_language, get_user_preferences, resolve_selected_group_chat_ids
-from src.utils.split_message import split_message
+from src.utils.answer_utils import build_references
+from src.utils.streaming import StreamingResponder
 
 
 async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -38,15 +42,15 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     with ResponseTimer() as timer:
         try:
-            await update.message.reply_text(get_string(ui_language, "searching"))
+            searching_msg = await update.message.reply_text(get_string(ui_language, "searching"))
 
-            history, session_id = load_conversation_history(user_id, chat_id)
-            search_query = rewrite_query(query, history)
+            history, session_id = await asyncio.to_thread(load_conversation_history, user_id, chat_id)
+            search_query = await asyncio.to_thread(rewrite_query, query, history)
 
-            results, query_embedding = search_messages(search_query, chat_ids=search_chat_ids)
+            results, query_embedding = await asyncio.to_thread(search_messages, search_query, chat_ids=search_chat_ids)
             if not results:
                 no_results_message = get_string(ui_language, "no_results")
-                await update.message.reply_text(no_results_message)
+                await searching_msg.edit_text(no_results_message)
 
                 await InteractionLogger.log_interaction(
                     update=update,
@@ -62,7 +66,22 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 )
                 return
 
-            answer, tokens_used = generate_answer(query, results, conversation_history=history, answer_language=ui_language, chat_type="private")
+            # Stream the answer, progressively editing the searching message
+            responder = StreamingResponder(searching_msg)
+            full_answer = ""
+            tokens_used = 0
+
+            question_results, chunks = await stream_answer(query, results, conversation_history=history, answer_language=ui_language)
+            async for delta, tokens in chunks:
+                if delta:
+                    full_answer += delta
+                    await responder.push(delta)
+                if tokens is not None:
+                    tokens_used = tokens
+
+            # Build references and log interaction
+            references = "" if is_declined(full_answer) else build_references(question_results, "private", language=ui_language)
+            answer = full_answer + references
 
             referenced_message_ids = [msg.get("id") for msg in results if msg.get("id")]
             similarity_scores = [msg.get("similarity") for msg in results if msg.get("similarity")]
@@ -83,15 +102,8 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 session_id=session_id,
             )
 
-            chunks = split_message(answer)
-            for i, chunk in enumerate(chunks):
-                is_last = i == len(chunks) - 1
-                kwargs = {"reply_markup": create_feedback_keyboard(interaction_id)} if is_last and interaction_id else {}
-                try:
-                    await update.message.reply_text(chunk, parse_mode="Markdown", **kwargs)
-                except BadRequest as e:
-                    print(f"Markdown render failed, retrying as plain text: {e}")
-                    await update.message.reply_text(chunk, **kwargs)
+            keyboard = create_feedback_keyboard(interaction_id) if interaction_id else None
+            await responder.finalize(references=references, keyboard=keyboard)
 
         except Exception as e:
             print(f"Error handling DM: {e}")
