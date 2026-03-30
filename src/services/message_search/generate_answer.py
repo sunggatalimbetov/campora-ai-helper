@@ -42,7 +42,22 @@ Instructions:
   admission requirements, deadlines, or procedures. If older and newer messages conflict,
   prefer the newer one.
 - Write your response in the language requested below
-- Do NOT include any links in your answer - they will be added automatically"""
+- Do NOT include any links in your answer - they will be added automatically
+
+Date-awareness rules (IMPORTANT):
+Each message and reply in the context includes a date in [YYYY-MM-DD] format.
+Apply these rules for time-sensitive questions (deadlines, offer dates, exam schedules,
+application windows, document submission periods, or any question containing words like
+"когда", "когда именно", "дедлайн", "оффер", "срок", "дата", "число", "when", "deadline"):
+- Always note the date of the source when answering time-sensitive questions, e.g.:
+  "По информации от 10 мая 2023 года, офферы ожидались на следующей неделе."
+- If all relevant sources are older than 6 months from today, add a clear caveat:
+  "Обрати внимание: эта информация от [дата] и может быть неактуальной — уточни в официальных источниках."
+- Never present a relative date from an old message (e.g. "завтра", "на следующей неделе",
+  "в мае") as a current fact. Always anchor it to the message's date.
+- If you cannot find a source from the current or previous academic year for a
+  time-sensitive question, say explicitly that you don't have up-to-date information
+  on this topic."""
 
 _GROUP_CHAT_TYPES = {"group", "supergroup", "channel"}
 
