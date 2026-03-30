@@ -85,17 +85,30 @@ def _build_context(results: list) -> tuple[str, List[MessageDict], List[MessageD
     return "\n".join(context_parts), question_results, reply_results
 
 
-def generate_answer(
+DECLINE_PHRASES = [
+    "i can only help with university",
+    "я могу помочь только с вопросами",
+    "мен тек университетке",
+]
+
+
+def is_declined(answer: str) -> bool:
+    """Check if the LLM declined to answer (off-topic question)."""
+    return any(phrase in answer.lower() for phrase in DECLINE_PHRASES)
+
+
+def build_messages(
     query: str,
     results: list,
     conversation_history: Optional[List[ConversationTurn]] = None,
     answer_language: str = "ru",
     chat_type: str = "private",
-) -> tuple[str, int]:
-    """Generate answer using OpenAI based on search results and conversation history."""
-    if not results:
-        return "I don't have enough information to answer that question.", 0
+) -> tuple[list[dict], List[MessageDict]]:
+    """Build the OpenAI messages array and return question results for references.
 
+    Returns (messages, question_results) where question_results are the
+    non-reply search results needed for building references later.
+    """
     context, question_results, reply_results = _build_context(results)
 
     system_content = f"{SYSTEM_PROMPT}\n\nAnswer language: {answer_language}\n\nInformation:\n{context}"
@@ -112,20 +125,28 @@ def generate_answer(
 
     messages.append({"role": "user", "content": query})
 
+    return messages, question_results
+
+
+def generate_answer(
+    query: str,
+    results: list,
+    conversation_history: Optional[List[ConversationTurn]] = None,
+    answer_language: str = "ru",
+    chat_type: str = "private",
+) -> tuple[str, int]:
+    """Generate answer using OpenAI based on search results and conversation history."""
+    if not results:
+        return "I don't have enough information to answer that question.", 0
+
+    messages, question_results = build_messages(query, results, conversation_history, answer_language, chat_type)
+
     response = client_oa.chat.completions.create(model="gpt-4o-mini", messages=messages)
 
     answer: str = response.choices[0].message.content.strip()
     tokens_used: int = response.usage.total_tokens
 
-    # Only append references if the LLM gave a real answer, not a fallback/decline
-    DECLINE_PHRASES = [
-        "i can only help with university",
-        "я могу помочь только с вопросами",
-        "мен тек университетке",
-    ]
-    is_declined = any(phrase in answer.lower() for phrase in DECLINE_PHRASES)
-
-    if not is_declined:
+    if not is_declined(answer):
         references = build_references(question_results, chat_type, language=answer_language)
         answer = answer + references
 
