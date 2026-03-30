@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 import asyncio
+import logging
 import time
 
 from telegram import Message
 from telegram.error import BadRequest, RetryAfter
+
+logger = logging.getLogger(__name__)
 
 
 class StreamingResponder:
@@ -17,6 +20,16 @@ class StreamingResponder:
     EDIT_INTERVAL = 1.5  # minimum seconds between edits
     SAFE_LENGTH = 3800  # split before hitting 4096 limit
     CURSOR = " \u258d"  # ▍ typing cursor shown during streaming
+
+    @staticmethod
+    def _find_split_point(text: str, max_len: int) -> int:
+        """Find the best place to split text: prefer newline, then space, then hard cut."""
+        split_at = text.rfind("\n", 0, max_len)
+        if split_at <= 0:
+            split_at = text.rfind(" ", 0, max_len)
+        if split_at <= 0:
+            split_at = max_len
+        return split_at
 
     def __init__(self, message: Message) -> None:
         self._message = message
@@ -36,12 +49,7 @@ class StreamingResponder:
 
         # If buffer is getting long, finalize current message and start a new one
         if len(self._buffer) > self.SAFE_LENGTH:
-            split_at = self._buffer.rfind("\n", 0, self.SAFE_LENGTH)
-            if split_at <= 0:
-                split_at = self._buffer.rfind(" ", 0, self.SAFE_LENGTH)
-            if split_at <= 0:
-                split_at = self.SAFE_LENGTH
-
+            split_at = self._find_split_point(self._buffer, self.SAFE_LENGTH)
             finalize_text = self._buffer[:split_at]
             self._buffer = self._buffer[split_at:].lstrip()
 
@@ -59,12 +67,7 @@ class StreamingResponder:
         # Flush any remaining buffer that hasn't been sent yet
         if len(self._buffer) > self.SAFE_LENGTH and references:
             # Buffer is long and we still need to add references — split first
-            split_at = self._buffer.rfind("\n", 0, self.SAFE_LENGTH)
-            if split_at <= 0:
-                split_at = self._buffer.rfind(" ", 0, self.SAFE_LENGTH)
-            if split_at <= 0:
-                split_at = self.SAFE_LENGTH
-
+            split_at = self._find_split_point(self._buffer, self.SAFE_LENGTH)
             finalize_text = self._buffer[:split_at]
             self._buffer = self._buffer[split_at:].lstrip()
 
@@ -75,12 +78,7 @@ class StreamingResponder:
         final_text = self._buffer + references
         # If final text is too long, split it
         if len(final_text) > self.SAFE_LENGTH:
-            split_at = self._buffer.rfind("\n", 0, self.SAFE_LENGTH)
-            if split_at <= 0:
-                split_at = self._buffer.rfind(" ", 0, self.SAFE_LENGTH)
-            if split_at <= 0:
-                split_at = self.SAFE_LENGTH
-
+            split_at = self._find_split_point(self._buffer, self.SAFE_LENGTH)
             await self._edit(self._message, self._buffer[:split_at])
             remainder = self._buffer[split_at:].lstrip() + references
             self._message = await self._message.reply_text("...")
@@ -91,6 +89,7 @@ class StreamingResponder:
         try:
             await self._message.edit_text(final_text, parse_mode="Markdown", **kwargs)
         except BadRequest:
+            logger.warning("Markdown edit failed in finalize, falling back to plain text")
             await self._edit(self._message, final_text, **kwargs)
 
     async def _edit(self, message: Message, text: str, **kwargs) -> None:
