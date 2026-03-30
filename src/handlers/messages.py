@@ -44,7 +44,7 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         try:
             searching_msg = await update.message.reply_text(get_string(ui_language, "searching"))
 
-            history, session_id = load_conversation_history(user_id, chat_id)
+            history, session_id = await asyncio.to_thread(load_conversation_history, user_id, chat_id)
             search_query = await asyncio.to_thread(rewrite_query, query, history)
 
             results, query_embedding = await asyncio.to_thread(search_messages, search_query, chat_ids=search_chat_ids)
@@ -71,7 +71,8 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             full_answer = ""
             tokens_used = 0
 
-            async for delta, tokens in stream_answer(query, results, conversation_history=history, answer_language=ui_language):
+            question_results, chunks = await stream_answer(query, results, conversation_history=history, answer_language=ui_language)
+            async for delta, tokens in chunks:
                 if delta:
                     full_answer += delta
                     await responder.push(delta)
@@ -79,7 +80,6 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
                     tokens_used = tokens
 
             # Build references and log interaction
-            question_results = [msg for msg in results if not msg.get("is_reply", False)]
             references = "" if is_declined(full_answer) else build_references(question_results, "private", language=ui_language)
             answer = full_answer + references
 
