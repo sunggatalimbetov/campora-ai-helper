@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from src.models.message import MessageDict
 from src.services.conversation import ConversationTurn
+from src.services.language import get_string
 from src.services.message_search._clients import client_oa
 from src.utils.answer_utils import GROUP_CHAT_TYPES, build_references, trim_answer_for_history
 
@@ -137,7 +138,7 @@ def generate_answer(
 ) -> tuple[str, int]:
     """Generate answer using OpenAI based on search results and conversation history."""
     if not results:
-        return "I don't have enough information to answer that question.", 0
+        return get_string(answer_language, "no_results"), 0
 
     messages, question_results = build_messages(query, results, conversation_history, answer_language, chat_type)
 
