@@ -14,9 +14,6 @@ See [docs/PRIORITIES.md](/Users/sunggat/Projects/campora-ai/campora-ai-helper/do
 
 | ID | File |
 |---|---|
-| 01 | [01-question-generation-indexing.md](/Users/sunggat/Projects/campora-ai/campora-ai-helper/docs/features/01-question-generation-indexing.md) |
-| 03 | [03-keyword-extraction-two-stage-retrieval.md](/Users/sunggat/Projects/campora-ai/campora-ai-helper/docs/features/03-keyword-extraction-two-stage-retrieval.md) |
-| 04 | [04-multi-university-scaling.md](/Users/sunggat/Projects/campora-ai/campora-ai-helper/docs/features/04-multi-university-scaling.md) |
 | 07 | [07-welcome-message.md](/Users/sunggat/Projects/campora-ai/campora-ai-helper/docs/features/07-welcome-message.md) |
 | 08 | [08-relevance-filter.md](/Users/sunggat/Projects/campora-ai/campora-ai-helper/docs/features/08-relevance-filter.md) |
 | 10 | [10-reply-threading.md](/Users/sunggat/Projects/campora-ai/campora-ai-helper/docs/features/10-reply-threading.md) |

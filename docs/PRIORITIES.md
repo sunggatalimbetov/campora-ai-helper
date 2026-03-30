@@ -47,8 +47,7 @@ Operational work:
 
 | Order | ID | Feature | Why next |
 |---|---|---|---|
-| 2 | 04 | [Multi-university scaling](features/04-multi-university-scaling.md) | DB infrastructure is in (PR #36); next step is deploying a second university instance |
-| 3 | 07 | [Welcome message](features/07-welcome-message.md) | Onboarding is done — welcome message should be revisited and aligned with new onboarding flow |
+| 2 | 07 | [Welcome message](features/07-welcome-message.md) | Onboarding is done — welcome message should be revisited and aligned with new onboarding flow |
 | 4 | 08 | [Relevance filter](features/08-relevance-filter.md) | May overlap with similarity threshold (21); needs review now that 21 is shipped |
 
 ## Later
@@ -59,8 +58,6 @@ Valuable but not urgent for current launch path.
 |---|---|---|
 | 10 | [Reply threading](features/10-reply-threading.md) | Partially addressed by 19 and 20; may need reframing |
 | 15 | [Admin commands](features/15-admin-commands.md) | Operationally useful, not blocking quality |
-| 01 | [Question generation indexing](features/01-question-generation-indexing.md) | Bigger retrieval investment; current quality baseline needs to settle first |
-| 03 | [Keyword extraction & two-stage retrieval](features/03-keyword-extraction-two-stage-retrieval.md) | More invasive search work than current launch path needs |
 | 16 | [Inline mode](features/16-inline-mode.md) | Nice-to-have interface expansion |
 
 ## Notes
