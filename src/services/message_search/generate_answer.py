@@ -1,3 +1,4 @@
+from datetime import date
 from typing import List, Optional
 
 from src.models.message import MessageDict
@@ -6,7 +7,7 @@ from src.services.language import get_string
 from src.services.message_search._clients import client_oa
 from src.utils.answer_utils import GROUP_CHAT_TYPES, build_references, trim_answer_for_history
 
-SYSTEM_PROMPT = """\
+SYSTEM_PROMPT_TEMPLATE = """\
 You are a helpful assistant for university students.
 Your purpose is to answer questions related to university life: academics, exams, deadlines,
 schedules, enrollment, bureaucracy, student services, housing, stress management, campus life,
@@ -46,6 +47,7 @@ Instructions:
 
 Date-awareness rules (IMPORTANT):
 Each message and reply in the context includes a date in [YYYY-MM-DD] format.
+Current date: {current_date}
 Apply these rules for time-sensitive questions (deadlines, offer dates, exam schedules,
 application windows, document submission periods, or any question containing words like
 "когда", "когда именно", "дедлайн", "оффер", "срок", "дата", "число", "when", "deadline"):
@@ -58,6 +60,10 @@ application windows, document submission periods, or any question containing wor
 - If you cannot find a source from the current or previous academic year for a
   time-sensitive question, say explicitly that you don't have up-to-date information
   on this topic."""
+
+def _get_system_prompt() -> str:
+    current_date = date.today().isoformat()
+    return SYSTEM_PROMPT_TEMPLATE.format(current_date=current_date)
 
 _GROUP_CHAT_TYPES = {"group", "supergroup", "channel"}
 
@@ -127,7 +133,8 @@ def build_messages(
     """
     context, question_results, reply_results = _build_context(results)
 
-    system_content = f"{SYSTEM_PROMPT}\n\nAnswer language: {answer_language}\n\nInformation:\n{context}"
+    system_prompt = _get_system_prompt()
+    system_content = f"{system_prompt}\n\nAnswer language: {answer_language}\n\nInformation:\n{context}"
 
     if chat_type in _GROUP_CHAT_TYPES:
         system_content += GROUP_PROMPT_ADDENDUM
