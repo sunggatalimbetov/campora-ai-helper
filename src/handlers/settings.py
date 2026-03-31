@@ -3,13 +3,13 @@ import logging
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
 
-logger = logging.getLogger(__name__)
-
 from src.handlers.onboarding import create_language_keyboard, LANGUAGE_CALLBACK_PREFIX
 from src.services.language import get_language_label, get_string, resolve_ui_language
 from src.services.onboarding_options import create_group_keyboard
 from src.services.user_preferences import get_user_preferences, save_user_group
 from src.services import university_service
+
+logger = logging.getLogger(__name__)
 
 SETTINGS_GROUP_CALLBACK_PREFIX = "settings:group:"
 
