@@ -9,6 +9,7 @@ Practical recipes for common development tasks in campora-ai-helper.
 ### Prerequisites
 
 - Python 3.9+
+- A virtual environment (recommended: `python -m venv .venv && source .venv/bin/activate`)
 - A Telegram bot token from [@BotFather](https://t.me/BotFather)
 - An OpenAI API key
 - A Supabase project with the required schema applied
@@ -58,6 +59,12 @@ python main.py
 
 The bot starts polling for updates. It retries automatically on network errors and Telegram API conflicts.
 
+After making changes, run existing tests:
+
+```bash
+python3 -m unittest discover tests -v
+```
+
 ---
 
 ## 2. Adding a new slash command
@@ -66,7 +73,7 @@ This walks through adding a `/mycommand` command as an example.
 
 ### Step 1: Create the handler function
 
-Add your handler to `src/handlers/commands.py`:
+Add your handler to `src/handlers/commands.py`. The existing imports at the top of the file provide the necessary functions (`get_user_language` from `src.services.user_preferences`, `resolve_ui_language` and `get_string` from `src.services.language`):
 
 ```python
 async def mycommand_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -212,7 +219,19 @@ In `src/services/telegram_commands.py`, add a `"fr"` entry to `PRIVATE_COMMANDS_
 ],
 ```
 
-### Step 5: Add to the language selection keyboard
+### Step 5: Update the database CHECK constraint
+
+The `user_preferences.language` column has a CHECK constraint restricting values to the currently supported languages. Create a migration (e.g., `sql/011_add_french_language.sql`) to update it:
+
+```sql
+ALTER TABLE user_preferences DROP CONSTRAINT user_preferences_language_check;
+ALTER TABLE user_preferences ADD CONSTRAINT user_preferences_language_check
+    CHECK (language IN ('ru', 'kk', 'en', 'fr'));
+```
+
+Without this, saving the new language preference will fail with a constraint violation.
+
+### Step 6: Add to the language selection keyboard
 
 In `src/handlers/onboarding.py`, update `create_language_keyboard()`:
 
@@ -228,11 +247,14 @@ def create_language_keyboard(prefix: str = LANGUAGE_CALLBACK_PREFIX) -> InlineKe
     ])
 ```
 
+If adding a 4th+ language, consider splitting the keyboard into multiple rows (2 per row) for better display on narrow mobile screens.
+
 ### Checklist
 
 - [ ] Language added to `SUPPORTED_LANGUAGES` and `LANGUAGE_LABELS`
 - [ ] All UI string keys translated in `STRINGS`
 - [ ] `normalize_language_code()` handles the new prefix
+- [ ] Database CHECK constraint updated via migration
 - [ ] Telegram commands added in `telegram_commands.py`
 - [ ] Language button added to the selection keyboard in `onboarding.py`
 
@@ -268,7 +290,7 @@ SEARCH_SOURCE_OVERRIDES={"-1004233113745": "1002008115936", "-1001234567890": "1
 
 The bot receives chat IDs in **Bot API format** (negative, with `-100` prefix for supergroups). The scraper may use **Telethon format** (positive, no prefix).
 
-The override parser handles this automatically: if you provide a positive key, it converts it to Bot API format. Source values (the right side) are stored as-is since they match the `chat_id` column in the `messages` table.
+The override parser handles this automatically: if you provide a positive key, it converts it to Bot API format by prepending `-100`. For example, Telethon ID `4233113745` becomes Bot API ID `-1004233113745`. Source values (the right side) are stored as-is since they match the `chat_id` column in the `messages` table.
 
 ### Verifying the override works
 
@@ -304,7 +326,7 @@ Each step follows the same pattern:
 
 ### Step 1: Add a database column
 
-Create a migration in `sql/`:
+Create a numbered migration file following the existing convention (e.g., `sql/011_add_timezone.sql`):
 
 ```sql
 ALTER TABLE user_preferences ADD COLUMN timezone VARCHAR DEFAULT 'UTC';
@@ -405,7 +427,9 @@ app.add_handler(CallbackQueryHandler(timezone_callback_handler, pattern=r"^onboa
 
 ### Step 7: Wire into the /start flow
 
-In `src/handlers/onboarding.py`, update `language_callback_handler()` to show the timezone step after language is saved, instead of completing onboarding immediately:
+In `src/handlers/onboarding.py`, update `language_callback_handler()` to show the timezone step after language is saved, instead of completing onboarding immediately.
+
+**Important:** The `onboarded_at` timestamp is currently set inside `save_user_language()`. If your new step comes after language selection, move the `onboarded_at` write from `save_user_language()` to the new final step's save function. Otherwise users will be marked as onboarded before completing all steps.
 
 ```python
 # Replace the final confirmation message with:
