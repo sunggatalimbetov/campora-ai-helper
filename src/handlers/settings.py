@@ -1,5 +1,9 @@
+import logging
+
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
+
+logger = logging.getLogger(__name__)
 
 from src.handlers.onboarding import create_language_keyboard, LANGUAGE_CALLBACK_PREFIX
 from src.services.language import get_language_label, get_string, resolve_ui_language
@@ -73,7 +77,7 @@ async def settings_group_callback_handler(update: Update, context: ContextTypes.
         save_user_group(query.from_user.id, selected_group)
     except Exception as e:
         fallback_language = resolve_ui_language(None, telegram_language_code=query.from_user.language_code)
-        print(f"Error saving user group in settings: {e}")
+        logger.error("Error saving user group in settings: %s", e)
         await query.edit_message_text(get_string(fallback_language, "error"))
         return
 

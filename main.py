@@ -18,7 +18,7 @@ from src.config.settings import TELEGRAM_BOT_TOKEN
 from src.handlers.commands import ask_command, help_command, new_command, optin_command, optout_command
 from src.handlers.feedback import feedback_callback_handler
 from src.handlers.messages import dm_handler
-from src.handlers.onboarding import language_callback_handler, language_command, onboarding_group_callback_handler, start_command
+from src.handlers.onboarding import language_callback_handler, onboarding_group_callback_handler, start_command
 from src.handlers.settings import settings_command, settings_group_callback_handler, settings_menu_callback_handler
 from src.services.telegram_commands import register_default_bot_commands
 
@@ -94,7 +94,6 @@ def main():
             app.add_handler(CommandHandler("new", new_command))
             app.add_handler(CommandHandler("help", help_command))
             app.add_handler(CommandHandler("start", start_command))
-            app.add_handler(CommandHandler("language", language_command))
             app.add_handler(CommandHandler("settings", settings_command))
             app.add_handler(CommandHandler("optout", optout_command))
             app.add_handler(CommandHandler("optin", optin_command))
