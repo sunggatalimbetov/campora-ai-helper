@@ -1,15 +1,14 @@
 from __future__ import annotations
 
+import logging
 from datetime import datetime, timezone
 from typing import Any, Optional
 
-from supabase import Client, create_client
-
-from src.config.settings import SUPABASE_SERVICE_KEY, SUPABASE_URL
+from src.clients import supabase
 from src.services import university_service
 from src.services.language import DEFAULT_LANGUAGE, normalize_language_code
 
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+logger = logging.getLogger(__name__)
 
 
 def get_user_preferences(user_id: int) -> Optional[dict[str, Any]]:
@@ -19,7 +18,7 @@ def get_user_preferences(user_id: int) -> Optional[dict[str, Any]]:
             return result.data[0]
         return None
     except Exception as e:
-        print(f"Error reading user preferences: {e}")
+        logger.error("Error reading user preferences: %s", e)
         return None
 
 

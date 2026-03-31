@@ -1,11 +1,11 @@
-from supabase import Client, create_client
+import logging
+
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
 
-from src.config.settings import SUPABASE_SERVICE_KEY, SUPABASE_URL
+from src.clients import supabase
 
-# Initialize Supabase client
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+logger = logging.getLogger(__name__)
 
 
 def create_feedback_keyboard(interaction_id: int) -> InlineKeyboardMarkup:
@@ -41,5 +41,5 @@ async def feedback_callback_handler(update: Update, context: ContextTypes.DEFAUL
             await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("❌ Error recording feedback", callback_data="feedback_error")]]))
 
     except Exception as e:
-        print(f"Error handling feedback: {e}")
+        logger.error("Error handling feedback: %s", e)
         await query.edit_message_reply_markup(reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("❌ Error recording feedback", callback_data="feedback_error")]]))

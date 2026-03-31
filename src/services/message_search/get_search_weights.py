@@ -1,7 +1,10 @@
+import logging
 import re
 from typing import Tuple
 
 from src.config.settings import DEFAULT_FULLTEXT_WEIGHT, DEFAULT_SEMANTIC_WEIGHT
+
+logger = logging.getLogger(__name__)
 
 
 def get_search_weights(query: str) -> Tuple[float, float]:
@@ -32,5 +35,5 @@ def get_search_weights(query: str) -> Tuple[float, float]:
 		semantic_weight = 0.6
 		full_text_weight = 0.4
 
-	print(f"🔍 Query weights: semantic={semantic_weight}, fulltext={full_text_weight}")
+	logger.debug("Query weights: semantic=%s, fulltext=%s", semantic_weight, full_text_weight)
 	return semantic_weight, full_text_weight
