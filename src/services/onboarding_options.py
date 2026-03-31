@@ -19,10 +19,10 @@ def resolve_group_selection_state(selected_group: str | None, available_groups: 
     return None, False
 
 
-def create_group_keyboard(groups: list[tuple[str, str]] | None = None) -> InlineKeyboardMarkup:
+def create_group_keyboard(groups: list[tuple[str, str]] | None = None, prefix: str = ONBOARD_GROUP_CALLBACK_PREFIX) -> InlineKeyboardMarkup:
     available_groups = groups or university_service.get_all_universities()
     return InlineKeyboardMarkup(
         [
-            [InlineKeyboardButton(group_label, callback_data=f"{ONBOARD_GROUP_CALLBACK_PREFIX}{group_id}") for group_id, group_label in available_groups]
+            [InlineKeyboardButton(group_label, callback_data=f"{prefix}{group_id}") for group_id, group_label in available_groups]
         ]
     )

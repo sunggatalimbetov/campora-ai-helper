@@ -36,7 +36,7 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
             "*В личке:*\n"
             "• Просто отправь вопрос сообщением\n"
             "• `/new` - начать новый разговор\n"
-            "• `/language` - изменить язык интерфейса\n"
+            "• `/settings` - настройки (университет, язык)\n"
             "• `/help` - показать помощь\n\n"
             "Бот запоминает недавние вопросы, поэтому можно задавать уточнения."
         ),
@@ -54,6 +54,10 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "rate_limited": "⏳ Слишком много запросов. Подожди немного перед следующим вопросом.",
         "optout_success": "Готово. Твои сообщения удалены из базы и больше не будут индексироваться.",
         "optin_success": "Окей, теперь твои сообщения снова будут индексироваться.",
+        "settings": "⚙️ Настройки\n\nУниверситет: {group_label}\nЯзык: {language_label}\n\nЧто хочешь изменить?",
+        "settings_not_onboarded": "Сначала пройди настройку: /start",
+        "settings_btn_university": "Университет",
+        "settings_btn_language": "Язык",
     },
     "kk": {
         "searching": "🔍 Іздеп жатырмын, күте тұрыңыз...",
@@ -80,7 +84,7 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
             "*Жекеде:*\n"
             "• Сұрақты жай хабарлама ретінде жіберіңіз\n"
             "• `/new` - жаңа әңгімені бастау\n"
-            "• `/language` - интерфейс тілін өзгерту\n"
+            "• `/settings` - баптаулар (университет, тіл)\n"
             "• `/help` - көмекті көрсету\n\n"
             "Бот соңғы сұрақтарды есте сақтайды, сондықтан нақтылап сұрай аласыз."
         ),
@@ -98,6 +102,10 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "rate_limited": "⏳ Сұраулар тым көп. Келесі сұрақ алдында аздап күтіңіз.",
         "optout_success": "Дайын. Сіздің хабарламаларыңыз базадан өшірілді және енді индекстелмейді.",
         "optin_success": "Жарайды, енді сіздің хабарламаларыңыз қайтадан индекстеледі.",
+        "settings": "⚙️ Баптаулар\n\nУниверситет: {group_label}\nТіл: {language_label}\n\nНені өзгерткіңіз келеді?",
+        "settings_not_onboarded": "Алдымен баптаудан өтіңіз: /start",
+        "settings_btn_university": "Университет",
+        "settings_btn_language": "Тіл",
     },
     "en": {
         "searching": "🔍 Searching, please wait...",
@@ -124,7 +132,7 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
             "*In Private Messages:*\n"
             "• Just send your question directly\n"
             "• `/new` - start a fresh conversation\n"
-            "• `/language` - change interface language\n"
+            "• `/settings` - settings (university, language)\n"
             "• `/help` - show help\n\n"
             "The bot remembers recent questions so you can ask follow-ups naturally."
         ),
@@ -142,6 +150,10 @@ STRINGS: Final[dict[str, dict[str, str]]] = {
         "rate_limited": "⏳ Too many requests. Please wait a bit before asking again.",
         "optout_success": "Done. Your messages were removed from the database and will no longer be indexed.",
         "optin_success": "Okay, your messages will now be indexed again.",
+        "settings": "⚙️ Settings\n\nUniversity: {group_label}\nLanguage: {language_label}\n\nWhat would you like to change?",
+        "settings_not_onboarded": "Please complete setup first: /start",
+        "settings_btn_university": "University",
+        "settings_btn_language": "Language",
     },
 }
 def normalize_language_code(language_code: str | None) -> str | None:
