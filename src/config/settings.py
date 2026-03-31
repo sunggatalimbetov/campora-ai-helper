@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 import json
+import logging
 import os
 
 from dotenv import load_dotenv
+
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
@@ -48,8 +51,8 @@ try:
     # to negative Bot API format (-100 prefix) so lookup matches update.effective_chat.id.
     SEARCH_SOURCE_OVERRIDES: dict[int, int] = {(-int(f"100{k}") if k > 0 else k): v for k, v in _parsed.items()}
 except (ValueError, TypeError) as e:
-    print(f"⚠️ Failed to parse SEARCH_SOURCE_OVERRIDES: {e!r}, raw={_raw_overrides!r}")
+    logger.warning("Failed to parse SEARCH_SOURCE_OVERRIDES: %r, raw=%r", e, _raw_overrides)
     SEARCH_SOURCE_OVERRIDES: dict[int, int] = {}
-print(f"🔧 SEARCH_SOURCE_OVERRIDES = {SEARCH_SOURCE_OVERRIDES}")
+logger.info("SEARCH_SOURCE_OVERRIDES = %s", SEARCH_SOURCE_OVERRIDES)
 
 

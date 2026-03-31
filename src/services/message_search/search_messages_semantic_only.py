@@ -1,7 +1,10 @@
+import logging
 from typing import List, Tuple
 
 from src.models.message import MessageDict
 from src.services.message_search._clients import supabase
+
+logger = logging.getLogger(__name__)
 from src.services.message_search.get_embedding import get_embedding
 from src.services.message_search.reply_fetching import attach_replies_to_messages
 
@@ -20,7 +23,7 @@ def search_messages_semantic_only(
             params["filter_chat_ids"] = chat_ids
         resp = supabase.rpc("match_messages", params).execute()
     except Exception as e:
-        print(f"Error in semantic search: {e}")
+        logger.error("Error in semantic search: %s", e)
         return [], query_embedding
 
     messages: List[MessageDict] = []

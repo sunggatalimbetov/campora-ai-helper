@@ -1,7 +1,10 @@
+import logging
 from typing import List
 
 from src.models.message import MessageDict
 from src.services.message_search._clients import supabase
+
+logger = logging.getLogger(__name__)
 
 
 def search_messages_by_questions(
@@ -33,7 +36,7 @@ def search_messages_by_questions(
         messages: List[MessageDict] = []
         for r in results:
             source = r.get("match_source", "message")
-            print(f"  📝 ID {r['id']}: similarity={r.get('similarity', 0):.3f} (source={source})")
+            logger.debug("ID %s: similarity=%.3f (source=%s)", r['id'], r.get('similarity', 0), source)
             messages.append(
                 {
                     "id": r["id"],
@@ -51,5 +54,5 @@ def search_messages_by_questions(
         return messages
 
     except Exception as e:
-        print(f"⚠️ match_messages_and_questions unavailable: {e}")
+        logger.warning("match_messages_and_questions unavailable: %s", e)
         return []

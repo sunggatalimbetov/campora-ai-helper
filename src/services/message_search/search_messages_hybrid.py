@@ -1,6 +1,9 @@
+import logging
 from typing import List, Tuple
 
 from src.config.settings import RRF_K, SIMILARITY_THRESHOLD
+
+logger = logging.getLogger(__name__)
 from src.models.message import MessageDict
 from src.utils.answer_utils import filter_by_similarity
 from src.services.message_search._clients import supabase
@@ -24,7 +27,7 @@ def search_messages_hybrid(
     """
     query_embedding = get_embedding(query)
     fulltext_query = extract_fulltext_terms(query)
-    print(f'🔤 Fulltext terms: "{fulltext_query}"')
+    logger.debug('Fulltext terms: "%s"', fulltext_query)
 
     try:
         params = {
@@ -38,19 +41,19 @@ def search_messages_hybrid(
         if chat_ids is not None:
             params["filter_chat_ids"] = chat_ids
 
-        print(f"🔍 hybrid_search params: filter_chat_ids={params.get('filter_chat_ids')}")
+        logger.debug("hybrid_search params: filter_chat_ids=%s", params.get('filter_chat_ids'))
         resp = supabase.rpc("hybrid_search", params).execute()
 
         results = resp.data
-        print(f"🔍 hybrid_search returned {len(results)} raw results")
+        logger.debug("hybrid_search returned %d raw results", len(results))
 
         for r in results:
-            print(f"  ID {r['id']}: semantic={r.get('semantic_similarity', 0):.3f}, " f"fulltext={r.get('full_text_rank', 0):.3f}, combined={r.get('combined_score', 0):.3f}")
+            logger.debug("ID %s: semantic=%.3f, fulltext=%.3f, combined=%.3f", r['id'], r.get('semantic_similarity', 0), r.get('full_text_rank', 0), r.get('combined_score', 0))
 
         pre_filter_count = len(results)
         results = filter_by_similarity(results, SIMILARITY_THRESHOLD)
         if len(results) < pre_filter_count:
-            print(f"🔻 Similarity filter ({SIMILARITY_THRESHOLD}): {pre_filter_count} → {len(results)} results")
+            logger.debug("Similarity filter (%s): %d -> %d results", SIMILARITY_THRESHOLD, pre_filter_count, len(results))
 
         messages: List[MessageDict] = []
         for r in results:
@@ -73,5 +76,5 @@ def search_messages_hybrid(
         return attach_replies_to_messages(messages), query_embedding
 
     except Exception as e:
-        print(f"Error in hybrid search: {e}, falling back to semantic-only")
+        logger.error("Error in hybrid search: %s, falling back to semantic-only", e)
         return search_messages_semantic_only(query, count, chat_ids=chat_ids)

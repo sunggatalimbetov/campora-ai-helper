@@ -1,7 +1,10 @@
+import logging
 from typing import Dict, List, Tuple
 
 from src.models.message import MessageDict
 from src.services.message_search._clients import supabase
+
+logger = logging.getLogger(__name__)
 
 
 def fetch_replies_by_parent(messages: List[MessageDict]) -> Dict[Tuple[int, int], List[MessageDict]]:
@@ -27,7 +30,7 @@ def fetch_replies_by_parent(messages: List[MessageDict]) -> Dict[Tuple[int, int]
             .execute()
         )
     except Exception as e:
-        print(f"Error fetching replies batch: {e}")
+        logger.error("Error fetching replies batch: %s", e)
         return {}
 
     replies_by_parent: Dict[Tuple[int, int], List[MessageDict]] = {}

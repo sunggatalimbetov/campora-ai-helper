@@ -1,7 +1,10 @@
 import asyncio
+import logging
 
 from telegram import Update
 from telegram.ext import ContextTypes
+
+logger = logging.getLogger(__name__)
 
 from src.handlers.feedback import create_feedback_keyboard
 from src.services.conversation import load_conversation_history
@@ -106,7 +109,7 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await responder.finalize(references=references, keyboard=keyboard)
 
         except Exception as e:
-            print(f"Error handling DM: {e}")
+            logger.error("Error handling DM: %s", e)
             error_response = get_string(ui_language, "error")
             await update.message.reply_text(error_response)
 

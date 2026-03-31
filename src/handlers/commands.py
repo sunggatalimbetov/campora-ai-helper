@@ -1,7 +1,11 @@
+import logging
+
 from telegram import Update
 from telegram.constants import ChatAction
 from telegram.error import BadRequest
 from telegram.ext import ContextTypes
+
+logger = logging.getLogger(__name__)
 
 from src.handlers.feedback import create_feedback_keyboard
 from src.services.conversation import load_conversation_history, mark_new_session
@@ -33,7 +37,7 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.effective_user.id
     chat_id = update.effective_chat.id
     search_chat_id = SEARCH_SOURCE_OVERRIDES.get(chat_id, chat_id)
-    print(f"🔍 /ask: chat_id={chat_id}, search_chat_id={search_chat_id}, override_hit={chat_id != search_chat_id}")
+    logger.debug("/ask: chat_id=%s, search_chat_id=%s, override_hit=%s", chat_id, search_chat_id, chat_id != search_chat_id)
 
     if not rate_limiter.is_allowed(user_id, chat_id):
         return
@@ -92,11 +96,11 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 try:
                     await update.message.reply_text(chunk, parse_mode="Markdown", **kwargs)
                 except BadRequest as e:
-                    print(f"Markdown render failed, retrying as plain text: {e}")
+                    logger.warning("Markdown render failed, retrying as plain text: %s", e)
                     await update.message.reply_text(chunk, **kwargs)
 
         except Exception as e:
-            print(f"Error handling /ask command: {e}")
+            logger.error("Error handling /ask command: %s", e)
             error_response = get_string(ui_language, "error")
             await update.message.reply_text(error_response)
 
@@ -140,7 +144,7 @@ async def optout_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         opt_out_user(user_id)
         await update.message.reply_text(get_string(ui_language, "optout_success"))
     except Exception as e:
-        print(f"Error handling /optout: {e}")
+        logger.error("Error handling /optout: %s", e)
         await update.message.reply_text(get_string(ui_language, "error"))
 
 
@@ -153,5 +157,5 @@ async def optin_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         opt_in_user(user_id)
         await update.message.reply_text(get_string(ui_language, "optin_success"))
     except Exception as e:
-        print(f"Error handling /optin: {e}")
+        logger.error("Error handling /optin: %s", e)
         await update.message.reply_text(get_string(ui_language, "error"))
