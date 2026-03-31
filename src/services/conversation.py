@@ -1,18 +1,16 @@
+import logging
 import uuid
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from typing import List, Optional, Set, Tuple
 
-from supabase import Client, create_client
+from src.clients import supabase
 
+logger = logging.getLogger(__name__)
 from src.config.settings import (
     CONVERSATION_MAX_TURNS,
     CONVERSATION_TIMEOUT_MINUTES,
-    SUPABASE_SERVICE_KEY,
-    SUPABASE_URL,
 )
-
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 _reset_sessions: Set[Tuple[int, int]] = set()
 
@@ -50,7 +48,7 @@ def load_conversation_history(user_id: int, chat_id: int) -> Tuple[List[Conversa
             .execute()
         )
     except Exception as e:
-        print(f"Error loading conversation history: {e}")
+        logger.error("Error loading conversation history: %s", e)
         return [], str(uuid.uuid4())
 
     if not result.data:

@@ -2,8 +2,6 @@ import asyncio
 import logging
 import time
 
-from openai import OpenAI
-from supabase import Client, create_client
 from telegram import Update
 from telegram.error import Conflict, NetworkError, RetryAfter
 from telegram.ext import (
@@ -16,26 +14,17 @@ from telegram.ext import (
     filters,
 )
 
-from src.config.settings import (
-    OPENAI_API_KEY,
-    SUPABASE_SERVICE_KEY,
-    SUPABASE_URL,
-    TELEGRAM_BOT_TOKEN,
-)
+from src.config.settings import TELEGRAM_BOT_TOKEN
 from src.handlers.commands import ask_command, help_command, new_command, optin_command, optout_command
 from src.handlers.feedback import feedback_callback_handler
 from src.handlers.messages import dm_handler
 from src.handlers.onboarding import language_callback_handler, language_command, onboarding_group_callback_handler, start_command
+from src.handlers.settings import settings_command, settings_group_callback_handler, settings_menu_callback_handler
 from src.services.telegram_commands import register_default_bot_commands
 
 # Add logging configuration
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-# Initialize clients
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
-client_oa: OpenAI = OpenAI(api_key=OPENAI_API_KEY)
-
 
 WELCOME_NOTICE_TEMPLATE = (
     "👋 Привет! Я Campora AI — помогаю находить ответы по истории переписки этой группы.\n\n"
@@ -106,6 +95,7 @@ def main():
             app.add_handler(CommandHandler("help", help_command))
             app.add_handler(CommandHandler("start", start_command))
             app.add_handler(CommandHandler("language", language_command))
+            app.add_handler(CommandHandler("settings", settings_command))
             app.add_handler(CommandHandler("optout", optout_command))
             app.add_handler(CommandHandler("optin", optin_command))
             app.add_handler(
@@ -116,25 +106,25 @@ def main():
             )
             app.add_handler(CallbackQueryHandler(feedback_callback_handler, pattern="^feedback:"))
             app.add_handler(CallbackQueryHandler(onboarding_group_callback_handler, pattern=r"^onboard:group:"))
+            app.add_handler(CallbackQueryHandler(settings_menu_callback_handler, pattern=r"^settings:(group|lang)$"))
+            app.add_handler(CallbackQueryHandler(settings_group_callback_handler, pattern=r"^settings:group:"))
             app.add_handler(CallbackQueryHandler(language_callback_handler, pattern=r"^(language:|onboard:language:)"))
             app.add_handler(ChatMemberHandler(track_chat_member, ChatMemberHandler.MY_CHAT_MEMBER))
 
             # Add error handler
             app.add_error_handler(error_handler)
 
-            print("🤖 Starting AI Assistant Bot...")
+            logger.info("Starting AI Assistant Bot...")
 
             # Start the bot with graceful shutdown
             app.run_polling(allowed_updates=Update.ALL_TYPES)
 
         except Conflict as e:
-            logger.error(f"Conflict error: {e}")
-            print("⚠️ Conflict detected. Waiting 30 seconds before restart...")
+            logger.error("Conflict error: %s", e)
             time.sleep(30)
             continue
         except Exception as e:
-            logger.error(f"Unexpected error: {e}")
-            print("⚠️ Unexpected error. Waiting 10 seconds before restart...")
+            logger.error("Unexpected error: %s", e)
             time.sleep(10)
             continue
 
