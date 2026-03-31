@@ -61,6 +61,7 @@ application windows, document submission periods, or any question containing wor
   time-sensitive question, say explicitly that you don't have up-to-date information
   on this topic."""
 
+
 def _get_system_prompt() -> str:
     current_date = date.today().isoformat()
     return SYSTEM_PROMPT_TEMPLATE.format(current_date=current_date)

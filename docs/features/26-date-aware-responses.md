@@ -42,7 +42,7 @@ Classify queries before answering:
 
 ## Changes
 - **Helper repo:** `src/services/message_search/generate_answer.py` — pass `created_at` per source into prompt context
-- **Helper repo:** `src/prompts/` or equivalent — update system prompt with date-awareness instructions
+- **Helper repo:** `src/services/message_search/generate_answer.py` — update system prompt with date-awareness instructions
 
 ## Verification
 1. Ask "когда офферы?" — response should include source dates and a staleness caveat if sources are >6 months old
