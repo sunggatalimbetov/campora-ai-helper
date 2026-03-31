@@ -39,6 +39,7 @@ WELCOME_NOTICE_TEMPLATE = (
 # Track chats that already received the welcome notice (per bot session).
 # For persistence across restarts, you could store this in Supabase instead.
 _notified_chats: set[int] = set()
+_MAX_NOTIFIED_CHATS = 5000
 
 
 async def register_bot_commands(app: Application) -> None:
@@ -62,6 +63,8 @@ async def track_chat_member(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     was_in_group = old_status in ("member", "administrator", "restricted")
     is_in_group = new_status in ("member", "administrator")
     if is_in_group and not was_in_group and chat.id not in _notified_chats:
+        if len(_notified_chats) >= _MAX_NOTIFIED_CHATS:
+            _notified_chats.pop()
         _notified_chats.add(chat.id)
         try:
             bot_username = context.application.bot_data.get("bot_username") or context.bot.username

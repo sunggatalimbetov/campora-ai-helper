@@ -1,6 +1,7 @@
 import unittest
 
 from src.services.language import (
+    detect_language_from_text,
     get_language_label,
     get_string,
     normalize_language_code,
@@ -44,6 +45,28 @@ class LanguageServiceTests(unittest.TestCase):
 
     def test_get_language_label_returns_human_readable_name(self):
         self.assertEqual(get_language_label("kk"), "Қазақша")
+
+    def test_detect_language_returns_none_for_empty_input(self):
+        self.assertIsNone(detect_language_from_text(""))
+        self.assertIsNone(detect_language_from_text("  "))
+        self.assertIsNone(detect_language_from_text("?!"))
+
+    def test_detect_language_russian(self):
+        self.assertEqual(detect_language_from_text("Когда дедлайн?"), "ru")
+        self.assertEqual(detect_language_from_text("Какой проходной балл"), "ru")
+
+    def test_detect_language_kazakh(self):
+        self.assertEqual(detect_language_from_text("Қанша керек?"), "kk")
+        self.assertEqual(detect_language_from_text("Фаундейшнға NUET қанша керек?"), "kk")
+
+    def test_detect_language_english(self):
+        self.assertEqual(detect_language_from_text("What SAT score?"), "en")
+
+    def test_detect_language_kazakh_not_triggered_by_single_char_in_long_text(self):
+        # One Kazakh char in a long Russian sentence should stay Russian
+        self.assertEqual(detect_language_from_text(
+            "Привет всем подскажите пожалуйста какой балл нужен для поступления сколько стоит обучение в университете Нұрсултан"
+        ), "ru")
 
 
 if __name__ == "__main__":

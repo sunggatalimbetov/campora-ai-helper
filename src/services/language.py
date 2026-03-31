@@ -194,7 +194,7 @@ def detect_language_from_text(text: str) -> str | None:
         return None
 
     if cyrillic > latin:
-        if kazakh_specific >= 1:
+        if kazakh_specific >= 1 and kazakh_specific / cyrillic > 0.03:
             return "kk"
         return "ru"
     if latin > cyrillic:
