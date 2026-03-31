@@ -178,10 +178,13 @@ def resolve_ui_language(
     telegram_language_code: str | None = None,
 ) -> str:
     del query_text
-    del telegram_language_code
     normalized_preference = normalize_language_code(preferred_language)
     if normalized_preference is not None:
         return normalized_preference
+
+    normalized_telegram = normalize_language_code(telegram_language_code)
+    if normalized_telegram is not None:
+        return normalized_telegram
 
     return DEFAULT_LANGUAGE
 

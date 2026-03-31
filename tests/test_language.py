@@ -17,8 +17,11 @@ class LanguageServiceTests(unittest.TestCase):
     def test_resolve_ui_language_prefers_saved_preference(self):
         self.assertEqual(resolve_ui_language("kk", "When is the deadline?", "en-US"), "kk")
 
-    def test_resolve_ui_language_defaults_to_english_without_preference(self):
-        self.assertEqual(resolve_ui_language(None, "Когда дедлайн?", "ru-RU"), "en")
+    def test_resolve_ui_language_falls_back_to_telegram_language(self):
+        self.assertEqual(resolve_ui_language(None, "Когда дедлайн?", "ru-RU"), "ru")
+
+    def test_resolve_ui_language_defaults_to_english_without_any_language(self):
+        self.assertEqual(resolve_ui_language(None, None, None), "en")
 
     def test_get_string_returns_localized_messages(self):
         self.assertIn("По этому вопросу ничего не нашлось", get_string("ru", "no_results"))
