@@ -1,3 +1,4 @@
+import asyncio
 import logging
 
 from telegram import Update
@@ -5,13 +6,13 @@ from telegram.constants import ChatAction
 from telegram.error import BadRequest
 from telegram.ext import ContextTypes
 
+from src.config.settings import SEARCH_SOURCE_OVERRIDES
+from src.handlers._search_pipeline import extract_result_metadata, run_search_pipeline
 from src.handlers.feedback import create_feedback_keyboard
-from src.services.conversation import load_conversation_history, mark_new_session
+from src.services.conversation import mark_new_session
 from src.services.interaction_logger import InteractionLogger, ResponseTimer
 from src.services.language import get_string, resolve_ui_language
-from src.config.settings import SEARCH_SOURCE_OVERRIDES
-from src.services.message_search import generate_answer, search_messages
-from src.services.message_search.rewrite_query import rewrite_query
+from src.services.message_search import generate_answer
 from src.services.optout import opt_in_user, opt_out_user
 from src.services.rate_limiter import rate_limiter
 from src.services.user_preferences import get_user_language
@@ -46,10 +47,9 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         try:
             await update.effective_chat.send_action(ChatAction.TYPING)
 
-            history, session_id = load_conversation_history(user_id, chat_id)
-            search_query = rewrite_query(query, history)
-
-            results, query_embedding = search_messages(search_query, chat_ids=[search_chat_id])
+            history, session_id, search_query, results, query_embedding = await run_search_pipeline(
+                query, user_id, chat_id, search_chat_ids=[search_chat_id],
+            )
             if not results:
                 no_results_message = get_string(ui_language, "no_results")
                 await update.message.reply_text(no_results_message)
@@ -68,10 +68,13 @@ async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 )
                 return
 
-            answer, tokens_used = generate_answer(query, results, conversation_history=history, answer_language=ui_language, chat_type=update.effective_chat.type)
+            answer, tokens_used = await asyncio.to_thread(
+                generate_answer, query, results,
+                conversation_history=history, answer_language=ui_language,
+                chat_type=update.effective_chat.type,
+            )
 
-            referenced_message_ids = [msg.get("id") for msg in results if msg.get("id")]
-            similarity_scores = [msg.get("similarity") for msg in results if msg.get("similarity")]
+            referenced_message_ids, similarity_scores = extract_result_metadata(results)
 
             interaction_id = await InteractionLogger.log_interaction(
                 update=update,
