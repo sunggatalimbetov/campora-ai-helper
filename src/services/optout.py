@@ -1,12 +1,8 @@
 import logging
 
-from supabase import Client, create_client
-
-from src.config.settings import SUPABASE_SERVICE_KEY, SUPABASE_URL
+from src.clients import supabase
 
 logger = logging.getLogger(__name__)
-
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
 
 
 def opt_out_user(user_id: int) -> None:

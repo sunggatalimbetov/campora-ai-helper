@@ -1,7 +1,10 @@
+import logging
 from typing import List
 
 from src.services.conversation import ConversationTurn
 from src.services.message_search._clients import client_oa
+
+logger = logging.getLogger(__name__)
 
 
 def rewrite_query(query: str, history: List[ConversationTurn]) -> str:
@@ -42,5 +45,5 @@ def rewrite_query(query: str, history: List[ConversationTurn]) -> str:
         rewritten = response.choices[0].message.content.strip()
         return rewritten or query
     except Exception as e:
-        print(f"Error rewriting query: {e}")
+        logger.error("Error rewriting query: %s", e)
         return query

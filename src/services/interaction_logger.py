@@ -1,16 +1,15 @@
+import logging
 import time
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List, Optional
 
-from supabase import Client, create_client
 from telegram import Update
 
-from src.config.settings import SUPABASE_SERVICE_KEY, SUPABASE_URL
+from src.clients import supabase
 from src.services.language import DEFAULT_LANGUAGE, normalize_language_code
 
-# Initialize Supabase client
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
+logger = logging.getLogger(__name__)
 
 
 class InteractionLogger:
@@ -89,7 +88,7 @@ class InteractionLogger:
                 "similarity_scores": similarity_scores,
                 "user_language": user_language,
                 "session_id": session_id,
-                "created_at": datetime.utcnow().isoformat(),
+                "created_at": datetime.now(timezone.utc).isoformat(),
                 "user_feedback": None,
             }
 
@@ -102,7 +101,7 @@ class InteractionLogger:
             return None
 
         except Exception as e:
-            print(f"Error logging interaction: {e}")
+            logger.error("Error logging interaction: %s", e)
             return None
 
 class ResponseTimer:

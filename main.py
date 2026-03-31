@@ -2,8 +2,6 @@ import asyncio
 import logging
 import time
 
-from openai import OpenAI
-from supabase import Client, create_client
 from telegram import Update
 from telegram.error import Conflict, NetworkError, RetryAfter
 from telegram.ext import (
@@ -16,12 +14,7 @@ from telegram.ext import (
     filters,
 )
 
-from src.config.settings import (
-    OPENAI_API_KEY,
-    SUPABASE_SERVICE_KEY,
-    SUPABASE_URL,
-    TELEGRAM_BOT_TOKEN,
-)
+from src.config.settings import TELEGRAM_BOT_TOKEN
 from src.handlers.commands import ask_command, help_command, new_command, optin_command, optout_command
 from src.handlers.feedback import feedback_callback_handler
 from src.handlers.messages import dm_handler
@@ -31,11 +24,6 @@ from src.services.telegram_commands import register_default_bot_commands
 # Add logging configuration
 logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-# Initialize clients
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_SERVICE_KEY)
-client_oa: OpenAI = OpenAI(api_key=OPENAI_API_KEY)
-
 
 WELCOME_NOTICE_TEMPLATE = (
     "👋 Привет! Я Campora AI — помогаю находить ответы по истории переписки этой группы.\n\n"
@@ -89,7 +77,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
         await asyncio.sleep(10)
     elif isinstance(context.error, RetryAfter):
         retry_after = context.error.retry_after
-        logger.warning(f"Rate limited - waiting {retry_after} seconds...")
+        logger.warning("Rate limited - waiting %s seconds...", retry_after)
         await asyncio.sleep(retry_after)
 
 
@@ -122,19 +110,17 @@ def main():
             # Add error handler
             app.add_error_handler(error_handler)
 
-            print("🤖 Starting AI Assistant Bot...")
+            logger.info("Starting AI Assistant Bot...")
 
             # Start the bot with graceful shutdown
             app.run_polling(allowed_updates=Update.ALL_TYPES)
 
         except Conflict as e:
-            logger.error(f"Conflict error: {e}")
-            print("⚠️ Conflict detected. Waiting 30 seconds before restart...")
+            logger.error("Conflict error: %s", e)
             time.sleep(30)
             continue
         except Exception as e:
-            logger.error(f"Unexpected error: {e}")
-            print("⚠️ Unexpected error. Waiting 10 seconds before restart...")
+            logger.error("Unexpected error: %s", e)
             time.sleep(10)
             continue
 

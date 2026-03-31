@@ -1,3 +1,4 @@
+import logging
 from typing import List
 
 from src.config.settings import HYBRID_SEARCH_ENABLED, MIN_RESULT_SCORE
@@ -14,6 +15,8 @@ from src.services.message_search.search_messages_hybrid import search_messages_h
 from src.services.message_search.search_messages_semantic_only import (
     search_messages_semantic_only,
 )
+
+logger = logging.getLogger(__name__)
 
 
 def _merge_results(
@@ -52,7 +55,7 @@ def _merge_results(
             by_key[key]["match_source"] = r.get("match_source", "question")
 
     if new_from_questions:
-        print(f"🔀 Merged: {new_from_questions} new messages from question search")
+        logger.debug("Merged: %d new messages from question search", new_from_questions)
 
     # Sort non-reply messages by similarity descending
     merged = sorted(by_key.values(), key=lambda x: x.get("similarity", 0), reverse=True)
@@ -90,7 +93,7 @@ def search_messages(
         results, query_embedding = search_messages_semantic_only(query, count, chat_ids=chat_ids)
 
     # Also search via hypothetical question embeddings
-    print("🔍 Searching message_questions...")
+    logger.debug("Searching message_questions...")
     question_results = search_messages_by_questions(query_embedding, count=count, chat_ids=chat_ids)
 
     # Merge hybrid + question results
@@ -100,6 +103,6 @@ def search_messages(
     filtered_results = [r for r in results if r.get("similarity", 0) >= MIN_RESULT_SCORE]
 
     top_results = [r for r in filtered_results if not r.get("is_reply", False)]
-    print(f"📊 Found {len(top_results)} top results after filtering (score >= {MIN_RESULT_SCORE})")
+    logger.debug("Found %d top results after filtering (score >= %s)", len(top_results), MIN_RESULT_SCORE)
 
     return filtered_results, query_embedding

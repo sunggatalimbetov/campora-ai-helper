@@ -1,3 +1,5 @@
+import logging
+
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
 
@@ -11,6 +13,8 @@ from src.services.onboarding_options import (
 from src.services.telegram_commands import register_private_chat_commands
 from src.services.user_preferences import get_user_language, get_user_preferences, save_user_group, save_user_language
 from src.services import university_service
+
+logger = logging.getLogger(__name__)
 
 LANGUAGE_CALLBACK_PREFIX = "language:"
 
@@ -100,7 +104,7 @@ async def onboarding_group_callback_handler(update: Update, context: ContextType
         save_user_group(query.from_user.id, selected_group)
     except Exception as e:
         fallback_language = resolve_ui_language(None, telegram_language_code=query.from_user.language_code)
-        print(f"Error saving user group: {e}")
+        logger.error("Error saving user group: %s", e)
         await query.edit_message_text(get_string(fallback_language, "error"))
         return
 
@@ -131,7 +135,7 @@ async def language_callback_handler(update: Update, context: ContextTypes.DEFAUL
         await register_private_chat_commands(context.application, query.message.chat.id, normalized_language)
     except Exception as e:
         fallback_language = resolve_ui_language(None, telegram_language_code=query.from_user.language_code)
-        print(f"Error saving user language: {e}")
+        logger.error("Error saving user language: %s", e)
         await query.edit_message_text(get_string(fallback_language, "error"))
         return
 
