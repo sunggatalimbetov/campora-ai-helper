@@ -24,13 +24,13 @@ logger = logging.getLogger(__name__)
 async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handle /ask command in group chats."""
     preferred_language = get_user_language(update.effective_user.id)
-    ui_language = resolve_ui_language(preferred_language, telegram_language_code=update.effective_user.language_code)
+    query = " ".join(context.args) if context.args else ""
+    ui_language = resolve_ui_language(preferred_language, query or None, update.effective_user.language_code)
 
     if update.effective_chat.type == "private":
         await update.message.reply_text(get_string(ui_language, "ask_private_only"))
         return
 
-    query = " ".join(context.args)
     if not query:
         await update.message.reply_text(get_string(ui_language, "ask_usage"))
         return

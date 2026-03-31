@@ -172,16 +172,53 @@ def normalize_language_code(language_code: str | None) -> str | None:
     return None
 
 
+def detect_language_from_text(text: str) -> str | None:
+    """Detect language from text using character frequency heuristic."""
+    if not text or len(text.strip()) < 3:
+        return None
+
+    cyrillic = 0
+    latin = 0
+    kazakh_specific = 0
+
+    for ch in text:
+        if "\u0400" <= ch <= "\u04ff":
+            cyrillic += 1
+            if ch in "ӘәҒғҚқҢңӨөҰұҮүҺһІі":
+                kazakh_specific += 1
+        elif "a" <= ch.lower() <= "z":
+            latin += 1
+
+    total = cyrillic + latin
+    if total < 3:
+        return None
+
+    if cyrillic > latin:
+        if kazakh_specific >= 1 and kazakh_specific / cyrillic > 0.03:
+            return "kk"
+        return "ru"
+    if latin > cyrillic:
+        return "en"
+
+    return None
+
+
 def resolve_ui_language(
     preferred_language: str | None,
     query_text: str | None = None,
     telegram_language_code: str | None = None,
 ) -> str:
-    del query_text
-    del telegram_language_code
     normalized_preference = normalize_language_code(preferred_language)
     if normalized_preference is not None:
         return normalized_preference
+
+    detected = detect_language_from_text(query_text) if query_text else None
+    if detected is not None:
+        return detected
+
+    normalized_telegram = normalize_language_code(telegram_language_code)
+    if normalized_telegram is not None:
+        return normalized_telegram
 
     return DEFAULT_LANGUAGE
 

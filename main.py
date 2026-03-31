@@ -32,12 +32,14 @@ WELCOME_NOTICE_TEMPLATE = (
     "• /ask <вопрос>\n"
     "• @{bot_username} <вопрос>\n"
     "• /help — все команды\n\n"
+    "Пример: /ask когда дедлайн по курсовой?\n\n"
     "Если не хочешь, чтобы твои сообщения использовались — напиши /optout."
 )
 
 # Track chats that already received the welcome notice (per bot session).
 # For persistence across restarts, you could store this in Supabase instead.
 _notified_chats: set[int] = set()
+_MAX_NOTIFIED_CHATS = 5000
 
 
 async def register_bot_commands(app: Application) -> None:
@@ -53,11 +55,16 @@ async def track_chat_member(update: Update, context: ContextTypes.DEFAULT_TYPE) 
     if update.my_chat_member is None:
         return
 
+    old_status = update.my_chat_member.old_chat_member.status
     new_status = update.my_chat_member.new_chat_member.status
     chat = update.my_chat_member.chat
 
-    # Bot was added or promoted in a group
-    if new_status in ("member", "administrator") and chat.id not in _notified_chats:
+    # Only send welcome when bot is newly added, not when promoted within the group
+    was_in_group = old_status in ("member", "administrator", "restricted")
+    is_in_group = new_status in ("member", "administrator")
+    if is_in_group and not was_in_group and chat.id not in _notified_chats:
+        if len(_notified_chats) >= _MAX_NOTIFIED_CHATS:
+            _notified_chats.pop()
         _notified_chats.add(chat.id)
         try:
             bot_username = context.application.bot_data.get("bot_username") or context.bot.username

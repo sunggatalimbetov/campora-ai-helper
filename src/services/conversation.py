@@ -74,5 +74,8 @@ def load_conversation_history(user_id: int, chat_id: int) -> Tuple[List[Conversa
 def mark_new_session(user_id: int, chat_id: int) -> None:
     """Mark that the next query for this user+chat should start a fresh session."""
     if len(_reset_sessions) >= _MAX_RESET_SESSIONS:
-        _reset_sessions.clear()
+        # Eviction order is arbitrary (set has no ordering), which is fine —
+        # entries are consumed on next query so the set rarely grows large.
+        for _ in range(len(_reset_sessions) // 4):
+            _reset_sessions.pop()
     _reset_sessions.add((user_id, chat_id))
