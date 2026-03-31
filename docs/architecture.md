@@ -222,14 +222,14 @@ Init(searching_msg) → push(delta) → _maybe_flush() → finalize()
 |-----------|-------|-----|
 | `EDIT_INTERVAL` | 1.5 seconds | Telegram rate limits edits to ~1/sec per chat. 1.5s gives margin. |
 | `SAFE_LENGTH` | 3800 characters | Telegram's message limit is 4096. Buffer before splitting. |
-| `CURSOR` | ▍ | Visual indicator that the bot is still generating. |
+| `CURSOR` | ` ▍` (space + block) | Visual indicator that the bot is still generating. |
 
 ### The flush cycle
 
 1. Deltas arrive from OpenAI streaming and accumulate in a buffer
 2. Every 1.5 seconds, the responder edits the message with `buffer + cursor`
 3. If the buffer exceeds 3800 characters:
-   - The current message is finalized with the first chunk (split at paragraph, then newline, then space, then hard cut)
+   - The current message is finalized with the first chunk (split at last newline, then last space, then hard cut at 3800)
    - A new message is created as a reply with the remainder + cursor
    - Streaming continues into the new message
 

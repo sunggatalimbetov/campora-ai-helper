@@ -86,6 +86,10 @@ async def mycommand_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # Your logic here
     await update.message.reply_text(get_string(ui_language, "mycommand_response"))
+
+# Note: telegram_language_code provides a fallback when preferred_language
+# is None (e.g., for first-time users). See resolve_ui_language() in
+# src/services/language.py for the full fallback chain.
 ```
 
 If your command is complex enough to warrant a separate file, create it in `src/handlers/` and follow the same pattern.
