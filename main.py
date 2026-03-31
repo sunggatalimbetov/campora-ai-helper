@@ -77,7 +77,7 @@ async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> N
         await asyncio.sleep(10)
     elif isinstance(context.error, RetryAfter):
         retry_after = context.error.retry_after
-        logger.warning(f"Rate limited - waiting {retry_after} seconds...")
+        logger.warning("Rate limited - waiting %s seconds...", retry_after)
         await asyncio.sleep(retry_after)
 
 
