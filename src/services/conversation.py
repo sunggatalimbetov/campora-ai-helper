@@ -12,6 +12,7 @@ from src.config.settings import (
 
 logger = logging.getLogger(__name__)
 
+_MAX_RESET_SESSIONS = 10_000
 _reset_sessions: Set[Tuple[int, int]] = set()
 
 
@@ -72,4 +73,6 @@ def load_conversation_history(user_id: int, chat_id: int) -> Tuple[List[Conversa
 
 def mark_new_session(user_id: int, chat_id: int) -> None:
     """Mark that the next query for this user+chat should start a fresh session."""
+    if len(_reset_sessions) >= _MAX_RESET_SESSIONS:
+        _reset_sessions.clear()
     _reset_sessions.add((user_id, chat_id))
