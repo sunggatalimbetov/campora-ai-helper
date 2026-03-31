@@ -66,8 +66,6 @@ def _get_system_prompt() -> str:
     current_date = date.today().isoformat()
     return SYSTEM_PROMPT_TEMPLATE.format(current_date=current_date)
 
-_GROUP_CHAT_TYPES = {"group", "supergroup", "channel"}
-
 GROUP_PROMPT_ADDENDUM = """
 IMPORTANT — Group chat mode:
 You are answering in a group chat. Keep your response very concise:
@@ -137,7 +135,7 @@ def build_messages(
     system_prompt = _get_system_prompt()
     system_content = f"{system_prompt}\n\nAnswer language: {answer_language}\n\nInformation:\n{context}"
 
-    if chat_type in _GROUP_CHAT_TYPES:
+    if chat_type in GROUP_CHAT_TYPES:
         system_content += GROUP_PROMPT_ADDENDUM
 
     messages: list[dict] = [{"role": "system", "content": system_content}]

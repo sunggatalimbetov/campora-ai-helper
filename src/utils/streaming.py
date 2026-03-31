@@ -47,7 +47,6 @@ class StreamingResponder:
         if now - self._last_edit_time < self.EDIT_INTERVAL:
             return
 
-        # If buffer is getting long, finalize current message and start a new one
         if len(self._buffer) > self.SAFE_LENGTH:
             split_at = self._find_split_point(self._buffer, self.SAFE_LENGTH)
             finalize_text = self._buffer[:split_at]
@@ -64,9 +63,7 @@ class StreamingResponder:
 
     async def finalize(self, references: str = "", keyboard=None) -> None:
         """Remove cursor, append references, apply Markdown, and attach keyboard."""
-        # Flush any remaining buffer that hasn't been sent yet
         if len(self._buffer) > self.SAFE_LENGTH and references:
-            # Buffer is long and we still need to add references — split first
             split_at = self._find_split_point(self._buffer, self.SAFE_LENGTH)
             finalize_text = self._buffer[:split_at]
             self._buffer = self._buffer[split_at:].lstrip()
@@ -76,7 +73,6 @@ class StreamingResponder:
             self._messages.append(self._message)
 
         final_text = self._buffer + references
-        # If final text is too long, split it
         if len(final_text) > self.SAFE_LENGTH:
             split_at = self._find_split_point(self._buffer, self.SAFE_LENGTH)
             await self._edit(self._message, self._buffer[:split_at])
