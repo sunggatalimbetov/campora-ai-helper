@@ -26,6 +26,6 @@ async def run_search_pipeline(
 
 def extract_result_metadata(results: List[MessageDict]) -> Tuple[List[int], List[float]]:
     """Extract message IDs and similarity scores from search results."""
-    referenced_message_ids = [msg.get("id") for msg in results if msg.get("id")]
-    similarity_scores = [msg.get("similarity") for msg in results if msg.get("similarity")]
+    referenced_message_ids = [msg.get("id") for msg in results if msg.get("id") is not None]
+    similarity_scores = [msg.get("similarity") for msg in results if msg.get("similarity") is not None]
     return referenced_message_ids, similarity_scores
