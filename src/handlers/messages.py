@@ -1,16 +1,13 @@
-import asyncio
 import logging
 
 from telegram import Update
 from telegram.ext import ContextTypes
 
+from src.handlers._search_pipeline import extract_result_metadata, run_search_pipeline
 from src.handlers.feedback import create_feedback_keyboard
-from src.services.conversation import load_conversation_history
 from src.services.interaction_logger import InteractionLogger, ResponseTimer
 from src.services.language import get_string, resolve_ui_language
-from src.services.message_search import search_messages
 from src.services.message_search.generate_answer import is_declined
-from src.services.message_search.rewrite_query import rewrite_query
 from src.services.message_search.stream_answer import stream_answer
 from src.services.rate_limiter import rate_limiter
 from src.services.user_preferences import get_user_language, get_user_preferences, resolve_selected_group_chat_ids
@@ -47,10 +44,9 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
         try:
             searching_msg = await update.message.reply_text(get_string(ui_language, "searching"))
 
-            history, session_id = await asyncio.to_thread(load_conversation_history, user_id, chat_id)
-            search_query = await asyncio.to_thread(rewrite_query, query, history)
-
-            results, query_embedding = await asyncio.to_thread(search_messages, search_query, chat_ids=search_chat_ids)
+            history, session_id, search_query, results, query_embedding = await run_search_pipeline(
+                query, user_id, chat_id, search_chat_ids=search_chat_ids,
+            )
             if not results:
                 no_results_message = get_string(ui_language, "no_results")
                 await searching_msg.edit_text(no_results_message)
@@ -86,8 +82,7 @@ async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             references = "" if is_declined(full_answer) else build_references(question_results, "private", language=ui_language)
             answer = full_answer + references
 
-            referenced_message_ids = [msg.get("id") for msg in results if msg.get("id")]
-            similarity_scores = [msg.get("similarity") for msg in results if msg.get("similarity")]
+            referenced_message_ids, similarity_scores = extract_result_metadata(results)
 
             interaction_id = await InteractionLogger.log_interaction(
                 update=update,
