@@ -7,9 +7,9 @@ from typing import List, Optional
 from telegram import Update
 
 from src.clients import supabase
+from src.services.language import DEFAULT_LANGUAGE, normalize_language_code
 
 logger = logging.getLogger(__name__)
-from src.services.language import DEFAULT_LANGUAGE, normalize_language_code
 
 
 class InteractionLogger:

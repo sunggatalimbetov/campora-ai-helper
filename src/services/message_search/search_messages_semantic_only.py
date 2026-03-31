@@ -3,10 +3,10 @@ from typing import List, Tuple
 
 from src.models.message import MessageDict
 from src.services.message_search._clients import supabase
-
-logger = logging.getLogger(__name__)
 from src.services.message_search.get_embedding import get_embedding
 from src.services.message_search.reply_fetching import attach_replies_to_messages
+
+logger = logging.getLogger(__name__)
 
 
 def search_messages_semantic_only(

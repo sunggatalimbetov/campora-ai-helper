@@ -5,12 +5,12 @@ from datetime import datetime, timedelta, timezone
 from typing import List, Optional, Set, Tuple
 
 from src.clients import supabase
-
-logger = logging.getLogger(__name__)
 from src.config.settings import (
     CONVERSATION_MAX_TURNS,
     CONVERSATION_TIMEOUT_MINUTES,
 )
+
+logger = logging.getLogger(__name__)
 
 _reset_sessions: Set[Tuple[int, int]] = set()
 

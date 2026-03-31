@@ -2,8 +2,6 @@ import logging
 from typing import List, Tuple
 
 from src.config.settings import RRF_K, SIMILARITY_THRESHOLD
-
-logger = logging.getLogger(__name__)
 from src.models.message import MessageDict
 from src.utils.answer_utils import filter_by_similarity
 from src.services.message_search._clients import supabase
@@ -13,6 +11,8 @@ from src.services.message_search.reply_fetching import attach_replies_to_message
 from src.services.message_search.search_messages_semantic_only import (
     search_messages_semantic_only,
 )
+
+logger = logging.getLogger(__name__)
 
 
 def search_messages_hybrid(

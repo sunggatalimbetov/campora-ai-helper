@@ -3,8 +3,6 @@ import logging
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import ContextTypes
 
-logger = logging.getLogger(__name__)
-
 from src.services.language import DEFAULT_LANGUAGE, get_language_label, get_string, normalize_language_code, resolve_ui_language
 from src.services.onboarding_options import (
     ONBOARD_GROUP_CALLBACK_PREFIX,
@@ -15,6 +13,8 @@ from src.services.onboarding_options import (
 from src.services.telegram_commands import register_private_chat_commands
 from src.services.user_preferences import get_user_language, get_user_preferences, save_user_group, save_user_language
 from src.services import university_service
+
+logger = logging.getLogger(__name__)
 
 LANGUAGE_CALLBACK_PREFIX = "language:"
 

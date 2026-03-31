@@ -5,8 +5,6 @@ from telegram.constants import ChatAction
 from telegram.error import BadRequest
 from telegram.ext import ContextTypes
 
-logger = logging.getLogger(__name__)
-
 from src.handlers.feedback import create_feedback_keyboard
 from src.services.conversation import load_conversation_history, mark_new_session
 from src.services.interaction_logger import InteractionLogger, ResponseTimer
@@ -18,6 +16,8 @@ from src.services.optout import opt_in_user, opt_out_user
 from src.services.rate_limiter import rate_limiter
 from src.services.user_preferences import get_user_language
 from src.utils.split_message import split_message
+
+logger = logging.getLogger(__name__)
 
 
 async def ask_command(update: Update, context: ContextTypes.DEFAULT_TYPE):

@@ -2,8 +2,6 @@ import logging
 from typing import List
 
 from src.config.settings import HYBRID_SEARCH_ENABLED, MIN_RESULT_SCORE
-
-logger = logging.getLogger(__name__)
 from src.models.message import MessageDict
 from src.services.message_search.get_search_weights import get_search_weights
 from src.services.message_search.reply_fetching import (
@@ -17,6 +15,8 @@ from src.services.message_search.search_messages_hybrid import search_messages_h
 from src.services.message_search.search_messages_semantic_only import (
     search_messages_semantic_only,
 )
+
+logger = logging.getLogger(__name__)
 
 
 def _merge_results(

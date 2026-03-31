@@ -5,10 +5,10 @@ from datetime import datetime, timezone
 from typing import Any, Optional
 
 from src.clients import supabase
-
-logger = logging.getLogger(__name__)
 from src.services import university_service
 from src.services.language import DEFAULT_LANGUAGE, normalize_language_code
+
+logger = logging.getLogger(__name__)
 
 
 def get_user_preferences(user_id: int) -> Optional[dict[str, Any]]:

@@ -4,8 +4,6 @@ import logging
 from telegram import Update
 from telegram.ext import ContextTypes
 
-logger = logging.getLogger(__name__)
-
 from src.handlers.feedback import create_feedback_keyboard
 from src.services.conversation import load_conversation_history
 from src.services.interaction_logger import InteractionLogger, ResponseTimer
@@ -18,6 +16,8 @@ from src.services.rate_limiter import rate_limiter
 from src.services.user_preferences import get_user_language, get_user_preferences, resolve_selected_group_chat_ids
 from src.utils.answer_utils import build_references
 from src.utils.streaming import StreamingResponder
+
+logger = logging.getLogger(__name__)
 
 
 async def dm_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
